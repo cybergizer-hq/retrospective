@@ -35,7 +35,7 @@ class ActionItemsController < ApplicationController
 
   def reopen
     if @action_item.reopen!
-      redirect_to action_items_path, notice: 'Action Item was successfully reopend'
+      redirect_to action_items_path, notice: 'Action Item was successfully reopened'
     else
       redirect_to action_items_path, alert: @action_item.errors.full_messages.join(', ')
     end

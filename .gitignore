@@ -30,7 +30,9 @@
 /vendor/*
 
 .env
-
+.generators
+.rakeTasks
+.idea/
 /public/packs
 /public/packs-test
 /node_modules
