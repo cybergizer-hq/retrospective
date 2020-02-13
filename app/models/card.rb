@@ -7,6 +7,8 @@ class Card < ApplicationRecord
   validates_presence_of :kind, :body
   validates :kind, inclusion: { in: %w[mad sad glad] }
 
+  after_save :notify_subscriber_of_addition
+
   scope :mad, -> { where(kind: :mad) }
   scope :sad, -> { where(kind: :sad) }
   scope :glad, -> { where(kind: :glad) }
@@ -17,5 +19,11 @@ class Card < ApplicationRecord
 
   def like!
     increment!(:likes)
+  end
+
+  private
+
+  def notify_subscriber_of_addition
+    RetrospectiveSchema.subscriptions.trigger('card_added', {}, self)
   end
 end
