@@ -1,0 +1,15 @@
+#import "./user.graphql"
+
+fragment Card on Card {
+  author {
+    ...User
+  }
+  id
+  kind
+  body
+  likes
+  createdAt
+  updatedAt
+  authorId
+  boardId
+}

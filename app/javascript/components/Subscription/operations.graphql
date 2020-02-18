@@ -1,0 +1,7 @@
+#import '../../fragments/card.graphql'
+
+subscription CardSubscription {
+	cardAdded {
+		...Card
+	}
+}
