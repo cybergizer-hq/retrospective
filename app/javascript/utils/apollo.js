@@ -1,12 +1,11 @@
 import {ApolloLink} from 'apollo-link';
 import {ApolloClient} from 'apollo-client';
-import {ApolloProvider} from 'react-apollo';
 import {HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import ActionCable from 'actioncable';
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink';
 
-const cable = ActionCable.createConsumer();
+const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
 
 const httpLink = new HttpLink({
   uri: '/graphql',
@@ -26,7 +25,7 @@ const link = ApolloLink.split(
   httpLink
 );
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   link,
   cache: new InMemoryCache()
 });
