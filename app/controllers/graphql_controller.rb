@@ -2,7 +2,7 @@ class GraphqlController < ActionController::Base
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   def execute
     variables = ensure_hash(params[:variables])

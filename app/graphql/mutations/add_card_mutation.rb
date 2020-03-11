@@ -9,6 +9,7 @@ module Mutations
       card = Card.new(attributes.to_h)
 
       if card.save
+        RetrospectiveSchema.subscriptions.trigger('card_added', {}, card)
         { card: card }
       else
         { errors: card.errors.full_messages }

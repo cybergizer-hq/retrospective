@@ -23,6 +23,7 @@
 
 /public/assets
 .byebug_history
+.ruby-gemset
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

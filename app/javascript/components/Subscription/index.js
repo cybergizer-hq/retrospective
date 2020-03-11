@@ -4,27 +4,14 @@ import {Query} from 'react-apollo';
 
 const GET_BOARDS = gql`
   query {
-    boards {
-      id
-      slug
-      title
-      createdAt
-      updatedAt
+    board(id: 10) {
       cards {
-        author {
-          id
-          avatar
-          email
-          createdAt
-          updatedAt
-        }
         id
-        authorId
-        boardId
+        body
         likes
-        updatedAt
-        createdAt
-        kind
+        author {
+          email
+        }
       }
     }
   }
@@ -63,8 +50,8 @@ export class CardsSubscription extends Component {
 
         return {
           ...prev,
-          cards: [newCard, ...prev.boards],
-          __typename: prev.boards.__typename
+          cards: [newCard, ...prev.board.cards],
+          __typename: prev.board.cards__typename
         };
       }
     });
@@ -79,9 +66,16 @@ export class CardsSubscription extends Component {
 
           this._subscribeToNewCards(subscribeToMore);
 
-          const cardsToRender = data.boards;
-          console.log(cardsToRender);
-          return <div>{/* TODO */}</div>;
+          const cardsToRender = data.board.cards;
+          return (
+            <ul>
+              {cardsToRender.map(card => (
+                <li key={card.id}>
+                  {card.body} {card.author.email} {card.likes}
+                </li>
+              ))}
+            </ul>
+          );
         }}
       </Query>
     );

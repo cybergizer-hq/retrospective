@@ -10,6 +10,7 @@ module Mutations
       card = Card.find(id)
 
       if card.update(attributes.to_h)
+        RetrospectiveSchema.subscriptions.trigger('card_updated', {}, card)
         { card: card }
       else
         { errors: card.errors.full_messages }
