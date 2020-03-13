@@ -45,7 +45,7 @@
        PREVIOUS BOARD
       </h2>
       <% @previous_action_items.each do |action_item| %>
-        <%= react_component('ActionItem/index', { 
+        <%= react_component('ActionItem/index', {
               id: action_item.id,
               body: action_item.body,
               status: action_item.status,
@@ -56,7 +56,7 @@
                 can_complete: allowed_to?(:complete?, action_item, with: API::ActionItemPolicy, context: { board: @board }),
                 can_reopen: allowed_to?(:reopen?, action_item, with: API::ActionItemPolicy, context: { board: @board })
               }
-            }) 
+            })
         %>
       <% end %>
     </div>
@@ -71,22 +71,19 @@
       </div>
 
       <% cards.each do |card| %>
-        <%= react_component('Card/index', { 
+        <%= react_component('Card/index', {
               id: card.id,
               author: card.author.email.split('@').first,
               avatar: card.author.avatar.url(:thumb),
               body: card.body,
               likes: card.likes,
               editable: allowed_to?(:update?, card, with: API::CardPolicy),
-              deletable: allowed_to?(:destroy?, card, with: API::CardPolicy) 
-            }) 
+              deletable: allowed_to?(:destroy?, card, with: API::CardPolicy)
+            })
         %>
       <% end %>
     </div>
   <% end %>
-
-  <%= javascript_pack_tag 'board' %>
-  <div id="board"></div>
 
   <div class='<%= column_class_name %>'>
     <h2 class='subtitle'>
@@ -96,15 +93,15 @@
       <%= render 'action_items/form', action_item: @action_item %>
     </div>
       <%  @action_items.each do |action_item| %>
-        <%= react_component('ActionItem/index', { 
+        <%= react_component('ActionItem/index', {
               id: action_item.id,
               body: action_item.body,
               times_moved: action_item.times_moved,
               editable: allowed_to?(:update?, action_item, with: API::ActionItemPolicy, context: { board: @board }),
               deletable: allowed_to?(:destroy?, action_item, with: API::ActionItemPolicy, context: { board: @board })
-            }) 
+            })
         %>
-      <% end %>   
+      <% end %>
   </div>
 
 </div>
