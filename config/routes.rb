@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   end
   post "/graphql", to: "graphql#execute"
   root to: 'home#index'
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }, skip: :sessions
+  as :user do
+    delete "/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
+  end
   # get '/boardsql', to: 'boardsql#show'
 
   resources :boards, param: :slug do
