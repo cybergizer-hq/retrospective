@@ -76,7 +76,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise'
-gem 'omniauth-github'
 gem "omniauth-alfred", git: 'https://github.com/cybergizer-hq/omniauth-alfred', branch: 'master'
 gem 'webpacker', '~> 4.x'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
