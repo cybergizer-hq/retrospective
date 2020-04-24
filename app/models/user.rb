@@ -17,7 +17,7 @@ class User < ApplicationRecord
     if user = find_by_email(auth.info.email)
       return user if user.uid
 
-      user.update(provider: auth.provider, uid: auth.uid)
+      user.update(provider: auth.provider, uid: auth.uid, remote_avatar_url: auth.info.image)
       user
     else
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
