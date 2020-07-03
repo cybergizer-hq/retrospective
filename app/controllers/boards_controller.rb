@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
 
   def index
     authorize!
-    @boards = current_user.boards.order(created_at: :desc)
+    @boards = current_user.boards.includes(:users).order(created_at: :desc)
   end
 
   def show

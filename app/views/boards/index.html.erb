@@ -20,8 +20,8 @@
             <%= user.email %>&nbsp;
           <% end %>
           <span class="hover-to-open" >
-            <% if board.users.count > 3 %>
-              <%= link_to("and more #{board.users.count - 3}", '#') %>
+            <% if board.users.size > 3 %>
+              <%= link_to("and more #{board.users.size - 3}", '#') %>
             <% end %>
           </span>
           <div class="modal">
