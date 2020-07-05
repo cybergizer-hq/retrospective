@@ -19,13 +19,11 @@
           <% board.users.first(3).each do |user| %>
             <%= user.email %>&nbsp;
           <% end %>
-          <span class="hover-to-open" >
+          <div class="dropdown">
             <% if board.users.size > 3 %>
               <%= link_to("and more #{board.users.size - 3}", '#') %>
             <% end %>
-          </span>
-          <div class="modal">
-            <div class="modal-content">
+            <div class="dropdown-content">
               <% board.users.each do |user| %>
                 <%= user.email %>
                 <br />
@@ -54,4 +52,3 @@
 <br>
 
 <%= link_to 'New Board', new_board_path %>
-<%= javascript_pack_tag 'users_popup' %>
