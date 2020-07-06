@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class AddCardMutation < Mutations::BaseMutation
     argument :attributes, Types::CardAttributes, required: true

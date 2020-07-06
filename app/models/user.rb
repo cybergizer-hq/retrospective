@@ -14,8 +14,11 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Lint/ShadowingOuterLocalVariable
   def self.from_omniauth(auth)
-    if user = find_by_email(auth.info.email)
+    if (user = find_by_email(auth.info.email))
       return user if user.uid
 
       user.update(provider: auth.provider, uid: auth.uid, remote_avatar_url: auth.info.avatar_url)
@@ -28,4 +31,7 @@ class User < ApplicationRecord
       end
     end
   end
+  # rubocop:enable Lint/ShadowingOuterLocalVariable
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end

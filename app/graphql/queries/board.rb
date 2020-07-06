@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Queries
   class Board < Queries::BaseQuery
     description 'Returns board by id'

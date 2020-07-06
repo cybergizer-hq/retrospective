@@ -19,7 +19,6 @@ RSpec.describe Boards::ActionItemsController do
   before { bypass_rescue }
 
   describe 'POST #create' do
-    
     subject(:response) { post :create, params: params }
     let_it_be(:params) do
       { board_slug: board.slug,
@@ -54,6 +53,7 @@ RSpec.describe Boards::ActionItemsController do
           end
         end
 
+        # rubocop:disable Metrics/LineLength
         context 'is valid without assignee' do
           let_it_be(:params) { params.merge action_item: { assignee: nil, body: params[:action_item][:body] } }
           it { is_expected.to have_http_status(:redirect) }
@@ -70,6 +70,7 @@ RSpec.describe Boards::ActionItemsController do
           end
         end
 
+        # rubocop:enable Metrics/LineLength
         context 'with invalid params' do
           let_it_be(:params) { params.merge action_item: { body: nil } }
           it { is_expected.to have_http_status(:redirect) }

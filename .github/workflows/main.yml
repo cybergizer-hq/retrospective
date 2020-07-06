@@ -1,7 +1,7 @@
 env:
   RUBY_VERSION: 2.6
-  POSTGRES_USER: postgres
-  POSTGRESS_PASSWORD: postgres
+  POSTGRESQL_USERNAME: postgres
+  POSTGRESQL_PASSWORD: postgres
   POSTGRES_DB: postgres
 
 name: Rails tests
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install Rubocop
@@ -29,8 +29,8 @@ jobs:
         ports:
         - 5432:5432
         env:
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRESS_PASSWORD: ${{ env.POSTGRESS_PASSWORD }}
+          POSTGRES_USER: ${{ env.POSTGRESQL_USERNAME }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRESQL_PASSWORD }}
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-ruby@v1

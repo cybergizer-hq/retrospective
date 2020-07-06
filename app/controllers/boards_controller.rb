@@ -14,6 +14,9 @@ class BoardsController < ApplicationController
     @boards = current_user.boards.includes(:users).order(created_at: :desc)
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/LineLength
   def show
     authorize! @board
     @cards_by_type = @board.column_names.map do |column|
@@ -29,7 +32,9 @@ class BoardsController < ApplicationController
                              end
     @users = ActiveModelSerializers::SerializableResource.new(User.find(@board.memberships.pluck(:user_id))).as_json
   end
-  # rubocop: enable Metrics/AbcSize
+  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def new
     authorize!

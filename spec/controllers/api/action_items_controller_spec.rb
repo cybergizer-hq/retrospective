@@ -85,7 +85,7 @@ RSpec.describe API::ActionItemsController do
       it 'broadcasts updated item' do
         expect { patch :update, params: params }.to have_broadcasted_to("board_#{board.slug}")
       end
-      
+
       it { is_expected.to match_json_schema('api/cards/update') }
     end
   end

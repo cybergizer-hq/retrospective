@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Queries::Board, type: :request do
@@ -12,7 +14,7 @@ RSpec.describe Queries::Board, type: :request do
       data = json['data']['board']
 
       expect(data).to include(
-        'id'    => be_present,
+        'id' => be_present,
         'title' => board.title,
         'cards' => [{ 'id' => card.id.to_s }]
       )

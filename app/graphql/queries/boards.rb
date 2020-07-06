@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Queries
   class Boards < Queries::BaseQuery
     description 'Returns a list of boards'

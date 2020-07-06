@@ -46,8 +46,8 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.web_socket_server_url = "wss://retrospective-rubizza.herokuapp.com/cable" 
-  config.action_cable.allowed_request_origins = [ /https:\/\/retrospective-rubizza.*/]
+  config.web_socket_server_url = 'wss://retrospective-rubizza.herokuapp.com/cable'
+  config.action_cable.allowed_request_origins = [%r{https://retrospective-rubizza.*}]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

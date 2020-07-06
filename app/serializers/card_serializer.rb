@@ -6,6 +6,6 @@ class CardSerializer < ActiveModel::Serializer
   has_many :comments
 
   def comments
-    object.comments.order("created_at DESC")
+    object.comments.order('created_at DESC')
   end
 end

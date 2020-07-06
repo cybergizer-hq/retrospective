@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Mutations::DestroyCardMutation, type: :request do
@@ -17,12 +19,12 @@ RSpec.describe Mutations::DestroyCardMutation, type: :request do
       data = json.dig('data', 'destroyCard', 'card')
 
       expect(data).to include(
-                          'id'       => card.id.to_s,
-                          'kind'     => card.kind,
-                          'body'     => card.body,
-                          'boardId' => card.board.id.to_s,
-                          'author'   => { 'id' => author.id.to_s }
-                      )
+        'id' => card.id.to_s,
+        'kind' => card.kind,
+        'body' => card.body,
+        'boardId' => card.board.id.to_s,
+        'author' => { 'id' => author.id.to_s }
+      )
     end
   end
 

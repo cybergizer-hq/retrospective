@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class BoardChannel < ApplicationCable::Channel
-  
   def subscribed
     stream_from board_channel
   end
@@ -20,7 +21,7 @@ class BoardChannel < ApplicationCable::Channel
   def board_channel
     "board_#{params[:board]}"
   end
-  
+
   def membership_id
     board = Board.find_by(slug: params[:board])
     Membership.find_by(user_id: current_user.id, board_id: board.id)&.id

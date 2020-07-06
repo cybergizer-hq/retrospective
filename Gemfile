@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
@@ -76,7 +76,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise'
-gem "omniauth-alfred", git: 'https://github.com/cybergizer-hq/omniauth-alfred', branch: 'master'
+gem 'omniauth-alfred', git: 'https://github.com/cybergizer-hq/omniauth-alfred', branch: 'master'
 gem 'webpacker', '~> 4.x'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
@@ -88,7 +88,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'dry-monads'
 gem 'aasm'
 
-gem "graphql", "~> 1.9"
+gem 'graphql', '~> 1.9'
 
 gem 'graphiql-rails', group: :development
 group :test, :development do
