@@ -11,7 +11,7 @@ RSpec.describe Users::OmniauthCallbacksController do
   end
 
   it 'redirects' do
-    get :github
+    get :alfred
     expect(response).to have_http_status(:redirect)
   end
 end

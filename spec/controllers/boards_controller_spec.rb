@@ -127,7 +127,8 @@ RSpec.describe BoardsController do
         context 'when params are valid' do
           let_it_be(:params) { params.merge board: { title: Faker::Books::Dune.planet } }
 
-          it_behaves_like :controllers_redirect, :boards_path
+          it { is_expected.to have_http_status(:redirect) }
+          it { is_expected.to redirect_to edit_board_path(board.slug) }
         end
 
         context 'when params are invalid' do
