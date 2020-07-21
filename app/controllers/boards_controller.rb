@@ -59,8 +59,12 @@ class BoardsController < ApplicationController
 
   def update
     authorize! @board
+    old_column_names = @board.column_names
     if @board.update(board_params)
-      redirect_to edit_board_path(@board), notice: 'Board was successfully updated.'
+      result = Boards::RenameColumns.new(@board).call(old_column_names, @board.column_names)
+      if result.success?
+        redirect_to edit_board_path(@board), notice: 'Board was successfully updated.'
+      end
     else
       render :edit
     end
