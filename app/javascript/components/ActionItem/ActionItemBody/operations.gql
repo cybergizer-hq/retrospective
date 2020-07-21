@@ -7,9 +7,9 @@ mutation destroyActionItemMutation($id: ID!) {
   }
 }
 
-mutation updateActionItemMutation($id: ID!, $body: String!) {
+mutation updateActionItemMutation($id: ID!, $body: String!, $assigneeId: ID) {
   updateActionItem(
-    input: { id: $id, attributes: { body: $body } }
+    input: { id: $id, attributes: { body: $body, assigneeId: $assigneeId } }
   ) {
     actionItem {
       id

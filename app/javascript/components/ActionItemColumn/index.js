@@ -155,13 +155,15 @@ const ActionItemColumn = props => {
         return (
           <ActionItem
             key={item.id}
+            assigneeId={item?.assignee?.id}
             id={item.id}
             body={item.body}
-            times_moved={item.times_moved}
+            timesMoved={item.times_moved}
             editable={creators.includes(user)}
             deletable={creators.includes(user)}
-            assignee={item.assignee_name}
+            assignee={item?.assignee?.name}
             avatar={item.assignee_avatar_url}
+            users={users}
           />
         );
       })}

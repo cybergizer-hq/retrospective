@@ -6,13 +6,8 @@ module Types
     field :body, String, null: false
     field :times_moved, Int, null: false, camelize: false
     field :assignee, Types::UserType, null: true
-    field :assignee_name, String, null: true, camelize: false
     field :assignee_avatar_url, String, null: true, camelize: false
     field :status, String, null: true
-
-    def assignee_name
-      object.assignee.email.split('@')[0] if object.assignee
-    end
 
     def assignee_avatar_url
       object.assignee.avatar.thumb.url if object.assignee

@@ -8,9 +8,11 @@ import {
 import {useMutation} from '@apollo/react-hooks';
 
 const ActionItemBody = props => {
-  const [inputValue, setInputValue] = useState(props.body);
+  const {assigneeId, editable, deletable, body, users} = props;
+  const [inputValue, setInputValue] = useState(body);
   const [editMode, setEditMode] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [actionItemAssignee, setActionItemAssignee] = useState(assigneeId);
   const [destroyActionItem] = useMutation(destroyActionItemMutation);
   const [updateActionItem] = useMutation(updateActionItemMutation);
 
@@ -63,7 +65,8 @@ const ActionItemBody = props => {
     updateActionItem({
       variables: {
         id,
-        body
+        body,
+        assigneeId: actionItemAssignee
       }
     }).then(({data}) => {
       if (!data.updateActionItem.actionItem) {
@@ -85,8 +88,6 @@ const ActionItemBody = props => {
     editModeToggle();
     handleItemEdit(props.id, inputValue);
   };
-
-  const {editable, deletable, body} = props;
 
   return (
     <div>
@@ -136,23 +137,43 @@ const ActionItemBody = props => {
       >
         {body}
       </div>
-      <div hidden={!editMode}>
-        <Textarea
-          className="input"
-          value={inputValue}
-          onChange={handleChange}
-          onKeyPress={handleKeyPress}
-        />
-        <div className="btn-add">
-          <button
-            className="tag is-info button"
-            type="button"
-            onClick={handleSaveClick}
-          >
-            Save
-          </button>
+      {editable && (
+        <div hidden={!editMode}>
+          <Textarea
+            className="input"
+            value={inputValue}
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+          />
+          <div className="columns is-multiline columns-footer">
+            <div className="column column-select">
+              <select
+                className="select"
+                value={actionItemAssignee}
+                onChange={e => setActionItemAssignee(e.target.value)}
+              >
+                <option value=" ">Assigned to ...</option>
+                {users.map(user => {
+                  return (
+                    <option key={user.id} value={user.id}>
+                      {user.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="column column-btn-save">
+              <button
+                className="tag is-info button"
+                type="button"
+                onClick={handleSaveClick}
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

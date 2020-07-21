@@ -20,29 +20,33 @@ class ActionItem extends React.Component {
     const {
       id,
       body,
-      times_moved,
+      timesMoved,
       deletable,
       editable,
       movable,
       transitionable,
       assignee,
-      avatar
+      assigneeId,
+      avatar,
+      users
     } = this.props;
     const footerNotEmpty =
-      movable || transitionable || times_moved !== 0 || assignee !== null;
+      movable || transitionable || timesMoved !== 0 || assignee !== null;
 
     return (
       <div className={`box ${this.pickColor()}_bg`}>
         <ActionItemBody
           id={id}
+          assigneeId={assigneeId}
           editable={editable}
           deletable={deletable}
           body={body}
+          users={users}
         />
         {footerNotEmpty && (
           <ActionItemFooter
             id={id}
-            times_moved={times_moved}
+            timesMoved={timesMoved}
             movable={movable}
             transitionable={transitionable}
             assignee={assignee}

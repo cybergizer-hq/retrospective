@@ -5,7 +5,7 @@ import TransitionButton from '../TransitionButton';
 import BoardSlugContext from '../../../utils/board_slug_context';
 import './ActionItemFooter.css';
 const ActionItemFooter = props => {
-  const {id, movable, transitionable, assignee, avatar, times_moved} = props;
+  const {id, movable, transitionable, assignee, avatar, timesMoved} = props;
   const boardSlug = useContext(BoardSlugContext);
   const [moveActionItem] = useMutation(moveActionItemMutation);
   const handleMoveClick = () => {
@@ -33,10 +33,10 @@ const ActionItemFooter = props => {
   };
 
   const generateChevrons = () => {
-    const chevrons = Array.from({length: times_moved}, (_, index) => (
+    const chevrons = Array.from({length: timesMoved}, (_, index) => (
       <i
         key={index}
-        className={`fas fa-chevron-right ${pickColor(times_moved)}_font`}
+        className={`fas fa-chevron-right ${pickColor(timesMoved)}_font`}
       />
     ));
     return chevrons;

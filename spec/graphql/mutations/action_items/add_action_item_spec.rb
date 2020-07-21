@@ -45,8 +45,6 @@ RSpec.describe Mutations::AddActionItemMutation, type: :request do
             id
             body
             times_moved
-            assignee_name
-            assignee_avatar_url
           }
         }
       }
