@@ -94,3 +94,5 @@ gem 'graphiql-rails', group: :development
 group :test, :development do
   gem 'action-cable-testing'
 end
+
+gem 'bullet', group: 'test'

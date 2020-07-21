@@ -9,7 +9,7 @@ module Queries
     type [Types::MembershipType], null: false
 
     def resolve(board_slug:)
-      ::Board.find_by!(slug: board_slug).memberships
+      ::Board.find_by!(slug: board_slug).memberships.includes([:user])
     end
   end
 end
