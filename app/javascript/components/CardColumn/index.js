@@ -7,6 +7,7 @@ import {
   cardUpdatedSubscription,
   addCardMutation
 } from './operations.gql';
+import Textarea from 'react-textarea-autosize';
 import UserContext from '../../utils/user_context';
 import BoardSlugContext from '../../utils/board_slug_context';
 import '../table.css';
@@ -96,18 +97,24 @@ const CardColumn = props => {
     });
   };
 
+  const handleKeyPress = e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      submitHandler(e);
+    }
+  };
+
   return (
     <>
       <div className="box">
         <form onSubmit={submitHandler}>
           <h2> Add new {kind} card</h2>
-          <input
+          <Textarea
             className="input"
             autoComplete="off"
             id={`card_${kind}_body`}
-            type="text"
             value={newCard}
             onChange={e => setNewCard(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
           <div className="btn-save">
             <button

@@ -11,6 +11,7 @@ import {
   actionItemUpdatedSubscription
 } from './operations.gql';
 import '../table.css';
+import Textarea from 'react-textarea-autosize';
 
 const ActionItemColumn = props => {
   const user = useContext(UserContext);
@@ -108,6 +109,12 @@ const ActionItemColumn = props => {
     });
   };
 
+  const handleKeyPress = e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      submitHandler(e);
+    }
+  };
+
   const {creators, users} = props;
 
   return (
@@ -115,14 +122,14 @@ const ActionItemColumn = props => {
       <h2 className="subtitle">ACTION ITEMS</h2>
       <div className="box">
         <form onSubmit={submitHandler}>
-          <input
+          <Textarea
             className="input"
-            autoComplete="off"
-            id="action_item_body`"
-            type="text"
             value={newActionItemBody}
+            id="action_item_body`"
             onChange={e => setNewActionItemBody(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
+
           <div className="columns is-multiline columns-footer">
             <div className="column column-select">
               <select

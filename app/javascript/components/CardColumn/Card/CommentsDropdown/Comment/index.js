@@ -42,7 +42,7 @@ const Comment = props => {
   };
 
   const handleKeyPress = e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       editModeToggle();
       updateComment({
         variables: {
@@ -115,7 +115,10 @@ const Comment = props => {
               className="columns"
               onDoubleClick={editable ? editModeToggle : undefined}
             >
-              <div className="column" style={{wordBreak: 'break-all'}}>
+              <div
+                className="column"
+                style={{wordBreak: 'break-all', whiteSpace: 'pre-line'}}
+              >
                 {comment.content}
               </div>
             </div>

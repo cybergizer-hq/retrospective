@@ -8,7 +8,10 @@ textarea {
   color: hsl(0, 0%, 29%);
 }
 
-.text { overflow-wrap: break-word; }
+.text {
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
 
 .dropdown-btn {
   width: 32px;
