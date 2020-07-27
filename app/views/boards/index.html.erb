@@ -3,7 +3,7 @@
     <div class='column is-offset-1'>
 
       <a class='button new_board_button' href= <%= new_board_path%>> 
-      <%= image_tag 'icon-plus', class: 'inline-icon'%>
+      <%= image_tag 'icon-plus.svg', class: 'inline-icon'%>
       Create new board
       </a>
     </div>
@@ -24,7 +24,7 @@
         </div>
         <div class="board-stats-table">
           <div class='icon-container'>
-          <%= image_tag 'icon-members', class: 'inline-icon'%>
+          <%= image_tag 'icon-members.svg', class: 'inline-icon'%>
           </div>
           <div class="dropdown_boards_index">
            <%= pluralize(board.users.count, 'member')%>
@@ -36,13 +36,13 @@
             </div>
           </div>
           <div class='icon-container'>
-          <%= image_tag 'icon-cards', class: 'inline-icon'%>
+          <%= image_tag 'icon-cards.png', class: 'inline-icon'%>
           </div>
           <div>
             <%= pluralize(board.cards.count, 'card')%>
           </div>
           <div class='icon-container'>
-          <%= image_tag 'icon-done', class: 'inline-icon'%>
+          <%= image_tag 'icon-done.svg', class: 'inline-icon'%>
           </div>
           <div>
           <%= "#{board.action_items.where(status: 'done')&.count || 0}/#{board.action_items.count} action items done"%>
@@ -64,7 +64,7 @@
     <% end %>
     <% if @boards_by_date.length > 3%>
       <div class='load-more-boards-container'>
-        <%= image_tag 'chevron-down', class: 'load-more-boards-button'%>
+        <%= image_tag 'chevron-down.svg', class: 'load-more-boards-button'%>
       </div>
     <% end %>
   </div>
