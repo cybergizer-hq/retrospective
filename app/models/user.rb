@@ -1,37 +1,29 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable
-  devise :database_authenticatable, :recoverable,
-         :rememberable, :validatable, :omniauthable, omniauth_providers: %i[alfred developer]
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[alfred developer]
+
   has_many :cards, foreign_key: :author_id
   has_many :comments, foreign_key: :author_id
-  has_and_belongs_to_many :teams
-
   has_many :memberships
   has_many :boards, through: :memberships
 
+  has_and_belongs_to_many :teams
+
   mount_uploader :avatar, AvatarUploader
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Lint/ShadowingOuterLocalVariable
-  def self.from_omniauth(auth)
-    if (user = find_by_email(auth.info.email))
-      return user if user.uid
+  def self.from_omniauth(provider, uid, info)
+    user = find_by(provider: provider, uid: uid) || find_by(email: info[:email]) || new
 
-      user.update(provider: auth.provider, uid: auth.uid, remote_avatar_url: auth.info.avatar_url)
-      user
-    else
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0, 20]
-        user.remote_avatar_url = auth.info.avatar_url
-      end
+    user.tap do |u|
+      u.provider = provider
+      u.uid = uid
+      u.email = info[:email]
+      u.password = Devise.friendly_token[0, 20] if u.new_record?
+      u.remote_avatar_url = info[:image] if u.changed?
+
+      u.save
     end
   end
-  # rubocop:enable Lint/ShadowingOuterLocalVariable
-  # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 end

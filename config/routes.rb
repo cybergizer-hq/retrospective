@@ -5,11 +5,16 @@ Rails.application.routes.draw do
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
   post '/graphql', to: 'graphql#execute'
   root to: 'home#index'
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }, skip: :sessions
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }, only: :omniauth_callbacks
   as :user do
     delete '/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
     # rubocop:enable Metrics/LineLength
   end
+
+  direct :new_user_session do
+    root_path
+  end
+
   # get '/boardsql', to: 'boardsql#show'
 
   resources :boards, param: :slug do
