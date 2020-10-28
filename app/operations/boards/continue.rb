@@ -11,7 +11,6 @@ module Boards
     end
 
     # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
     def call
       if prev_board_continued?
         raise StandardError,
@@ -32,7 +31,6 @@ module Boards
     rescue StandardError => e
       Failure(e)
     end
-    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
     private

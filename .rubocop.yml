@@ -30,3 +30,6 @@ Style/Documentation:
 
 Bundler/OrderedGems:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
