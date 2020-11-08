@@ -33,26 +33,78 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#from_omniauth', :vcr do
-    after(:each) do
-      FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
+  describe '.from_omniauth' do
+    subject { described_class.from_omniauth(*args) }
+
+    context 'when the user exists in the database' do
+      let_it_be(:user) do
+        create(:user, provider: 'provider', uid: 'uid', email: 'whoever@wherever.com')
+      end
+
+      context 'when method receives args with matching provider & uid & email' do
+        let(:args) { ['provider', 'uid', { email: 'whoever@wherever.com' }] }
+
+        it 'returns db user' do
+          expect { subject }.not_to change { described_class.count }
+
+          expect(subject).to eq user
+          expect(subject.persisted?).to eq true
+          expect(subject).to have_attributes(provider: 'provider', uid: 'uid',
+                                             email: 'whoever@wherever.com')
+        end
+      end
+
+      context 'when method receives args with matching provider & uid & different email' do
+        let(:args) { ['provider', 'uid', { email: 'whoeverelse@wherever.com' }] }
+
+        it 'return db user with updated email' do
+          expect { subject }.not_to change { described_class.count }
+
+          expect(subject).to eq user
+          expect(subject.persisted?).to eq true
+          expect(subject).to have_attributes(provider: 'provider', uid: 'uid',
+                                             email: 'whoeverelse@wherever.com')
+        end
+      end
+
+      context 'when method receives args with different provider or uid & matching email' do
+        let(:args) { ['other_provider', 'other_uid', { email: 'whoever@wherever.com' }] }
+
+        it 'return db user with updated provider & uid' do
+          expect { subject }.not_to change { described_class.count }
+
+          expect(subject).to eq user
+          expect(subject.persisted?).to eq true
+          expect(subject).to have_attributes(provider: 'other_provider', uid: 'other_uid',
+                                             email: 'whoever@wherever.com')
+        end
+      end
     end
 
-    let(:auth_hash) { build(:omniauth) }
+    context 'when the user does not exist in the database' do
+      context 'when method receives valid args' do
+        let(:args) { ['provider', 'uid', { email: 'whoever@wherever.com' }] }
 
-    subject { described_class.from_omniauth(auth_hash) }
+        it 'creates db user' do
+          expect { subject }.to change { described_class.count }.by(1)
 
-    it 'retrieves an existing user' do
-      user = create(:user, :github)
-      expect(subject).to eq(user)
-    end
+          expect(subject).to be_a described_class
+          expect(subject.persisted?).to eq true
+          expect(subject).to have_attributes(provider: 'provider', uid: 'uid',
+                                             email: 'whoever@wherever.com')
+        end
+      end
 
-    it "creates a new user if one doesn't already exist" do
-      expect { subject }.to change { User.count }.by(1)
-    end
+      context 'when method receives invalid args' do
+        let(:args) { ['provider', 'uid', { email: nil }] }
 
-    it 'created user has avatar' do
-      expect(subject.avatar_url).not_to be_nil
+        it 'returns non persised user' do
+          expect { subject }.not_to change { described_class.count }
+
+          expect(subject).to be_a described_class
+          expect(subject.persisted?).to eq false
+        end
+      end
     end
   end
 end
