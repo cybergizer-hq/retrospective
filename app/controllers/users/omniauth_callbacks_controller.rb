@@ -5,7 +5,7 @@ module Users
     before_action :validate_auth, only: :alfred
 
     def alfred
-      @user = User.from_omniauth(auth.provider, auth.uid, alfred_info)
+      @user = User.from_omniauth(auth.provider, auth.uid, auth.info)
 
       if @user.persisted?
         sign_in_and_redirect @user, event: :authentication
@@ -37,12 +37,6 @@ module Users
 
     def auth
       request.env['omniauth.auth']
-    end
-
-    # consider making alfred return info.image instead of info.avatar_url
-    # as other providers to avoid this remapping
-    def alfred_info
-      { email: auth.info.email, image: auth.info.avatar_url }
     end
   end
 end

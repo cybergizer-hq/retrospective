@@ -21,7 +21,7 @@ class User < ApplicationRecord
       u.uid = uid
       u.email = info[:email]
       u.password = Devise.friendly_token[0, 20] if u.new_record?
-      u.remote_avatar_url = info[:image] if u.changed?
+      u.remote_avatar_url = info[:avatar_url] if u.changed?
 
       u.save
     end
