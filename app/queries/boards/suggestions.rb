@@ -17,7 +17,7 @@ module Boards
 
     def fitting_users(str)
       User.where('email ILIKE ?', "#{str}%")
-          .or(User.where('uid LIKE ?', "#{str}%"))
+          .or(User.where('uid LIKE ?', "#{str}%")).limit(10)
     end
 
     def fitting_teams(str)
