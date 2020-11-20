@@ -98,7 +98,9 @@ const InviteBlock = () => {
           placeholder="Enter e-mail or team name..."
           components={components}
           onChange={handleChange}
-          onInputChange={e => getSuggestions({variables: {autocomplete: e}})}
+          onInputChange={e => {
+            if (e.length >= 3) getSuggestions({variables: {autocomplete: e}});
+          }}
         />
         <input type="submit" value="Invite" />
       </form>
