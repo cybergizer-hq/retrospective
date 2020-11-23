@@ -55,5 +55,8 @@ RSpec.describe Boards::Continue do
     it 'sets current_user as the creator of the new board' do
       expect(subject.value!.memberships.find_by(role: 'creator').user_id).to eq current_user.id
     end
+    it 'sets previous privacy settings to new board' do
+      expect(subject.value!.private).to eq prev_board.private
+    end
   end
 end
