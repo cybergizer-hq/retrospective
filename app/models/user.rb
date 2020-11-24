@@ -11,6 +11,9 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :teams
 
+  validates :nickname, uniqueness: true
+  validates_presence_of :nickname
+
   mount_uploader :avatar, AvatarUploader
 
   def self.from_omniauth(provider, uid, info)
@@ -22,6 +25,7 @@ class User < ApplicationRecord
       u.email = info[:email]
       u.password = Devise.friendly_token[0, 20] if u.new_record?
       u.remote_avatar_url = info[:avatar_url] if u.changed?
+      u.nickname = info[:nickname] if u.new_record?
 
       u.save
     end

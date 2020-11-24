@@ -16,6 +16,11 @@ RSpec.describe Boards::Suggestions do
     expect(result[:users]).to eq [user.email]
   end
 
+  it 'finds user by nickname' do
+    result = described_class.new(user.nickname).call
+    expect(result[:users]).to eq [user.email]
+  end
+
   it 'finds team by name' do
     result = described_class.new(team.name).call
     expect(result[:teams]).to eq [team.name]

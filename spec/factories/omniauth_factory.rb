@@ -6,6 +6,7 @@ FactoryBot.define do
     uid { Faker::Number.number.to_s }
     email { Faker::Internet.email }
     avatar_url { Faker::Avatar.image }
+    nickname { email[/^[^@]+/] }
 
     initialize_with do
       new(
