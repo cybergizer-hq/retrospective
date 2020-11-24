@@ -43,7 +43,7 @@ RSpec.describe User, type: :model do
     context 'when the user exists in the database' do
       let_it_be(:user) do
         create(:user, provider: 'provider', uid: 'uid',
-               email: 'whoever@wherever.com', nickname: 'user_nick')
+                      email: 'whoever@wherever.com', nickname: 'user_nick')
       end
 
       context 'when method receives args with matching provider & uid & email & nickname' do
