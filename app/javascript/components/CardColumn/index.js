@@ -32,7 +32,9 @@ const CardColumn = props => {
           cardAdded.kind === kind &&
           cards.findIndex(element => element.id === cardAdded.id) === -1
         ) {
-          setCards(oldCards => [...oldCards, cardAdded]);
+          // New element go to 1st place
+          setCards(oldCards => [cardAdded, ...oldCards]);
+          setOpened(true);
         }
       }
     },
@@ -110,7 +112,23 @@ const CardColumn = props => {
   }, [setOpened]);
 
   const handleKeyPress = e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    // Console.log(e.key);
+
+    // submit adding
+
+    if (e.key === 'Enter' && e.metaKey) {
+      // Debugger;
+      console.log(`it happens with CMD!`);
+      // E.preventDefault();
+
+      submitHandler(e);
+    }
+
+    if (e.key === 'Enter' && e.ctrlKey) {
+      // Debugger;
+      console.log(`it happens with CNTR!`);
+      // E.preventDefault();
+
       submitHandler(e);
     }
   };
@@ -132,7 +150,7 @@ const CardColumn = props => {
               id={`card_${kind}_body`}
               value={newCard}
               onChange={e => setNewCard(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
             />
             <div className="card-buttons">
               <button

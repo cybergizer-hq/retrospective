@@ -119,6 +119,7 @@ const ActionItemColumn = props => {
   const handleKeyPress = e => {
     if (e.key === 'Enter' && !e.shiftKey) {
       submitHandler(e);
+      console.log(`here`);
     }
   };
 
