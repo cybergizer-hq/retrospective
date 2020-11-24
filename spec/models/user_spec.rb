@@ -13,10 +13,6 @@ RSpec.describe User, type: :model do
     it 'is not valid without an email' do
       expect(build_stubbed(:user, email: nil)).to_not be_valid
     end
-
-    it 'is not valid without a nickname' do
-      expect(build_stubbed(:user, nickname: nil)).to_not be_valid
-    end
   end
 
   context 'associations' do

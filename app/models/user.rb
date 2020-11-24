@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :teams
 
   validates :nickname, uniqueness: true
-  validates_presence_of :nickname
 
   mount_uploader :avatar, AvatarUploader
 
