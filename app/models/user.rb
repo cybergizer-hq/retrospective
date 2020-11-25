@@ -22,11 +22,21 @@ class User < ApplicationRecord
       u.provider = provider
       u.uid = uid
       u.email = info[:email]
-      u.password = Devise.friendly_token[0, 20] if u.new_record?
       u.remote_avatar_url = info[:avatar_url] if u.changed?
-      u.nickname = info[:nickname] if u.new_record?
 
+      u.send :new_user_settings, info
       u.save
     end
+  end
+
+  private
+
+  def new_user_settings(info)
+    return unless new_record?
+
+    self.password = Devise.friendly_token[0, 20]
+    self.nickname = info[:nickname]
+    self.first_name = info[:first_name] if info[:first_name]
+    self.last_name = info[:last_name] if info[:last_name]
   end
 end

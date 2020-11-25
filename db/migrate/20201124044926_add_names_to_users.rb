@@ -8,9 +8,9 @@ class AddNamesToUsers < ActiveRecord::Migration[6.0]
 
     ActiveRecord::Base.transaction do
       User.all.find_each do |user|
-        user.update_attributes!(nickname: user.email[/^[^@]+/],
-                                first_name: user.email[/^[^.]+/],
-                                last_name: user.email[/(?<=.)[a-zA-Z]+(?=@)/])
+        user.update(nickname: user.email[/^[^@]+/],
+                    first_name: user.email[/^[^.]+/],
+                    last_name: user.email[/(?<=.)[a-zA-Z]+(?=@)/])
       end
     end
   end
