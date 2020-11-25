@@ -110,7 +110,11 @@ const CardColumn = props => {
   }, [setOpened]);
 
   const handleKeyPress = e => {
-    if ((e.key === 'Enter' && e.metaKey) || (e.key === 'Enter' && e.ctrlKey)) {
+    if (navigator.platform.includes('Mac')) {
+      if (e.key === 'Enter' && e.metaKey) {
+        submitHandler(e);
+      }
+    } else if (e.key === 'Enter' && e.ctrlKey) {
       submitHandler(e);
     }
 

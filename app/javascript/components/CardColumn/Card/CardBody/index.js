@@ -30,19 +30,12 @@ const CardBody = props => {
   };
 
   const handleKeyPress = e => {
-    if ((e.key === 'Enter' && e.metaKey) || (e.key === 'Enter' && e.ctrlKey)) {
-      editModeToggle();
-      editCard({
-        variables: {
-          id,
-          body: inputValue
-        }
-      }).then(({data}) => {
-        if (!data.updateCard.card) {
-          console.log(data.updateCard.errors.fullMessages.join(' '));
-        }
-      });
-      e.preventDefault();
+    if (navigator.platform.includes('Mac')) {
+      if (e.key === 'Enter' && e.metaKey) {
+        handleSaveClick();
+      }
+    } else if (e.key === 'Enter' && e.ctrlKey) {
+      handleSaveClick();
     }
   };
 
