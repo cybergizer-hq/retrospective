@@ -32,7 +32,6 @@ const CardColumn = props => {
           cardAdded.kind === kind &&
           cards.findIndex(element => element.id === cardAdded.id) === -1
         ) {
-          // New element go to 1st place
           setCards(oldCards => [cardAdded, ...oldCards]);
           setOpened(true);
         }
@@ -84,7 +83,6 @@ const CardColumn = props => {
 
   const submitHandler = e => {
     e.preventDefault();
-    setOpened(opened => !opened);
     addCard({
       variables: {
         boardSlug,
@@ -108,28 +106,17 @@ const CardColumn = props => {
 
   const [isOpened, setOpened] = useState(false);
   const handleOpenBox = useCallback(() => {
-    setOpened(opened => !opened);
+    setOpened(isOpened => !isOpened);
   }, [setOpened]);
 
   const handleKeyPress = e => {
-    // Console.log(e.key);
-
-    // submit adding
-
-    if (e.key === 'Enter' && e.metaKey) {
-      // Debugger;
-      console.log(`it happens with CMD!`);
-      // E.preventDefault();
-
+    if ((e.key === 'Enter' && e.metaKey) || (e.key === 'Enter' && e.ctrlKey)) {
       submitHandler(e);
     }
 
-    if (e.key === 'Enter' && e.ctrlKey) {
-      // Debugger;
-      console.log(`it happens with CNTR!`);
-      // E.preventDefault();
-
-      submitHandler(e);
+    if (e.key === 'Escape') {
+      setOpened(opened => !opened);
+      setNewCard('');
     }
   };
 
@@ -145,6 +132,7 @@ const CardColumn = props => {
         <div>
           <form onSubmit={submitHandler}>
             <Textarea
+              autoFocus
               className="input"
               autoComplete="off"
               id={`card_${kind}_body`}

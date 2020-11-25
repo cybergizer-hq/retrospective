@@ -45,7 +45,6 @@ const Comment = props => {
 
   const handleKeyPress = e => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      // E.preventDefault();
       editModeToggle();
       updateComment({
         variables: {

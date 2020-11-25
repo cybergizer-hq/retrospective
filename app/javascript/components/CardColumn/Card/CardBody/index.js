@@ -30,8 +30,7 @@ const CardBody = props => {
   };
 
   const handleKeyPress = e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      console.log(`Helloabracadabra`);
+    if ((e.key === 'Enter' && e.metaKey) || (e.key === 'Enter' && e.ctrlKey)) {
       editModeToggle();
       editCard({
         variables: {
@@ -116,23 +115,26 @@ const CardBody = props => {
       >
         {body}
       </div>
-      <div hidden={!editMode}>
-        <Textarea
-          className="input"
-          value={inputValue}
-          onChange={handleChange}
-          onKeyPress={handleKeyPress}
-        />
-        <div className="btn-add">
-          <button
-            className="tag is-info button"
-            type="button"
-            onClick={handleSaveClick}
-          >
-            Save
-          </button>
-        </div>
-      </div>
+      {editMode && (
+        <>
+          <Textarea
+            autoFocus
+            className="input"
+            value={inputValue}
+            onChange={handleChange}
+            onKeyDown={handleKeyPress}
+          />
+          <div className="btn-add">
+            <button
+              className="tag is-info button"
+              type="button"
+              onClick={handleSaveClick}
+            >
+              Save
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
