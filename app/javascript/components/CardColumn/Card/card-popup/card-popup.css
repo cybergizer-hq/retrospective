@@ -19,5 +19,8 @@
   margin: auto;
   max-width: 500px;
   border-radius: 20px;
-  background: white;
+  background: #fafbfc;
+  overflow: auto;
+  padding: 20px;
 }
+

@@ -9,7 +9,6 @@ import {addCommentMutation} from './operations.gql';
 
 const CommentsDropdown = ({id, comments}) => {
   const controlEl = useRef(null);
-  // Const {visible, id, comments} = props;
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isError, setIsError] = useState(false);
   const user = useContext(UserContext);
@@ -52,10 +51,6 @@ const CommentsDropdown = ({id, comments}) => {
   const handleEmojiPickerClick = (_, emoji) => {
     setNewComment(comment => `${comment}${emoji.emoji}`);
   };
-
-  // If (!visible) {
-  //   return null;
-  // }
 
   return (
     <div className="column comments-column">

@@ -1,6 +1,5 @@
 import React from 'react';
 import Likes from '../Likes';
-// Import CommentsDropdown from '../CommentsDropdown';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCommentAlt} from '@fortawesome/free-regular-svg-icons';
 import './CardFooter.css';
@@ -14,8 +13,6 @@ const CardFooter = ({
   commentsNumber,
   onCommentButtonClick
 }) => {
-  // Const [showComments, setShowComments] = useState(false);
-
   return (
     <div>
       <hr style={{margin: '0.5rem'}} />
@@ -24,11 +21,7 @@ const CardFooter = ({
           <Likes id={id} likes={likes} type={type} />
         </div>
         <div className="column is-one-quarter">
-          <a
-            className="has-text-info"
-            // OnClick={() => setShowComments(prev => !prev)}
-            onClick={onCommentButtonClick}
-          >
+          <a className="has-text-info" onClick={onCommentButtonClick}>
             <FontAwesomeIcon fixedWidth icon={faCommentAlt} />
           </a>
           <span>{commentsNumber}</span>
@@ -37,7 +30,6 @@ const CardFooter = ({
           <img src={avatar} className="avatar" />
           <span> by {author}</span>
         </div>
-        {/* <CommentsDropdown visible={false} id={id} comments={comments} /> */}
       </div>
     </div>
   );

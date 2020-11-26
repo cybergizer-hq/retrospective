@@ -130,7 +130,7 @@ const CardColumn = ({kind, initCards}) => {
     }
   };
 
-  const card = cards.filter(it => it.id === popupShownId)[0]; //  , переделать, вот этот вот  [0] это какое то дно
+  const card = cards.find(it => it.id === popupShownId);
   return (
     <>
       <div className="board-column-title">
@@ -192,21 +192,16 @@ const CardColumn = ({kind, initCards}) => {
       {popupShownId && (
         <CardPopup
           id={card.id}
+          author={card.author.nickname}
+          avatar={card.author.avatar.thumb.url}
+          body={card.body}
+          likes={card.likes}
+          type={kind}
+          commentsNumber={card.comments.length}
           editable={user === card.author.email}
           deletable={user === card.author.email}
-          body={card.body}
-          // Id={card.id}
-          // author={card.author.nickname}
-          // avatar={card.author.avatar.thumb.url}
-          // body={card.body}
-          // likes={card.likes}
-          // type={kind}
-          // commentsNumber = {card.comments.length}
-          // editable={user === card.author.email}
-          // deletable={user === card.author.email}
-          // onCommentButtonClick = {() => {}}
-
           comments={card.comments}
+          onCommentButtonClick={() => {}}
           onClickClosed={handlePopupClose}
         />
       )}
