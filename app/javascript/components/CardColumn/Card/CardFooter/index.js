@@ -5,8 +5,6 @@ import {faCommentAlt} from '@fortawesome/free-regular-svg-icons';
 import './CardFooter.css';
 
 const CardFooter = ({
-  author,
-  avatar,
   id,
   likes,
   type,
@@ -25,10 +23,6 @@ const CardFooter = ({
             <FontAwesomeIcon fixedWidth icon={faCommentAlt} />
           </a>
           <span>{commentsNumber}</span>
-        </div>
-        <div className="column is-half">
-          <img src={avatar} className="avatar" />
-          <span> by {author}</span>
         </div>
       </div>
     </div>

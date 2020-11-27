@@ -4,3 +4,23 @@
   width: 1.5rem;
   border-radius: 1rem;
 }
+
+.avatar--text {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #dbdbdb;
+  font-weight: 700;
+  text-align: center;
+  font-size: 12px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar__container {
+  display: flex;
+  border-bottom: 1px solid #dbdbdb;
+  margin-bottom: 10px;
+}

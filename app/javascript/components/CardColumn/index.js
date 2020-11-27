@@ -177,7 +177,7 @@ const CardColumn = ({kind, initCards}) => {
             key={card.id}
             id={card.id}
             author={card.author.nickname}
-            avatar={card.author.avatar.thumb.url}
+            avatar={null}
             body={card.body}
             likes={card.likes}
             type={kind}
