@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class BoardPolicy < ApplicationPolicy
-  def index?
+  def my?
+    true
+  end
+
+  def participating?
     true
   end
 

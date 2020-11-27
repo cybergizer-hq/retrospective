@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'my_boards', to: 'boards#my'
+  get 'participating_boards', to: 'boards#participating'
+
   resources :action_items, only: :index do
     member do
       put 'close'

@@ -14,7 +14,7 @@ class ActionItemsController < ApplicationController
   end
 
   def index
-    @action_items = ActionItem.eager_load(:board).order(created_at: :asc)
+    @action_items = user_action_items.eager_load(:board).order(created_at: :asc)
   end
 
   def close
@@ -39,5 +39,11 @@ class ActionItemsController < ApplicationController
     else
       redirect_to action_items_path, alert: @action_item.errors.full_messages.join(', ')
     end
+  end
+
+  private
+
+  def user_action_items
+    ActionItem.all.where(assignee_id: current_user.id)
   end
 end

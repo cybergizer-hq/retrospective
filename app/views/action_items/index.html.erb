@@ -1,34 +1,38 @@
-<div class='box'>
-  <h1 class='title'>Action items</h1>
-</div>
-<table class='table is-fullwidth'>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th></th>
-      <th></th>
-      <th>Created at</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @action_items.each do |item| %>
+<div class="columns">
+  <div class="column is-offset-1 is-2">
+    <%= render 'shared/menu' %>
+  </div>
+  <div class="column is-9">
+    <table class='table'>
+      <thead>
       <tr>
-        <td><%= item.body %></td>
-        <td>
-          <% if allowed_to?(:close?, item, context: { board: item.board }) %>
-            <%= link_to "close", close_action_item_path(item.id), method: :put, class: 'button is-small is-danger' %>
-          <% end %>
-          <% if allowed_to?(:complete?, item, context: { board: item.board }) %>
-            <%= link_to "done", complete_action_item_path(item.id), method: :put, class: 'button is-small is-success' %>
-          <% end %>
-          <% if allowed_to?(:reopen?, item, context: { board: item.board }) %>
-            <%= link_to "reopen", reopen_action_item_path(item.id), method: :put, class: 'button is-small is-light' %>
-          <% end %>
-        </td>
-        <td><%= link_to "Board: #{item.board}", item.board %></td>
-        <th><%= item.created_at %></th>
+        <th>Item</th>
+        <th></th>
+        <th></th>
+        <th>Created at</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @action_items.each do |item| %>
+        <tr>
+          <td><%= item.body %></td>
+          <td>
+            <% if allowed_to?(:close?, item, context: { board: item.board }) %>
+              <%= link_to "close", close_action_item_path(item.id), method: :put, class: 'button is-small is-danger' %>
+            <% end %>
+            <% if allowed_to?(:complete?, item, context: { board: item.board }) %>
+              <%= link_to "done", complete_action_item_path(item.id), method: :put, class: 'button is-small is-success' %>
+            <% end %>
+            <% if allowed_to?(:reopen?, item, context: { board: item.board }) %>
+              <%= link_to "reopen", reopen_action_item_path(item.id), method: :put, class: 'button is-small is-light' %>
+            <% end %>
+          </td>
+          <td><%= link_to "Board: #{item.board}", item.board %></td>
+          <th><%= item.created_at %></th>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

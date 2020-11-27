@@ -7,51 +7,51 @@
 
 <% end %>
 
-<div class='box has-text-centered light-gray straight-border'>
-  <div class='level' style='height: 75px;'>
-    <div>
-      <div style='float: left;'>
-        <h1 class='board-title'>
-          <%= @board.title %>
-        </h1>
+<div class="column is-10">
+  <div class='box has-text-centered light-gray straight-border'>
+    <div class='level' style='height: 75px;'>
+      <div>
+        <div style='float: left;'>
+          <h1 class='board-title'>
+            <%= @board.title %>
+          </h1>
+        </div>
+
+      </div>
+      <%= react_component('membership_list_container')%>
+      <div class='level-right'>
+        <%if allowed_to?(:edit?, @board)%>
+          <div id='settings-button'>
+            <%= link_to "SETTINGS", edit_board_path(@board), class: 'board-button link-as-button' %>
+          </div>
+        <%end%>
+        <% if !current_user %>
+          <%= link_to 'Sign in with Alfred', user_alfred_omniauth_authorize_path, class: 'button is-large' %>
+        <% elsif allowed_to?(:create_cards?, @board) %>
+          <div id='ready-button'></div>
+        <% else %>
+          <%= link_to 'Join', board_memberships_path(board_slug: @board.slug), method: :post, class: 'button is-large' %>
+        <% end %>
       </div>
 
-    </div>
-    <%= react_component('membership_list_container')%>
-    <div class='level-right'>
-      <%if allowed_to?(:edit?, @board)%>
-        <div id='settings-button'>
-            <%= link_to "SETTINGS", edit_board_path(@board), class: 'board-button link-as-button' %>
-        </div>
-      <%end%>
-      <% if !current_user %>
-        <%= link_to 'Sign in with Alfred', user_alfred_omniauth_authorize_path, class: 'button is-large' %>
-      <% elsif allowed_to?(:create_cards?, @board) %>
-        <div id='ready-button'></div>
-      <% else %>
-        <%= link_to 'Join', board_memberships_path(board_slug: @board.slug), method: :post, class: 'button is-large' %>
-      <% end %>
     </div>
 
   </div>
 
-</div>
+  <% if @previous_action_items %>
+    <% column_class_name = 'column is-one-fifth' %>
+  <% else %>
+    <% column_class_name = 'column is-one-quarter' %>
+  <% end %>
 
-<% if @previous_action_items %>
-  <% column_class_name = 'column is-one-fifth' %>
-<% else %>
-  <% column_class_name = 'column is-one-quarter' %>
-<% end %>
-
-<%= react_component('card_table', {
-              actionItems: @action_items,
-              board: @board,
-              cardsByType: @cards_by_type,
-              creators: @board_creators,
-              initPrevItems: @previous_action_items || [],
-              user: current_user&.email,
-              users: @users
-            })
-%>
-
+  <%= react_component('card_table', {
+    actionItems: @action_items,
+    board: @board,
+    cardsByType: @cards_by_type,
+    creators: @board_creators,
+    initPrevItems: @previous_action_items || [],
+    user: current_user&.email,
+    users: @users
+  })
+  %>
 </div>

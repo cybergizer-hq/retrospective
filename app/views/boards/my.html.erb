@@ -1,0 +1,68 @@
+<div class='columns' style="margin-top: -25px;">
+  <div class='column is-9'>
+    <span class="subtitle is-2">My Boards</span>
+    <a class='button new_board_button' href= <%= new_board_path%>>
+      <%= image_tag 'icon-plus.svg', class: 'inline-icon'%>
+      Create new board
+    </a>
+    <% @boards_by_date.each_with_index do |arr, index| %>
+      <% month, records = arr%>
+      <div class='board-date <%= 'animated-board' if index > 2%>' style="margin-top: 20px;">
+        <%= month%>
+      </div>
+      <div class="columns is-3 is-variable is-multiline <%= 'animated-board' if index > 2%>">
+        <% records.each do |board|%>
+          <div class='column is-one-third'>
+            <div class="board-card">
+              <div class="board-title">
+                <%= link_to board.title, board %>
+              </div>
+              <div class="board-stats-table">
+                <div class='icon-container'>
+                  <%= image_tag 'icon-members.svg', class: 'inline-icon'%>
+                </div>
+                <div class="dropdown_boards_index">
+                  <%= pluralize(board.users.count, 'member')%>
+                  <div class="dropdown-content_boards_index">
+                    <% board.users.each do |user| %>
+                      <%= user.email %>
+                      <br />
+                    <% end %>
+                  </div>
+                </div>
+                <div class='icon-container'>
+                  <%= image_tag 'icon-cards.png', class: 'inline-icon'%>
+                </div>
+                <div>
+                  <%= pluralize(board.cards.count, 'card')%>
+                </div>
+                <div class='icon-container'>
+                  <%= image_tag 'icon-done.svg', class: 'inline-icon'%>
+                </div>
+                <div>
+                  <%= "#{board.action_items.where(status: 'done')&.count || 0}/#{board.action_items.count} action items done"%>
+                </div>
+              </div>
+              <div class='button-grid'>
+                <% if allowed_to?(:continue?, board)%>
+                  <%= link_to 'continue', continue_board_path(board), class: 'button board-button', method: :post %>
+                <% end %>
+                <% if allowed_to?(:destroy?, board)%>
+                  <%= link_to 'delete', board, method: :delete, class: 'button board-button',
+                              data: { confirm: 'Are you sure you want to delete this board?' } %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end%>
+      </div>
+    <% end %>
+    <% if @boards_by_date.length > 3%>
+      <div class='load-more-boards-container'>
+        <%= image_tag 'chevron-down.svg', class: 'load-more-boards-button'%>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'boards_index_animation'%>

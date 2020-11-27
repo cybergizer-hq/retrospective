@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <aside class="menu">
+    <p class="menu-label">
+      Pages
+    </p>
+    <ul class="menu-list">
+      <li><%= link_to 'My Boards', my_boards_path %></li>
+      <li><%= link_to 'Boards where I am', participating_boards_path %></li>
+      <li><%= link_to 'Action Items assigned to me', action_items_path %></li>
+    </ul>
+    <p class="menu-label">
+      Actions
+    </p>
+    <ul class="menu-list">
+      <li><%= link_to 'User settings', "#" %></li>
+      <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+    </ul>
+  </aside>
+<% end %>

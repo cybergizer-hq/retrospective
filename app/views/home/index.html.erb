@@ -3,11 +3,11 @@
 <div class='box'>
   <% if user_signed_in? %>
     <p>Logged in as <strong><%= current_user.email %></strong></p>
-    <p> <%= link_to 'See your boards', boards_path %></p>
+    <p> <%= link_to 'See your boards', my_boards_path %></p>
     <p class='has-text-right'> <%= link_to 'Logout', destroy_user_session_path, method: :delete %></p>
   <% else %>
     <% if ENV.fetch('SKIP_ALFRED', false) == 'true' %>
-      <%= link_to 'Sign in as Developer', user_developer_omniauth_callback_path %> |
+      <%= link_to 'Sign in as Developer', user_developer_omniauth_callback_path %>
     <% end %>
     <%= link_to 'Sign in with Alfred', user_alfred_omniauth_authorize_path %>
   <% end %>

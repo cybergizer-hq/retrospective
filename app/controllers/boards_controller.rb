@@ -8,15 +8,19 @@ class BoardsController < ApplicationController
   skip_verify_authorized only: :show
 
   rescue_from ActionPolicy::Unauthorized do |ex|
-    redirect_to boards_path, alert: ex.result.message
+    redirect_to root_path, alert: ex.result.message
   end
 
-  def index
+  def my
     authorize!
-    @boards_by_date = current_user.boards
-                                  .includes(:users, :cards, :action_items)
-                                  .order(created_at: :desc)
-                                  .group_by { |record| record.created_at.strftime('%B, %Y') }
+
+    @boards_by_date = boards_by_role(:creator)
+  end
+
+  def participating
+    authorize!
+
+    @boards_by_date = boards_by_role(:member)
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -78,9 +82,9 @@ class BoardsController < ApplicationController
   def destroy
     authorize! @board
     if @board.destroy
-      redirect_to boards_path, notice: 'Board was successfully deleted.'
+      redirect_to my_boards_path, notice: 'Board was successfully deleted.'
     else
-      redirect_to boards_path, alert: @board.errors.full_messages.join(', ')
+      redirect_to my_boards_path, alert: @board.errors.full_messages.join(', ')
     end
   end
 
@@ -90,7 +94,7 @@ class BoardsController < ApplicationController
     if result.success?
       redirect_to result.value!, notice: 'Board was successfully created.'
     else
-      redirect_to boards_path, alert: result.failure
+      redirect_to my_boards_path, alert: result.failure
     end
   end
 
@@ -102,5 +106,12 @@ class BoardsController < ApplicationController
 
   def set_board
     @board = Board.find_by!(slug: params[:slug])
+  end
+
+  def boards_by_role(role)
+    Board.joins(:memberships).where(memberships: { user_id: current_user.id, role: role })
+         .includes(:users, :cards, :action_items)
+         .order(created_at: :desc)
+         .group_by { |record| record.created_at.strftime('%B, %Y') }
   end
 end

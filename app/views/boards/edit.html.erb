@@ -1,18 +1,20 @@
 <%= javascript_pack_tag 'application'%>
-<div class='box'>
-  <h1>Editing Board</h1>
-</div>
-<div class='box'>
-<% if allowed_to?(:update?, @board) %>
-  <%= render 'form', board: @board %>
-<% end %>
-</div>
-
-<% if allowed_to?(:invite?, @board) %>
+<div class="column is-10">
   <div class='box'>
-    <%= react_component 'invite_block_container'%>
+    <h1>Editing Board</h1>
   </div>
-<% end %>
+  <div class='box'>
+    <% if allowed_to?(:update?, @board) %>
+      <%= render 'form', board: @board %>
+    <% end %>
+  </div>
 
-<%= link_to 'Board page', @board %> |
-<%= link_to 'Boards menu', boards_path %>
+  <% if allowed_to?(:invite?, @board) %>
+    <div class='box'>
+      <%= react_component 'invite_block_container'%>
+    </div>
+  <% end %>
+
+  <%= link_to 'Board page', @board %> |
+  <%= link_to 'Boards menu', my_boards_path %>
+</div>

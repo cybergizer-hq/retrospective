@@ -10,8 +10,17 @@ RSpec.describe BoardPolicy do
 
   let(:policy) { described_class.new(board, user: test_user) }
 
-  describe '#index?' do
-    subject { policy.apply(:index?) }
+  describe '#my? boards' do
+    subject { policy.apply(:my?) }
+
+    context 'when user exists' do
+      let(:test_user) { not_member }
+      it { is_expected.to eq true }
+    end
+  end
+
+  describe '#participating? boards' do
+    subject { policy.apply(:participating?) }
 
     context 'when user exists' do
       let(:test_user) { not_member }
