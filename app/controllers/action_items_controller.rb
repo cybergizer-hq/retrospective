@@ -14,6 +14,10 @@ class ActionItemsController < ApplicationController
   end
 
   def index
+    @action_items = ActionItem.eager_load(:board).order(created_at: :asc)
+  end
+
+  def my
     @action_items = user_action_items.eager_load(:board).order(created_at: :asc)
   end
 

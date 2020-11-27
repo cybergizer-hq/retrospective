@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'my_actions', to: 'action_items#my'
+
   resources :teams
 
   resources :boardsql, param: :slug, only: :show
