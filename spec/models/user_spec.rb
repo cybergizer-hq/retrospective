@@ -31,6 +31,10 @@ RSpec.describe User, type: :model do
     it 'has many teams' do
       expect(user).to respond_to(:teams)
     end
+
+    it 'has many action items' do
+      expect(user).to respond_to(:action_items)
+    end
   end
 
   describe '.from_omniauth' do

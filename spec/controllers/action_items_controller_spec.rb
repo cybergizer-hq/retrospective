@@ -26,14 +26,6 @@ RSpec.describe ActionItemsController do
     end
   end
 
-  describe 'GET #my actions' do
-    subject(:response) { get :my }
-
-    context 'when user is not logged in' do
-      it { is_expected.to have_http_status(:redirect) }
-    end
-  end
-
   describe 'PUT #close' do
     subject(:response) { put :close, params: params }
     let_it_be(:params) { { id: action_item.id } }

@@ -14,10 +14,6 @@ class ActionItemsController < ApplicationController
   end
 
   def index
-    @action_items = ActionItem.eager_load(:board).order(created_at: :asc)
-  end
-
-  def my
     @action_items = user_action_items.eager_load(:board).order(created_at: :asc)
   end
 
@@ -48,6 +44,6 @@ class ActionItemsController < ApplicationController
   private
 
   def user_action_items
-    ActionItem.all.where(assignee_id: current_user.id)
+    current_user&.action_items
   end
 end

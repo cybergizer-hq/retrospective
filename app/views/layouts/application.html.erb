@@ -13,11 +13,17 @@
   </head>
 
   <body>
-    <div style="margin-top: 40px;">
+  <div class="columns" style="margin-top: 40px;">
+    <div class="column is-offset-1 is-2">
+      <%= render 'shared/menu' %>
+    </div>
+    <div class="column is-9">
       <p id="notice"><%= notice %></p>
       <p id="alert"><%= alert %></p>
 
       <%= yield %>
     </div>
+  </div>
+
   </body>
 </html>

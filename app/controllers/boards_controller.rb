@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BoardsController < ApplicationController
-  layout 'board'
+  layout 'board', only: :show
 
   before_action :set_board, only: %i[show continue edit update destroy]
   skip_before_action :authenticate_user!, only: :show
