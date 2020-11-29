@@ -30,9 +30,9 @@ class BoardsController < ApplicationController
     authorize! @board
     @cards_by_type = @board.column_names.map do |column|
       [[column, ActiveModelSerializers::SerializableResource.new(@board.cards.where(kind: column)
-        .includes(:author, comments: [:author]).order(created_at: :asc)).as_json]].to_h
+        .includes(:author, comments: [:author]).order(created_at: :desc)).as_json]].to_h
     end.reduce({}, :merge).as_json
-    @action_items = ActiveModelSerializers::SerializableResource.new(@board.action_items).as_json
+    @action_items = ActiveModelSerializers::SerializableResource.new(@board.action_items.order(created_at: :desc)).as_json
     @action_item = ActionItem.new(board_id: @board.id)
     @board_creators = User.find(@board.memberships.where(role: 'creator').pluck(:user_id))
                           .pluck(:email)
