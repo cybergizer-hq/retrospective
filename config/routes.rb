@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:edit, :update]
+
   resources :teams
 
   resources :boardsql, param: :slug, only: :show

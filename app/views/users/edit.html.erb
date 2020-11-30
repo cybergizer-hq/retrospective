@@ -1,0 +1,10 @@
+<%= form_with model: @user, local: true do |form| %>
+  <div class="columns">
+    <%= image_tag(@user.avatar.url) if @user.avatar? %>
+    <%= form.file_field :avatar %>
+  </div>
+  <%= form.label :nickname %><br>
+  <%= form.text_field :nickname %>
+
+  <p><%= form.submit %></p>
+<% end %>
