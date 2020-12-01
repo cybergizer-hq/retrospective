@@ -41,6 +41,7 @@ const CardTable = props => {
 
     return content;
   };
+  // Debugger;
 
   return (
     <Provider>
