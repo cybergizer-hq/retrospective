@@ -10,7 +10,9 @@ const Card = ({
   body,
   deletable,
   editable,
-  author,
+  nickname,
+  firstName,
+  lastName,
   avatar,
   commentsNumber,
   likes,
@@ -21,15 +23,14 @@ const Card = ({
     <div className="box">
       <CardUser
         avatar={avatar}
-        name={author}
-        surname={author}
-        nickname={author}
+        name={nickname}
+        fisrtName={firstName}
+        lastName={lastName}
+        nickname={nickname}
       />
       <CardBody id={id} editable={editable} deletable={deletable} body={body} />
       <CardFooter
         id={id}
-        author={author}
-        avatar={avatar}
         likes={likes}
         type={type}
         commentsNumber={commentsNumber}

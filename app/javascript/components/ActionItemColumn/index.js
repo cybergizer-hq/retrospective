@@ -192,6 +192,7 @@ const ActionItemColumn = props => {
           </form>
         </div>
       )}
+
       {items.map(item => {
         return (
           <ActionItem
@@ -203,6 +204,8 @@ const ActionItemColumn = props => {
             editable={creators.includes(user)}
             deletable={creators.includes(user)}
             assignee={item?.assignee?.nickname}
+            firstName={item.assignee?.first_name} // TO DO: will be rewritten
+            lastName={item.assignee?.last_name} // TO DO: will be rewritten
             avatar={item.assignee_avatar_url}
             users={users}
           />

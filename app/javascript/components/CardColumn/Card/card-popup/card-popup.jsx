@@ -8,7 +8,9 @@ const CardPopup = ({
   body,
   deletable,
   editable,
-  author,
+  nickname,
+  firstName,
+  lastName,
   avatar,
   commentsNumber,
   likes,
@@ -31,7 +33,9 @@ const CardPopup = ({
           deletable={deletable}
           body={body}
           id={id}
-          author={author}
+          nickname={nickname}
+          firstName={firstName}
+          lastName={lastName}
           avatar={avatar}
           likes={likes}
           type={type}

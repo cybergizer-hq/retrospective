@@ -1,4 +1,6 @@
-.box { margin-bottom: 1.5rem; }
+.box {
+  margin-bottom: 1.5rem;
+}
 
 .avatar {
   width: 1.5rem;
@@ -23,4 +25,8 @@
   display: flex;
   border-bottom: 1px solid #dbdbdb;
   margin-bottom: 10px;
+}
+
+.avatar__nickname {
+  margin-left: 15px;
 }

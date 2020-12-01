@@ -5,7 +5,8 @@ import TransitionButton from '../TransitionButton';
 import BoardSlugContext from '../../../utils/board_slug_context';
 import './ActionItemFooter.css';
 const ActionItemFooter = props => {
-  const {id, movable, transitionable, assignee, avatar, timesMoved} = props;
+  // Const {id, movable, transitionable, assignee, avatar, timesMoved} = props;
+  const {id, movable, transitionable, timesMoved} = props;
   const boardSlug = useContext(BoardSlugContext);
   const [moveActionItem] = useMutation(moveActionItemMutation);
   const handleMoveClick = () => {
@@ -47,7 +48,7 @@ const ActionItemFooter = props => {
       <hr style={{margin: '0.5rem'}} />
       <div className="chevrons">{generateChevrons()}</div>
 
-      {assignee && (
+      {/* {assignee && (
         <div className="columns is-multiline">
           <div className="column is-one-quarter column-assignee">
             <img src={avatar} className="avatar" />
@@ -57,7 +58,7 @@ const ActionItemFooter = props => {
             <p> {assignee}</p>
           </div>
         </div>
-      )}
+      )} */}
 
       {transitionable && transitionable.can_close && (
         <TransitionButton id={id} action="close" />

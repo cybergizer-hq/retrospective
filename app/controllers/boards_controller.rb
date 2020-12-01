@@ -36,6 +36,7 @@ class BoardsController < ApplicationController
                                ActiveModelSerializers::SerializableResource.new(@board.previous_board.action_items).as_json
                              end
     @users = ActiveModelSerializers::SerializableResource.new(User.find(@board.memberships.pluck(:user_id))).as_json
+    # @data = RetrospectiveSchema.execute(INITIAL__QUERY)
   end
   # rubocop:enable Metrics/LineLength
   # rubocop:enable Metrics/MethodLength
