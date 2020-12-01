@@ -24,7 +24,7 @@
             <%= link_to "reopen", reopen_action_item_path(item.id), method: :put, class: 'button is-small is-light' %>
           <% end %>
         </td>
-        <td><%= link_to "Board: #{item.board}", item.board %></td>
+        <td><%= link_to "Board: #{item.board.title}", item.board %></td>
         <th><%= item.created_at %></th>
       </tr>
     <% end %>
