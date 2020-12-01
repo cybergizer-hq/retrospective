@@ -3,7 +3,6 @@ import React from 'react';
 import ActionItemBody from './ActionItemBody';
 import ActionItemFooter from './ActionItemFooter';
 import './ActionItem.css';
-// Import CardUser from './action-item-user/action-item-user.jsx';
 import CardUser from '../CardColumn/Card/card-user/card-user.jsx';
 
 class ActionItem extends React.Component {
