@@ -42,8 +42,8 @@ class ActionItem extends React.Component {
           <CardUser
             avatar={avatar}
             nickname={assignee}
-            fistsName={lastName}
-            lastName={firstName}
+            firstName={firstName}
+            lastName={lastName}
           />
         )}
 
@@ -62,7 +62,6 @@ class ActionItem extends React.Component {
             movable={movable}
             transitionable={transitionable}
             assignee={assignee}
-            // Avatar={avatar}
           />
         )}
       </div>

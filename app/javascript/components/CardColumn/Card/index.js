@@ -24,7 +24,7 @@ const Card = ({
       <CardUser
         avatar={avatar}
         name={nickname}
-        fisrtName={firstName}
+        firstName={firstName}
         lastName={lastName}
         nickname={nickname}
       />
