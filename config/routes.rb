@@ -35,7 +35,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:edit, :update]
+  resources :users, only: [:edit, :update] do
+    member do
+      delete 'avatar_destroy', to: 'users#avatar_destroy'
+    end
+  end
 
   resources :teams
 

@@ -8,4 +8,8 @@ class UserPolicy < ApplicationPolicy
   def update?
     true
   end
+
+  def avatar_destroy?
+    true
+  end
 end

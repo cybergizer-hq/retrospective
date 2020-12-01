@@ -1,10 +1,49 @@
 <%= form_with model: @user, local: true do |form| %>
-  <div class="columns">
-    <%= image_tag(@user.avatar.url) if @user.avatar? %>
-    <%= form.file_field :avatar %>
+  <div class="avatar-img">
+    <img src="<%= @user.avatar.profile.url if @user.avatar? %>", id='avatar'>
   </div>
-  <%= form.label :nickname %><br>
-  <%= form.text_field :nickname %>
+  <div class="columns" style="margin-top: 5px;">
+    <div class="column is-1">
+      <div class="avatar-upload">
+        <label for="file-input">
+          <span class="button">Change avatar</span>
+        </label>
+        <%= form.file_field :avatar, class: 'button', id: 'file-input', onchange: "onFileSelected(event)" %>
+      </div>
+    </div>
+    <div class="column is-1" style="margin-left: 40px;">
+      <div class="avatar-delete">
+        <label for="avatar-delete-button">
+          <span class="button">Delete avatar</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-4">
+      <%= form.label :nickname, class: 'label' %>
+      <%= form.text_field :nickname, class: 'input' %>
 
-  <p><%= form.submit %></p>
+      <%= form.submit 'Save changes', class: 'button', style: "margin-top: 10px;" %>
+    </div>
+  </div>
 <% end %>
+
+<%= button_to 'Delete avatar', avatar_destroy_user_path(@user), method: :delete, id: 'avatar-delete-button', class: 'delete-button', data: { confirm: "Are you sure?" } %>
+
+<script>
+  function onFileSelected(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    var avatar = document.getElementById('avatar');
+    avatar.title = selectedFile.name;
+
+    reader.onload = function(event) {
+      avatar.src = event.target.result;
+      avatar.style.width = '400px'
+    };
+
+    reader.readAsDataURL(selectedFile);
+  }
+</script>

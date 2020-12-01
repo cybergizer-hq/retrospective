@@ -1,3 +1,18 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.avatar-upload > input {
+  display: none;
+}
+.image-upload > label {
+  cursor:pointer;
+}
+
+.delete-button {
+  display: none;
+}
+
+.avatar-delete > label {
+  cursor: pointer;
+}

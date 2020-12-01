@@ -10,9 +10,15 @@ class UsersController < ApplicationController
   def update
     authorize!
 
-    if @user.update(user_params)
-      render :edit
-    else
+    @user.update(user_params)
+    render :edit
+  end
+
+  def avatar_destroy
+    authorize!
+
+    if @user.remove_avatar!
+      @user.save
       render :edit
     end
   end
