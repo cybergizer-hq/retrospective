@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe ActionItemPolicy do
   let_it_be(:creator) { create(:user) }
+  let_it_be(:admin) { create(:user) }
+  let_it_be(:host) { create(:user) }
   let_it_be(:member) { create(:user) }
   let_it_be(:not_member) { build_stubbed(:user) }
   let_it_be(:board) { create(:board) }
@@ -12,6 +14,12 @@ RSpec.describe ActionItemPolicy do
   end
   let_it_be(:creatorship) do
     create(:membership, user_id: creator.id, board_id: board.id, role: 'creator')
+  end
+  let_it_be(:adminship) do
+    create(:membership, user_id: admin.id, board_id: board.id, role: 'admin')
+  end
+  let_it_be(:hostship) do
+    create(:membership, user_id: host.id, board_id: board.id, role: 'host')
   end
   let_it_be(:action_item) { build_stubbed(:action_item, board: board) }
   let_it_be(:closed_action_item) { build_stubbed(:action_item, board: board, status: 'closed') }
@@ -22,6 +30,21 @@ RSpec.describe ActionItemPolicy do
 
     context 'when user is a creator' do
       let(:test_user) { creator }
+      it { is_expected.to eq true }
+    end
+
+    context 'when user is a admin' do
+      let(:test_user) { admin }
+      it { is_expected.to eq true }
+    end
+
+    context 'when user is a host' do
+      let(:test_user) { host }
+      it { is_expected.to eq true }
+    end
+
+    context 'when user is a member' do
+      let(:test_user) { member }
       it { is_expected.to eq true }
     end
 
