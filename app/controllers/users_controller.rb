@@ -3,24 +3,26 @@
 class UsersController < ApplicationController
   before_action :set_user
 
+  rescue_from ActionPolicy::Unauthorized do |ex|
+    redirect_to root_path, alert: ex.result.message
+  end
+
   def edit
-    authorize!
+    authorize! @user
   end
 
   def update
-    authorize!
+    authorize! @user
 
     @user.update(user_params)
     render :edit
   end
 
   def avatar_destroy
-    authorize!
+    authorize! @user
 
-    if @user.remove_avatar!
-      @user.save
-      render :edit
-    end
+    @user.save if @user.remove_avatar!
+    render :edit
   end
 
   private

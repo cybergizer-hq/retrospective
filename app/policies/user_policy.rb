@@ -2,14 +2,18 @@
 
 class UserPolicy < ApplicationPolicy
   def edit?
-    true
+    users_match?
   end
 
   def update?
-    true
+    users_match?
   end
 
   def avatar_destroy?
-    true
+    users_match?
+  end
+
+  def users_match?
+    user.id == record.id
   end
 end
