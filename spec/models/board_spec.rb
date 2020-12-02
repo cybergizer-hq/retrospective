@@ -135,7 +135,6 @@ RSpec.describe Board, type: :model do
     end
   end
 
-
   describe '#host?' do
     subject { board.host?(test_user) }
 
