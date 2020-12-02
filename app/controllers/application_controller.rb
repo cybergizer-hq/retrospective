@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   authorize :user, through: :current_or_guest_user
   verify_authorized unless: [:devise_controller?]
 
+  rescue_from ActionPolicy::Unauthorized do |ex|
+    redirect_to root_path, alert: ex.result.message
+  end
+
   private
 
   def set_raven_context

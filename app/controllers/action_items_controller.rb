@@ -9,10 +9,6 @@ class ActionItemsController < ApplicationController
 
   skip_verify_authorized only: :index
 
-  rescue_from ActionPolicy::Unauthorized do |ex|
-    redirect_to action_items_path, alert: ex.result.message
-  end
-
   def index
     @action_items = user_action_items.eager_load(:board).order(created_at: :asc)
   end

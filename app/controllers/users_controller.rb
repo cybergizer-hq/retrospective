@@ -2,25 +2,18 @@
 
 class UsersController < ApplicationController
   before_action :set_user
-
-  rescue_from ActionPolicy::Unauthorized do |ex|
-    redirect_to root_path, alert: ex.result.message
-  end
-
-  def edit
+  before_action do
     authorize! @user
   end
+
+  def edit; end
 
   def update
-    authorize! @user
-
     @user.update(user_params)
     render :edit
   end
 
   def avatar_destroy
-    authorize! @user
-
     @user.save if @user.remove_avatar!
     render :edit
   end
@@ -32,6 +25,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:nickname, :avatar)
+    params.require(:user).permit(:nickname, :first_name, :last_name, :avatar)
   end
 end

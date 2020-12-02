@@ -7,10 +7,6 @@ class BoardsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
 
-  rescue_from ActionPolicy::Unauthorized do |ex|
-    redirect_to root_path, alert: ex.result.message
-  end
-
   def my
     authorize!
 

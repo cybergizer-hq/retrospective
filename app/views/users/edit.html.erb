@@ -21,9 +21,18 @@
   </div>
   <div class="columns">
     <div class="column is-4">
-      <%= form.label :nickname, class: 'label' %>
-      <%= form.text_field :nickname, class: 'input' %>
-
+      <div class="field">
+        <%= form.label :nickname, class: 'label' %>
+        <%= form.text_field :nickname, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :first_name, class: 'label' %>
+        <%= form.text_field :first_name, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :last_name, class: 'label' %>
+        <%= form.text_field :last_name, class: 'input' %>
+      </div>
       <%= form.submit 'Save changes', class: 'button', style: "margin-top: 10px;" %>
     </div>
   </div>
