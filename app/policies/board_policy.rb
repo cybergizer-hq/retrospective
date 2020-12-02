@@ -50,19 +50,19 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def user_is_creator?
-    record.creator?(user)
+    record.memberships.exists?(user_id: user.id, role: 'creator')
   end
 
   def user_is_admin?
-    record.admin?(user)
+    record.memberships.exists?(user_id: user.id, role: 'admin')
   end
 
   def user_is_host?
-    record.host?(user)
+    record.memberships.exists?(user_id: user.id, role: 'host')
   end
 
   def user_is_member?
-    record.member?(user)
+    record.memberships.where(user_id: user.id).exists?
   end
 
   def can_continue?

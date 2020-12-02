@@ -32,10 +32,14 @@ class ActionItemPolicy < ApplicationPolicy
   end
 
   def user_is_creator?
-    board ? board.creator?(user) : record.board.creator?(user)
+    if board
+      board.memberships.exists?(user_id: user.id, role: 'creator')
+    else
+      record.board.memberships.exists?(user_id: user.id, role: 'creator')
+    end
   end
 
   def user_is_member?
-    board ? board.member?(user) : record.board.member?(user)
+    board.memberships.where(user_id: user.id).exists?
   end
 end

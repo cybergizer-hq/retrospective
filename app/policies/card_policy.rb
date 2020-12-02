@@ -18,7 +18,7 @@ class CardPolicy < ApplicationPolicy
   end
 
   def user_is_member?
-    record.board.member?(user)
+    record.board.memberships.exists?(user_id: user.id)
   end
 
   def user_is_author?
