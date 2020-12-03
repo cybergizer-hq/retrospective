@@ -1,6 +1,6 @@
 <%= form_with model: @user, local: true do |form| %>
   <div class="avatar-img">
-    <img src="<%= @user.avatar.profile.url if @user.avatar? %>", id='avatar'>
+    <img src="<%= @user.avatar_url if @user.avatar? %>" id='avatar' style="width: 400px;">
   </div>
   <div class="columns" style="margin-top: 5px;">
     <div class="column is-1">

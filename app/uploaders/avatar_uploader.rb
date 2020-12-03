@@ -15,10 +15,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def default_url
-    '/assets/default_avatar.jpg'
-  end
-
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #
