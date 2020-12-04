@@ -7,6 +7,7 @@ RSpec.describe DailyActionItemsDigestService do
 
   # rubocop:disable Metrics/LineLength
   it 'sends daily digest to all users' do
+    ActiveJob::Base.queue_adapter = :test
     users.each { |user| expect(DailyActionItemsMailer).to receive(:digest).with(user).and_call_original }
     subject.send_digest
   end
