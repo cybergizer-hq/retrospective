@@ -88,7 +88,6 @@ gem 'react-rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'dry-monads'
 gem 'aasm'
-gem 'whenever', require: false
 gem 'sidekiq'
 
 gem 'graphql', '~> 1.9'

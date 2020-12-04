@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class DailyActionItemsMailer < ApplicationMailer
-  def digest(user)
-    @action_items = user.action_items.where(status: 'pending').where('created_at > ?', 1.days.ago)
+  def send_action_items(user, board)
+    @action_items = user.action_items.where(board_id: board.id, status: 'pending')
+    @board = board
     @greeting = "Good day, #{user.nickname}"
 
     return if @action_items.empty?

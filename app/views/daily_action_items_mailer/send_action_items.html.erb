@@ -1,0 +1,11 @@
+<p><%= @greeting %></p>
+<p>List of your new ActionItems from board <%= link_to @board.title, board_url(@board) %>:</p>
+
+<ul>
+  <% @action_items.each do |item| %>
+    <li>
+      <%= item.body %>
+    </li>
+  <% end %>
+</ul>
+

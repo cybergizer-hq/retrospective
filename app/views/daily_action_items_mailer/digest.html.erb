@@ -1,8 +1,0 @@
-<p><%= @greeting %></p>
-<p>List of your new ActionItems:</p>
-
-<% @action_items.each do |item| %>
-  <p>
-    <%= link_to "#{item.body}", board_url(item.board) %>, from board <%= item.board.title %>
-  </p>
-<% end %>

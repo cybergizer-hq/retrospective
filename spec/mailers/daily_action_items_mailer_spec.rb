@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe DailyActionItemsMailer, type: :mailer do
-  describe 'digest' do
+  describe '#send_action_items' do
     let_it_be(:user) { create(:user, email: 'test_user@mail.com') }
     let_it_be(:another_user) { create(:user) }
     let_it_be(:board) { create(:board) }
     let_it_be(:action_item) { create(:action_item, assignee: user, board: board) }
-    let_it_be(:mail) { DailyActionItemsMailer.digest(user) }
-    let_it_be(:another_mail) { DailyActionItemsMailer.digest(another_user) }
+    let_it_be(:mail) { DailyActionItemsMailer.send_action_items(user, board) }
+    let_it_be(:another_mail) { DailyActionItemsMailer.send_action_items(another_user, board) }
 
     context 'when user has a new action items' do
       it 'renders the headers' do

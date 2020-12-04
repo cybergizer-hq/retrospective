@@ -127,7 +127,6 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
-    chronic (0.10.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -424,8 +423,6 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    whenever (1.0.0)
-      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.2.0)
@@ -485,7 +482,6 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webmock
   webpacker (~> 4.x)
-  whenever
 
 RUBY VERSION
    ruby 2.6.6p146
