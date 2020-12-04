@@ -12,16 +12,6 @@ Rails.application.routes.draw do
     # rubocop:enable Metrics/LineLength
   end
 
-  if Rails.env.development?
-    require 'sidekiq/web'
-
-    Rails.application.routes.draw do
-      authenticate :user do
-        mount Sidekiq::Web => '/sidekiq'
-      end
-    end
-  end
-
   direct :new_user_session do
     root_path
   end
