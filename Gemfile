@@ -55,6 +55,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rails-erd'
+  gem 'letter_opener'
 end
 
 group :test do
@@ -87,6 +88,8 @@ gem 'react-rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'dry-monads'
 gem 'aasm'
+gem 'whenever', require: false
+gem 'sidekiq'
 
 gem 'graphql', '~> 1.9'
 gem 'action_policy-graphql', '~> 0.3'

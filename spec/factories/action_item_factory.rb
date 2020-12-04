@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :action_item do
-    body { Faker::ChuckNorris.fact }
+    sequence(:body) { |n| "Test Action Item#{n}" }
     association :board
     association :assignee, factory: :user
   end

@@ -17,6 +17,7 @@ require 'devise'
 require 'aasm/rspec'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'services', '*.rb')].sort.each { |f| require f }
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
