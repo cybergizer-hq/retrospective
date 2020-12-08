@@ -106,7 +106,7 @@ class BoardsController < ApplicationController
   end
 
   def boards_by_role(role)
-    Board.where.not(id: Board.distinct.pluck(:previous_board_id))
+    Board.where.not(id: Board.select(:previous_board_id).where.not(previous_board_id: nil))
          .joins(:memberships).where(memberships: { user_id: current_user.id, role: role })
          .includes(:users, :cards, :action_items)
          .order(created_at: :desc)
