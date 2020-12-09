@@ -2,6 +2,6 @@
 
 module Types
   class AvatarType < Types::BaseObject
-    field :thumb, Types::ThumbType, null: false
+    field :thumb, Types::ThumbType, null: true
   end
 end

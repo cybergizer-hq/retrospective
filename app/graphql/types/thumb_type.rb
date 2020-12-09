@@ -2,6 +2,6 @@
 
 module Types
   class ThumbType < Types::BaseObject
-    field :url, String, null: false
+    field :url, String, null: true
   end
 end
