@@ -9,6 +9,10 @@ class BoardPolicy < ApplicationPolicy
     true
   end
 
+  def history?
+    true
+  end
+
   def show?
     record.private ? user_is_member? : true
   end

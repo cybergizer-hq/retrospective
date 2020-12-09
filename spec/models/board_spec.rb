@@ -39,4 +39,19 @@ RSpec.describe Board, type: :model do
       expect(board).to respond_to(:users)
     end
   end
+
+  describe 'methods' do
+    context '#previous_boards' do
+      let_it_be(:board) { create(:board) }
+      let_it_be(:second_board) { create(:board, previous_board_id: board.id) }
+
+      context 'return previous boards if they exists' do
+        it { expect(second_board.previous_boards).to eq [board] }
+      end
+
+      context 'return empty array if board does not have previous boards' do
+        it { expect(board.previous_boards).to eq [] }
+      end
+    end
+  end
 end

@@ -3,7 +3,7 @@
 class BoardsController < ApplicationController
   layout 'board', only: :show
 
-  before_action :set_board, only: %i[show continue edit update destroy]
+  before_action :set_board, only: %i[show continue edit update destroy history]
   skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
 
@@ -17,6 +17,14 @@ class BoardsController < ApplicationController
     authorize!
 
     @boards_by_date = boards_by_role(:member)
+  end
+
+  def history
+    authorize!
+
+    @boards_by_date = @board.previous_boards.includes(:users, :cards, :action_items)
+                            .order(created_at: :desc)
+                            .group_by { |record| record.created_at.strftime('%B, %Y') }
   end
 
   # rubocop:disable Metrics/AbcSize

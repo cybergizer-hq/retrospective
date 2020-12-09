@@ -32,9 +32,7 @@
         <%= link_to 'Join', board_memberships_path(board_slug: @board.slug), method: :post, class: 'button is-large' %>
       <% end %>
     </div>
-
   </div>
-
 </div>
 
 <% if @previous_action_items %>
@@ -53,3 +51,6 @@
   users: @users
 })
 %>
+<% if @board.previous_boards.any? %>
+  <%= link_to 'Historical boards', history_board_path(@board), class: 'button is-ghost', style: 'float: right; margin-right: 8px; margin-top: 20px;' %>
+<% end %>

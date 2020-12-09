@@ -38,6 +38,19 @@ RSpec.describe BoardsController do
     end
   end
 
+  describe 'GET #history' do
+    subject(:response) { get :history, params: { slug: board.slug } }
+
+    context 'when user is not logged in' do
+      it_behaves_like :controllers_unauthenticated_action
+    end
+
+    context 'when user is logged in' do
+      before { login_as not_member }
+      it_behaves_like :controllers_render, :history
+    end
+  end
+
   describe 'GET #new' do
     subject(:response) { get :new }
 

@@ -32,6 +32,15 @@ RSpec.describe BoardPolicy do
     end
   end
 
+  describe '#history? boards' do
+    subject { policy.apply(:history?) }
+
+    context 'when user exists' do
+      let(:test_user) { not_member }
+      it { is_expected.to eq true }
+    end
+  end
+
   describe '#new?' do
     subject { policy.apply(:new?) }
 

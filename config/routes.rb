@@ -21,11 +21,14 @@ Rails.application.routes.draw do
   resources :boards, param: :slug do
     member do
       post 'continue'
+      get 'history'
+    end
+
+    collection do
+      get 'my'
+      get 'participating'
     end
   end
-
-  get 'my_boards', to: 'boards#my'
-  get 'participating_boards', to: 'boards#participating'
 
   resources :action_items, only: :index do
     member do
