@@ -161,7 +161,7 @@ GEM
       dry-core (~> 0.4, >= 0.4.4)
       dry-equalizer
     erubi (1.9.0)
-    excon (0.67.0)
+    excon (0.78.1)
     execjs (2.7.0)
     factory_bot (5.1.1)
       activesupport (>= 4.2.0)
