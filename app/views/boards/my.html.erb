@@ -6,8 +6,6 @@
       Create new board
     </a>
     <% @boards_by_date.each_with_index do |arr, index| %>
-      <% puts arr %>
-
       <% month, records = arr%>
       <div class='board-date <%= 'animated-board' if index > 2%>' style="margin-top: 20px;">
         <%= month%>

@@ -2,7 +2,6 @@
   <div class='column is-9'>
     <span class="subtitle is-2">History of <%= @board.title %></span>
     <% @boards_by_date.each_with_index do |arr, index| %>
-      <% puts arr %>
       <% month, records = arr %>
       <div class='board-date <%= 'animated-board' if index > 2%>' style="margin-top: 20px;">
         <%= month %>
