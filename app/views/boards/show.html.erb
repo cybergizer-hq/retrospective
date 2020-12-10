@@ -51,6 +51,8 @@
   users: @users
 })
 %>
-<% if @board.previous_boards.any? %>
-  <%= link_to 'Historical boards', history_board_path(@board), class: 'button is-ghost', style: 'float: right; margin-right: 8px; margin-top: 20px;' %>
+<%= link_to 'My boards', my_boards_path, class: 'button is-ghost', style: 'margin-left: 8px; margin-top: 20px;' %>
+<%= link_to 'Boards where I am', participating_boards_path, class: 'button is-ghost', style: 'margin-left: 8px; margin-top: 20px;' %>
+<% if @board.previous_board_id %>
+  <%= link_to 'Historical boards', history_board_path(@board), class: 'button is-ghost', style: 'margin-left: 8px; margin-top: 20px;' %>
 <% end %>

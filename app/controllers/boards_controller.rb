@@ -22,7 +22,8 @@ class BoardsController < ApplicationController
   def history
     authorize!
 
-    @boards_by_date = @board.previous_boards.includes(:users, :cards, :action_items)
+    boards = Boards::GetHistoryOfBoard.new(@board.id).call
+    @boards_by_date = boards.includes(:users, :cards, :action_items)
                             .order(created_at: :desc)
                             .group_by { |record| record.created_at.strftime('%B, %Y') }
   end

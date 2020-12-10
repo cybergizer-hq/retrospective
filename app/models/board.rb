@@ -16,10 +16,6 @@ class Board < ApplicationRecord
     slug
   end
 
-  def previous_boards
-    Boards::GetHistoryOfBoard.new(id).call
-  end
-
   private
 
   def set_slug
