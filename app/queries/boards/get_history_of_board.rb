@@ -2,15 +2,15 @@
 
 module Boards
   class GetHistoryOfBoard
-    attr_reader :board
+    attr_reader :board_id
 
-    def initialize(board)
-      @board = board
+    def initialize(board_id)
+      @board_id = board_id
     end
 
     def call
-      boards_ids = Board.connection.execute(history_query).values.flatten.drop(1)
-      Board.where(id: boards_ids)
+      previous_boards_ids = Board.connection.execute(history_query).values.flatten.drop(1)
+      Board.where(id: previous_boards_ids)
     end
 
     private
@@ -19,13 +19,13 @@ module Boards
       WITH RECURSIVE previous_boards(id, previous_board_id) AS (
       SELECT id, previous_board_id FROM boards WHERE id = ?
       UNION ALL
-      SELECT c.id, c.previous_board_id FROM previous_boards AS p, boards AS c WHERE c.id = p.previous_board_id
+      SELECT b.id, b.previous_board_id FROM previous_boards AS p, boards AS b WHERE b.id = p.previous_board_id
       )
       SELECT id FROM previous_boards;
     SQL
 
     def history_query
-      ActiveRecord::Base.send(:sanitize_sql_array, [HISTORY_OF_BOARD, board.id])
+      ActiveRecord::Base.send(:sanitize_sql_array, [HISTORY_OF_BOARD, board_id])
     end
   end
 end

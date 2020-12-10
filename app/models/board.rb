@@ -17,7 +17,7 @@ class Board < ApplicationRecord
   end
 
   def previous_boards
-    Boards::GetHistoryOfBoard.new(self).call
+    Boards::GetHistoryOfBoard.new(id).call
   end
 
   private
