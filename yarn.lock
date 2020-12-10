@@ -1530,10 +1530,10 @@ acorn@^7.4.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-actioncable@^5.2.4-3:
-  version "5.2.4-3"
-  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.4-3.tgz#cb4d1f4a6a8164ac9abe623eca2c382fe05e7d47"
-  integrity sha512-SrGfg2W2GKGfYOlsOUnqjdihUhIVoyb5ewsMtpfE/Z3ZK/j5Gj2e/YWp2A7Wo+aeB1aewhPxorFxIGVRowbX4w==
+actioncable@^5.2.4:
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.4.tgz#744f555f16d87413044f81074a9cc4d2cf416502"
+  integrity sha512-2mCP0eKTjxtDWNPqP6xPar9a5i8F/pndrTHJGU6QDS1a77B+DlPEWzPRiyNAaNEGMY/9yTBOP3CXhR+8/zaVQw==
 
 aggregate-error@^3.0.0:
   version "3.1.0"
