@@ -9,12 +9,12 @@ RSpec.describe Boards::GetHistoryOfBoard do
   context 'call method' do
     it 'returns array of previous boards if they exists' do
       result = described_class.new(second_board).call
-      expect(result).to eq [board]
+      expect(result).to eq [board, second_board]
     end
 
-    it 'returns empty array if board does not have history' do
+    it 'returns board object' do
       result = described_class.new(board).call
-      expect(result).to eq []
+      expect(result).to eq [board]
     end
   end
 end
