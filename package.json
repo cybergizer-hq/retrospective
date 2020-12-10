@@ -84,14 +84,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-xo-react": "^0.22.0",
+    "eslint": "^7.15.0",
+    "eslint-config-xo-react": "^0.23.0",
     "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": ">=4",
     "lint-staged": ">=10.0.6",
     "webpack-dev-server": "^3.10.1",
-    "xo": "^0.25.3"
+    "xo": "^0.36.1"
   },
   "scripts": {
     "lint": "xo app/javascript",
