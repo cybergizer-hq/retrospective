@@ -1112,10 +1112,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@rails/actioncable@^6.0.3-1":
-  version "6.0.3-2"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.0.3-2.tgz#18933d870649e356f3c47a134af9430f17ce51ca"
-  integrity sha512-zgMwnvn0zmJuy1N7IgZpd4X1ERWBL/bd9ZrqaSKtWay7F4ZB+Q6F5dc1D2I3IyUYYQU5dssQb5VaygvMLc7+GA==
+"@rails/actioncable@^6.0.3":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.0.tgz#f336f25450b1bc43b99bc60557a70b6e6bb1d3d2"
+  integrity sha512-eDgy+vcKN9RIzxmMBfSAe77rTj2cp6kJALiVQyKrW2O9EK2MdostOmP+99At/Dit3ur5+77NVnruxD7y14ZYFA==
 
 "@rails/webpacker@^4.2.2":
   version "4.2.2"
