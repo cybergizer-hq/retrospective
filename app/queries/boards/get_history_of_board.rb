@@ -9,7 +9,7 @@ module Boards
     end
 
     def call
-      previous_boards_ids = Board.connection.execute(history_query).values.flatten.drop(1)
+      previous_boards_ids = Board.connection.execute(history_query).values.flatten
       Board.where(id: previous_boards_ids)
     end
 
