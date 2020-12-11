@@ -23,6 +23,30 @@ Things you may want to cover:
 
 ## Development instructions
 
-1. Install docker with docker-compose
-2. docker-compose up -d rails
-3. docker-compose run runner # For some commands from console
+1.  Install docker:  [docker engine install](https://docs.docker.com/engine/install/ "docker engine install")
+
+
+2. Install docker-compose: [docker compose install](https://docs.docker.com/compose/install/ "docker compose install")
+
+
+3. Clone the project: https://github.com/cybergizer-hq/retrospective
+
+
+4. Create and setup postgres db:
+```
+docker-compose run rake db:create db:setup
+```
+
+
+5. Run the containers:
+```
+docker-compose up -d rails
+```
+
+run Rails console if needed:
+```
+docker-compose run runner
+```
+
+6. In order to skip Alfred login and login with the first seed user
+   put `SKIP_ALFRED=true` in your .env file
