@@ -70,7 +70,7 @@
     "apollo-link-http": "^1.5.17",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "emoji-picker-react": "^3.2.4",
-    "graphql": "^15.1.0",
+    "graphql": "^15.4.0",
     "graphql-ruby-client": "^1.8.1",
     "graphql-tag": "^2.10.3",
     "prop-types": "^15.7.2",
