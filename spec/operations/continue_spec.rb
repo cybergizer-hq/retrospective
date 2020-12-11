@@ -72,5 +72,8 @@ RSpec.describe Boards::Continue do
     it 'sets previous privacy settings to new board' do
       expect(subject.value!.private).to eq prev_board.private
     end
+    it 'sets previous title to the new board' do
+      expect(subject.value!.title).to eq(prev_board.title + ' #2')
+    end
   end
 end
