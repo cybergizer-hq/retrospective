@@ -16,6 +16,10 @@ const CardTable = props => {
     users
   } = props;
 
+  const findCurrentUser = (userEmail, allUsers) => {
+    return allUsers.find(it => it.email === userEmail); // TO DO : rewrite after changes in back
+  };
+
   const [columnClass, setColumnClass] = useState(
     'column board-column light-gray'
   );
@@ -34,14 +38,18 @@ const CardTable = props => {
     for (const [columnName, cards] of Object.entries(cardTypePairs)) {
       content.push(
         <div key={`${columnName}_column`} className={columnClass}>
-          <CardColumn key={columnName} kind={columnName} initCards={cards} />
+          <CardColumn
+            key={columnName}
+            kind={columnName}
+            initCards={cards}
+            currentUser={findCurrentUser(user, users)}
+          />
         </div>
       );
     }
 
     return content;
   };
-  // Debugger;
 
   return (
     <Provider>

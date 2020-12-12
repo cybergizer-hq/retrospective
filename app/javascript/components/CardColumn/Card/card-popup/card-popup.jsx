@@ -3,24 +3,10 @@ import CommentsDropdown from '../CommentsDropdown';
 import Card from '..';
 import './card-popup.css';
 
-const CardPopup = ({
-  id,
-  body,
-  deletable,
-  editable,
-  nickname,
-  firstName,
-  lastName,
-  avatar,
-  commentsNumber,
-  likes,
-  type,
-  onCommentButtonClick,
-  comments,
-  onClickClosed
-}) => {
-  const handlePopupClosed = e => {
-    if (e.target.classList.contains('card-popup')) {
+const CardPopup = ({card, type, onCommentButtonClick, onClickClosed}) => {
+  const {id, comments} = card;
+  const handlePopupClosed = (evt) => {
+    if (evt.target.classList.contains('card-popup')) {
       onClickClosed();
     }
   };
@@ -29,17 +15,8 @@ const CardPopup = ({
     <div className="card-popup" onClick={handlePopupClosed}>
       <div className="card-popup__inner">
         <Card
-          editable={editable}
-          deletable={deletable}
-          body={body}
-          id={id}
-          nickname={nickname}
-          firstName={firstName}
-          lastName={lastName}
-          avatar={avatar}
-          likes={likes}
+          {...card}
           type={type}
-          commentsNumber={commentsNumber}
           onCommentButtonClick={onCommentButtonClick}
         />
         <CommentsDropdown id={id} comments={comments} />
