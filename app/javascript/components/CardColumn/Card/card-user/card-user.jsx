@@ -1,22 +1,15 @@
 import React from 'react';
-import {getUserInitials} from '../../../../utils/helpers';
+import CardUserAvatar from '../card-user-avatar/card-user-avatar';
 
-const CardUser = ({avatar, firstName, lastName, nickname}) => {
-  const renderAvatar = (userAvatar, userName, userSurname) => {
-    if (userAvatar) {
-      return <img src={userAvatar} className="avatar" />;
-    }
-
-    return (
-      <div className="avatar avatar--text">
-        {getUserInitials(userName, userSurname)}
-      </div>
-    );
-  };
-
+const CardUser = ({first_name, last_name, nickname, avatar}) => {
+  const url = avatar?.thumb?.url;
   return (
     <div className="column avatar__container">
-      {renderAvatar(avatar, firstName, lastName)}
+      <CardUserAvatar
+        avatar={url}
+        firstName={first_name}
+        lastName={last_name}
+      />
       <span className="avatar__nickname"> {nickname}</span>
     </div>
   );

@@ -16,6 +16,17 @@
     "rules": {
       "camelcase": 0,
       "default-case": 0,
+      "import/extensions": [
+        "error",
+        {
+          "js": "never",
+          "jsx": "never",
+          "json": "always",
+          "svg": "always",
+          "css": "always",
+          "gql": "always"
+        }
+      ],
       "import/no-unassigned-import": [
         "error",
         {
@@ -32,16 +43,7 @@
         }
       ],
       "promise/prefer-await-to-then": 1,
-      "react/prop-types": 0,
-      "unicorn/filename-case": [
-        "error",
-        {
-          "cases": {
-            "camelCase": true,
-            "kebabCase": true
-          }
-        }
-      ]
+      "react/prop-types": 0
     }
   },
   "husky": {
@@ -73,13 +75,14 @@
     "graphql": "^15.1.0",
     "graphql-ruby-client": "^1.8.1",
     "graphql-tag": "^2.10.3",
+    "nanoid": "^3.1.20",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-apollo": "^3.1.5",
     "react-bulma-components": "3.4.0",
     "react-dom": "^16.12.0",
     "react-select": "^3.0.8",
-    "react-textarea-autosize": "8.3.0",
+    "react-textarea-autosize": "^8.3.0",
     "react_ujs": "^2.6.1"
   },
   "devDependencies": {
