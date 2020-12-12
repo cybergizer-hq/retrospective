@@ -1,14 +1,16 @@
+import {nanoid} from 'nanoid';
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import Textarea from 'react-textarea-autosize';
-import {addCardMutation} from '../operations.gql';
-import BoardSlugContext from '../../../utils/board_slug_context';
+import {addCardMutation} from './operations.gql';
+import BoardSlugContext from '../../utils/board_slug_context';
 
-const CardColumnHeader = ({kind}) => {
+const NewCardBody = ({kind, onCardAdded, onGetNewCardID, currentUser}) => {
   const textInput = useRef();
   const [isOpened, setOpened] = useState(false);
   const [newCard, setNewCard] = useState('');
   const [addCard] = useMutation(addCardMutation);
+
   const boardSlug = useContext(BoardSlugContext);
 
   const toggleOpen = () => setOpened(!isOpened);
@@ -25,21 +27,34 @@ const CardColumnHeader = ({kind}) => {
     setNewCard('');
   };
 
-  const submitHandler = e => {
+  const buildNewCard = () => ({
+    likes: 0,
+    comments: [],
+    kind,
+    author: currentUser,
+    body: newCard,
+    id: `tmp-${nanoid()}`
+  });
+
+  const submitHandler = async e => {
+    const card = buildNewCard();
     e.preventDefault();
-    addCard({
+
+    onCardAdded(card);
+
+    const {data} = await addCard({
       variables: {
         boardSlug,
         kind,
         body: newCard
       }
-    }).then(({data}) => {
-      if (data.addCard.card) {
-        setNewCard('');
-      } else {
-        console.log(data.addCard.errors.fullMessages.join(' '));
-      }
     });
+    if (data.addCard.card) {
+      onGetNewCardID(card.id, data.addCard.card.id);
+      setNewCard('');
+    } else {
+      console.log(data.addCard.errors.fullMessages.join(' '));
+    }
   };
 
   const handleKeyPress = e => {
@@ -100,4 +115,4 @@ const CardColumnHeader = ({kind}) => {
   );
 };
 
-export default CardColumnHeader;
+export default NewCardBody;

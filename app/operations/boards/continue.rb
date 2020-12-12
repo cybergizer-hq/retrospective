@@ -18,7 +18,7 @@ module Boards
       end
 
       new_board = Board.new(
-        title: default_board_name,
+        title: new_board_title,
         previous_board_id: prev_board.id,
         column_names: prev_board.column_names,
         private: prev_board.private
@@ -34,6 +34,14 @@ module Boards
     # rubocop:enable Metrics/MethodLength
 
     private
+
+    def new_board_title
+      prev_board.title.split('#')[0] + " ##{board_number}"
+    end
+
+    def board_number
+      Boards::GetHistoryOfBoard.new(prev_board.id).call.size + 1 if prev_board
+    end
 
     def duplicate_memberships
       prev_board.memberships
