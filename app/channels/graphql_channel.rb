@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class GraphqlChannel < ApplicationCable::Channel
-  def subscribed
-    @subscription_ids = []
-  end
-
   def execute(data)
     result = execute_query(data)
 
@@ -13,13 +9,12 @@ class GraphqlChannel < ApplicationCable::Channel
       more: result.subscription?
     }
 
-    @subscription_ids << context[:subscription_id] if result.context[:subscription_id]
-
     transmit(payload)
   end
 
   def unsubscribed
-    @subscription_ids.each { |sid| RetrospectiveSchema.subscriptions.delete_subscription(sid) }
+    channel_id = params.fetch('channelId')
+    RetrospectiveSchema.subscriptions.delete_channel_subscriptions(channel_id)
   end
 
   private

@@ -103,3 +103,4 @@ end
 
 gem 'bullet', group: 'test'
 gem 'anycable-rails', '1.0'
+gem 'graphql-anycable'
