@@ -3,7 +3,7 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def alfred
-      @user = User.from_omniauth(auth.provider, auth.uid, alfred_info)
+      @user = User.from_omniauth(auth.provider, auth.uid, auth.info)
 
       if @user.valid?
         sign_in_and_redirect @user, event: :authentication
@@ -53,16 +53,6 @@ module Users
 
     def auth
       request.env['omniauth.auth']
-    end
-
-    def alfred_info
-      {
-        email: auth.info.email,
-        image: auth.info.avatar_url,
-        nickname: auth.info.nickname,
-        first_name: auth.info.first_name,
-        last_name: auth.info.last_name
-      }
     end
   end
 end
