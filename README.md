@@ -32,11 +32,10 @@ Things you may want to cover:
 3. Clone the project: https://github.com/cybergizer-hq/retrospective
 
 
-4. Create and setup postgres db:
+4. Install gems and setup database:
 ```
-docker-compose run rake db:create db:setup
+docker-compose run runner bundle install && rake db:setup
 ```
-
 
 5. Run the containers:
 ```
