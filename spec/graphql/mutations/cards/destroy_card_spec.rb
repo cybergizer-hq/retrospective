@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Mutations::DestroyCardMutation, type: :request do
   describe '#resolve' do
     let!(:author) { create(:user) }
-    let!(:creator) { create(:user)}
+    let!(:creator) { create(:user) }
     let!(:board) { create(:board) }
     let!(:card) { create(:card, author: author, board: board) }
     let!(:creatorship) do
@@ -27,9 +27,7 @@ RSpec.describe Mutations::DestroyCardMutation, type: :request do
         json = JSON.parse(response.body)
         data = json.dig('data', 'destroyCard')
 
-        expect(data).to include(
-                          'id' => card.id
-                        )
+        expect(data).to include('id' => card.id)
       end
     end
 
@@ -46,9 +44,7 @@ RSpec.describe Mutations::DestroyCardMutation, type: :request do
         json = JSON.parse(response.body)
         data = json.dig('data', 'destroyCard')
 
-        expect(data).to include(
-                          'id' => card.id
-                        )
+        expect(data).to include('id' => card.id)
       end
     end
   end

@@ -40,6 +40,7 @@ class BoardsController < ApplicationController
     @action_item = ActionItem.new(board_id: @board.id)
     @board_creators = User.find(@board.memberships.where(role: 'creator').pluck(:user_id))
                           .pluck(:email)
+    @current_creator = current_user&.id if @board_creators.include?(current_user&.email)
     @previous_action_items = if @board.previous_board&.action_items&.any?
                                ActiveModelSerializers::SerializableResource.new(@board.previous_board.action_items).as_json
                              end
