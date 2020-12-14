@@ -102,3 +102,4 @@ group :test, :development do
 end
 
 gem 'bullet', group: 'test'
+gem 'anycable-rails', '1.0'

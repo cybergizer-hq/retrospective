@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
+  # Specify AnyCable WebSocket server URL to use by JS client
+  config.after_initialize do
+    if AnyCable::Rails.enabled?
+      config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL')
+    end
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -97,3 +104,4 @@ Rails.application.configure do
 
   config.public_file_server.enabled = true
 end
+# rubocop:enable Metrics/BlockLength

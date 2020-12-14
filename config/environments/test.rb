@@ -5,8 +5,20 @@
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+
+  # Enforce AnyCable patches to make it possible to use any_cable adapter for system tests
+  require 'anycable/rails/actioncable/connection'
+
+  # Specify AnyCable WebSocket server URL to use by JS client
+  config.after_initialize do
+    config.action_cable.url =
+      ActionCable.server.config.url = ENV.fetch('CABLE_URL', 'ws://localhost:8080/cable')
+  end
+
+  config.action_cable.mount_path = nil
 
   config.cache_classes = true
 
@@ -56,3 +68,4 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 end
+# rubocop:enable Metrics/BlockLength
