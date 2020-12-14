@@ -10,7 +10,7 @@ class CardPolicy < ApplicationPolicy
   end
 
   def destroy?
-    check?(:user_is_author?)
+    check?(:user_is_author?) || check?(:user_is_creator?)
   end
 
   def like?
@@ -23,5 +23,9 @@ class CardPolicy < ApplicationPolicy
 
   def user_is_author?
     record.author?(user)
+  end
+
+  def user_is_creator?
+    record.board.memberships.exists?(user: user, role: 'creator')
   end
 end

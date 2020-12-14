@@ -11,6 +11,8 @@ RSpec.describe CardPolicy do
   let_it_be(:member) { create(:user) }
   let_it_be(:not_a_member) { build_stubbed(:user) }
   let_it_be(:membership) { create(:membership, user_id: member.id, board_id: board.id) }
+  let_it_be(:creator) { create(:user) }
+  let_it_be(:creatorship) { create(:membership, user: creator, board: board, role: 'creator') }
 
   describe '#create?' do
     subject { policy.apply(:create?) }
@@ -48,8 +50,18 @@ RSpec.describe CardPolicy do
       it { is_expected.to eq true }
     end
 
+    context 'when user is creator of a board' do
+      let(:test_user) { creator }
+      it { is_expected.to eq true }
+    end
+
     context 'when user is not the card author' do
       let(:test_user) { not_an_author }
+      it { is_expected.to eq false }
+    end
+
+    context 'when user is neither creator nor author' do
+      let(:test_user) { member }
       it { is_expected.to eq false }
     end
   end
@@ -92,6 +104,20 @@ RSpec.describe CardPolicy do
 
     context 'when user is not the card author' do
       let(:test_user) { not_an_author }
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '#user_is_creator?' do
+    subject { policy.apply(:user_is_creator?) }
+
+    context 'when user is the board creator' do
+      let(:test_user) { creator }
+      it { is_expected.to eq true }
+    end
+
+    context 'when user is not the board creator' do
+      let(:test_user) { member }
       it { is_expected.to eq false }
     end
   end
