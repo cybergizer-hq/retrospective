@@ -42,7 +42,7 @@ gem 'sentry-raven'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'rubocop', '~> 0.74.0', require: false
+  gem 'rubocop', '~> 1.6.1', require: false
   gem 'rspec-rails', '~> 4.0.0.beta2'
   gem 'rspec_junit_formatter'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
