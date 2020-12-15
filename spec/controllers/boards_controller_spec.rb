@@ -75,30 +75,6 @@ RSpec.describe BoardsController do
       before { login_as not_member }
       it_behaves_like :controllers_render, :show
     end
-
-    context 'it assigns current_creator' do
-      context 'user is board creator and current user' do
-        before do
-          login_as creator
-          get :show, params: { slug: board.slug }
-        end
-
-        it 'assigns @current_creator to current_user' do
-          expect(assigns(:current_creator)).to eq creator.id
-        end
-      end
-
-      context 'user is not a board creator' do
-        before do
-          login_as member
-          get :show, params: { slug: board.slug }
-        end
-
-        it 'does not assign @current_creator to current_user' do
-          expect(assigns(:current_creator)).to be_nil
-        end
-      end
-    end
   end
 
   describe 'GET #edit' do
