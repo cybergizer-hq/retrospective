@@ -1,6 +1,7 @@
 textarea {
   overflow: hidden;
   resize: none;
+  word-wrap: break-word;
   width: 100%;
   font-size: 1rem;
   font-weight: 400;

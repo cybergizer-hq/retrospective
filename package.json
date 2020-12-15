@@ -81,6 +81,7 @@
     "react-apollo": "^3.1.5",
     "react-bulma-components": "3.4.0",
     "react-dom": "^16.12.0",
+    "react-linkify": "^1.0.0-alpha",
     "react-select": "^3.0.8",
     "react-textarea-autosize": "^8.3.0",
     "react_ujs": "^2.6.1"

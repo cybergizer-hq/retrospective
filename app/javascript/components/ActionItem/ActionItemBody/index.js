@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Textarea from 'react-textarea-autosize';
+import Linkify from 'react-linkify';
 import './ActionItemBody.css';
 import {
   destroyActionItemMutation,
@@ -140,7 +141,7 @@ const ActionItemBody = (props) => {
         hidden={editMode}
         onDoubleClick={editable ? editModeToggle : undefined}
       >
-        {body}
+        <Linkify> {body}</Linkify>
       </div>
       {editable && (
         <div hidden={!editMode}>
