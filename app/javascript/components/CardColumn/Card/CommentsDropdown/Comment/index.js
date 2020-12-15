@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import Linkify from 'react-linkify';
 import Picker from 'emoji-picker-react';
 import CommentLikes from './CommentLikes';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSmile} from '@fortawesome/free-regular-svg-icons';
 import {useMutation} from '@apollo/react-hooks';
 import {destroyCommentMutation, updateCommentMutation} from './operations.gql';
+import {cutUrl} from '../../../../../utils/helpers';
 
-const Comment = props => {
-  const {comment, deletable, editable, id} = props;
+const Comment = ({comment, deletable, editable, id}) => {
   const [editMode, setEditMode] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isDropdownShown, setIsDropdownShown] = useState(false);
@@ -20,14 +21,14 @@ const Comment = props => {
     if (inputValue !== comment.content) {
       setInputValue(comment.content);
     }
-  }, [props.comment.content]);
+  }, [comment.content]);
 
   const editModeToggle = () => {
-    setEditMode(prevMode => !prevMode);
+    setEditMode(!editMode);
   };
 
-  const handleChange = e => {
-    setInputValue(e.target.value);
+  const handleChange = (evt) => {
+    setInputValue(evt.target.value);
   };
 
   const handleEditClick = () => {
@@ -36,20 +37,20 @@ const Comment = props => {
   };
 
   const handleSmileClick = () => {
-    setShowEmojiPicker(isShown => !isShown);
+    setShowEmojiPicker(!showEmojiPicker);
   };
 
   const handleEmojiPickerClick = (_, emoji) => {
-    setInputValue(comment => `${comment}${emoji.emoji}`);
+    setInputValue((comment) => `${comment}${emoji.emoji}`);
   };
 
-  const handleKeyPress = e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+  const handleKeyPress = (evt) => {
+    if (evt.key === 'Enter' && !evt.shiftKey) {
       editModeToggle();
       updateComment({
         variables: {
           id,
-          content: e.target.value
+          content: evt.target.value
         }
       }).then(({data}) => {
         if (!data.updateComment.comment) {
@@ -91,8 +92,8 @@ const Comment = props => {
                 <div>
                   <a
                     onClick={() => handleEditClick()}
-                    onMouseDown={event => {
-                      event.preventDefault();
+                    onMouseDown={(evt) => {
+                      evt.preventDefault();
                     }}
                   >
                     Edit
@@ -102,8 +103,8 @@ const Comment = props => {
               )}
               <a
                 onClick={removeComment}
-                onMouseDown={event => {
-                  event.preventDefault();
+                onMouseDown={(evt) => {
+                  evt.preventDefault();
                 }}
               >
                 Delete
@@ -121,7 +122,7 @@ const Comment = props => {
                 className="column"
                 style={{wordBreak: 'break-all', whiteSpace: 'pre-line'}}
               >
-                {comment.content}
+                <Linkify textDecorator={cutUrl}> {comment.content} </Linkify>
               </div>
             </div>
             <div className="columns">
