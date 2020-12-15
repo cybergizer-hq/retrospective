@@ -104,3 +104,5 @@ end
 gem 'bullet', group: 'test'
 gem 'anycable-rails', '1.0'
 gem 'graphql-anycable'
+# For fix incompatibility of the pre-built binaries for 'anycable' in docker
+gem 'google-protobuf', git: 'https://github.com/google/protobuf'

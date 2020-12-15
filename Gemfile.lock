@@ -8,6 +8,12 @@ GIT
       omniauth-oauth2 (~> 1.0)
 
 GIT
+  remote: https://github.com/google/protobuf
+  revision: 64dd751868d633421563e53e68da831a0a02c923
+  specs:
+    google-protobuf (3.14.0)
+
+GIT
   remote: https://github.com/stympy/faker.git
   revision: ec06d217644cf3d66bd0e658c9b168af8f0c38c7
   branch: master
@@ -199,8 +205,6 @@ GEM
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    google-protobuf (3.14.0)
-    google-protobuf (3.14.0-x86_64-linux)
     googleapis-common-protos-types (1.0.5)
       google-protobuf (~> 3.11)
     graphiql-rails (1.7.0)
@@ -485,6 +489,7 @@ DEPENDENCIES
   factory_bot_rails
   faker!
   fog-aws
+  google-protobuf!
   graphiql-rails
   graphql (~> 1.9)
   graphql-anycable
