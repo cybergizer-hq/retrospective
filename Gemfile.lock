@@ -219,6 +219,9 @@ GEM
     grpc (1.34.0)
       google-protobuf (~> 3.13)
       googleapis-common-protos-types (~> 1.0)
+    grpc (1.34.0-universal-darwin)
+      google-protobuf (~> 3.13)
+      googleapis-common-protos-types (~> 1.0)
     grpc (1.34.0-x86_64-linux)
       google-protobuf (~> 3.13)
       googleapis-common-protos-types (~> 1.0)
@@ -467,6 +470,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
