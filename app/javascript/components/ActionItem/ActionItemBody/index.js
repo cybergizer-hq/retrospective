@@ -7,6 +7,7 @@ import {
   updateActionItemMutation
 } from './operations.gql';
 import {useMutation} from '@apollo/react-hooks';
+import {cutUrl} from '../../../utils/helpers';
 
 const ActionItemBody = (props) => {
   const {assigneeId, editable, deletable, body, users} = props;
@@ -141,7 +142,7 @@ const ActionItemBody = (props) => {
         hidden={editMode}
         onDoubleClick={editable ? editModeToggle : undefined}
       >
-        <Linkify> {body}</Linkify>
+        <Linkify textDecorator={cutUrl}> {body}</Linkify>
       </div>
       {editable && (
         <div hidden={!editMode}>

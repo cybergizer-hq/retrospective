@@ -4,6 +4,7 @@ import Linkify from 'react-linkify';
 import {useMutation} from '@apollo/react-hooks';
 import {updateCardMutation, destroyCardMutation} from './operations.gql';
 import './CardBody.css';
+import {cutUrl} from '../../../../utils/helpers';
 
 const CardBody = ({id, editable, body}) => {
   const [inputValue, setInputValue] = useState(body);
@@ -106,7 +107,7 @@ const CardBody = ({id, editable, body}) => {
         hidden={editMode}
         onDoubleClick={editable ? editModeToggle : undefined}
       >
-        <Linkify> {body} </Linkify>
+        <Linkify textDecorator={cutUrl}> {body} </Linkify>
       </div>
       {editMode && (
         <>
