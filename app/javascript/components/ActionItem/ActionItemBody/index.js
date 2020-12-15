@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Textarea from 'react-textarea-autosize';
-import Linkify from 'react-linkify';
 import './ActionItemBody.css';
 import {
   destroyActionItemMutation,
   updateActionItemMutation
 } from './operations.gql';
 import {useMutation} from '@apollo/react-hooks';
-import {cutUrl} from '../../../utils/helpers';
+import {Linkify, linkifyOptions} from '../../../utils/linkify';
 
 const ActionItemBody = (props) => {
   const {assigneeId, editable, deletable, body, users} = props;
@@ -142,7 +141,7 @@ const ActionItemBody = (props) => {
         hidden={editMode}
         onDoubleClick={editable ? editModeToggle : undefined}
       >
-        <Linkify textDecorator={cutUrl}> {body}</Linkify>
+        <Linkify options={linkifyOptions}> {body}</Linkify>
       </div>
       {editable && (
         <div hidden={!editMode}>

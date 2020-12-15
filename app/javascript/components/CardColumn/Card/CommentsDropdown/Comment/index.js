@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import Linkify from 'react-linkify';
 import Picker from 'emoji-picker-react';
 import CommentLikes from './CommentLikes';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSmile} from '@fortawesome/free-regular-svg-icons';
 import {useMutation} from '@apollo/react-hooks';
 import {destroyCommentMutation, updateCommentMutation} from './operations.gql';
-import {cutUrl} from '../../../../../utils/helpers';
+import {Linkify, linkifyOptions} from '../../../../../utils/linkify';
 
 const Comment = ({comment, deletable, editable, id}) => {
   const [editMode, setEditMode] = useState(false);
@@ -122,7 +121,7 @@ const Comment = ({comment, deletable, editable, id}) => {
                 className="column"
                 style={{wordBreak: 'break-all', whiteSpace: 'pre-line'}}
               >
-                <Linkify textDecorator={cutUrl}> {comment.content} </Linkify>
+                <Linkify options={linkifyOptions}> {comment.content} </Linkify>
               </div>
             </div>
             <div className="columns">

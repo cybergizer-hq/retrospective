@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Textarea from 'react-textarea-autosize';
-import Linkify from 'react-linkify';
 import {useMutation} from '@apollo/react-hooks';
 import {updateCardMutation, destroyCardMutation} from './operations.gql';
 import './CardBody.css';
-import {cutUrl} from '../../../../utils/helpers';
+import {Linkify, linkifyOptions} from '../../../../utils/linkify';
 
 const CardBody = ({id, editable, body}) => {
   const [inputValue, setInputValue] = useState(body);
@@ -107,7 +106,7 @@ const CardBody = ({id, editable, body}) => {
         hidden={editMode}
         onDoubleClick={editable ? editModeToggle : undefined}
       >
-        <Linkify textDecorator={cutUrl}> {body} </Linkify>
+        <Linkify options={linkifyOptions}> {body} </Linkify>
       </div>
       {editMode && (
         <>
