@@ -63,9 +63,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_model_serializers (0.10.10)
-      actionpack (>= 4.1, < 6.1)
-      activemodel (>= 4.1, < 6.1)
+    active_model_serializers (0.10.12)
+      actionpack (>= 4.1, < 6.2)
+      activemodel (>= 4.1, < 6.2)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (6.0.3.4)
@@ -446,7 +446,7 @@ DEPENDENCIES
   action-cable-testing
   action_policy (~> 0.3.0)
   action_policy-graphql (~> 0.3)
-  active_model_serializers (~> 0.10.0)
+  active_model_serializers (~> 0.10.12)
   bootsnap (>= 1.1.0)
   bullet
   capybara (>= 2.15)
