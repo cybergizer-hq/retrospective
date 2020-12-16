@@ -19,7 +19,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    aasm (5.0.6)
+    aasm (5.1.1)
       concurrent-ruby (~> 1.0)
     action-cable-testing (0.6.1)
       actioncable (>= 5.0)
