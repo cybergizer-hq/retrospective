@@ -87,7 +87,7 @@ gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'nanoid'
-gem 'action_policy', '~> 0.3.0'
+gem 'action_policy', '~> 0.5.4'
 gem 'react-rails'
 gem 'active_model_serializers', '~> 0.10.12'
 gem 'dry-monads'
