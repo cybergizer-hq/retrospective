@@ -1,7 +1,7 @@
 <div class='column is-one-third'>
   <div class="board-card">
     <div class="board-title">
-      <%= link_to board.title + " (#{board.created_at.strftime('%d-%m-%Y')})", board %>
+      <%= link_to board.title, board %>
     </div>
     <div class="board-stats-table">
       <div class='icon-container'>
@@ -15,6 +15,12 @@
             <br />
           <% end %>
         </div>
+      </div>
+      <div class="icon-container">
+        <%= image_tag 'icon-calendar.png', class: 'inline-icon', style: 'max-width: 17px;' %>
+      </div>
+      <div>
+        <%= board.created_at.strftime('%d %b %Y') %>
       </div>
       <div class='icon-container'>
         <%= image_tag 'icon-cards.png', class: 'inline-icon' %>
