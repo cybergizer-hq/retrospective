@@ -5,9 +5,12 @@
   <p> <%= link_to 'Logout', destroy_user_session_path, method: :delete %></p>
 <% else %>
   <% if ENV.fetch('SKIP_ALFRED', false) == 'true' %>
-    <%= link_to 'Sign in as Developer', user_developer_omniauth_callback_path %> |
+    <%= link_to 'Sign in as Developer', user_developer_omniauth_callback_path %>
+    <%= '|' if providers.any? %>
   <% end %>
-  <%= link_to 'Sign in with Alfred', user_alfred_omniauth_authorize_path %> |
-  <%= link_to 'Sign in with Google', user_google_omniauth_authorize_path %> |
-  <%= link_to 'Sign in with Facebook', user_facebook_omniauth_authorize_path %>
+
+  <% providers.each do |provider| %>
+    <%= link_to "Sign in with #{provider.capitalize}", send("user_#{provider}_omniauth_authorize_path") %>
+    <%= '|' unless provider == providers.last %>
+  <% end %>
 <% end %>
