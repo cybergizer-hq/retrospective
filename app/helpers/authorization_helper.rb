@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AuthorizationHelper
   def providers
     names = %w[alfred facebook google]
