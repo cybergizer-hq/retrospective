@@ -1,5 +1,5 @@
 const cutUrl = (url) => {
-  const match = /(?:https?:\/\/)?([a-z\d\-_]{2,64}\.[a-z]{2,6})/.exec(url);
+  const match = /(?:https?:\/\/)?(?:www\.)?([\w\d-_.]+)/.exec(url);
   if (match) {
     return match[1];
   }
