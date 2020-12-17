@@ -82,7 +82,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'webpacker', '~> 4.x'
+gem 'webpacker', '~> 5'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
