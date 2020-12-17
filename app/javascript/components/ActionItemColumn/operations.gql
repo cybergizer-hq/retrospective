@@ -1,4 +1,8 @@
 #import '../../fragments/action_item.graphql'
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 subscription actionItemAddedSubscription($boardSlug: String!) {
   actionItemAdded(boardSlug: $boardSlug) {
    ...ActionItem
