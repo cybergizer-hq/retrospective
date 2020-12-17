@@ -194,7 +194,7 @@ GEM
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
-    graphql (1.9.18)
+    graphql (1.11.6)
     hashdiff (1.0.1)
     hashie (4.1.0)
     i18n (1.8.5)
@@ -461,7 +461,7 @@ DEPENDENCIES
   faker!
   fog-aws
   graphiql-rails
-  graphql (~> 1.9)
+  graphql (~> 1.11)
   jbuilder (~> 2.5)
   json_matchers
   letter_opener

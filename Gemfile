@@ -94,7 +94,7 @@ gem 'dry-monads'
 gem 'aasm'
 gem 'sidekiq'
 
-gem 'graphql', '~> 1.9'
+gem 'graphql', '~> 1.11'
 gem 'action_policy-graphql', '~> 0.3'
 gem 'graphiql-rails', group: :development
 group :test, :development do
