@@ -1,4 +1,2 @@
-backend: bin/rails server
-frontend: bin/webpack-dev-server
-anycable: bundle exec anycable
-ws: anycable-go --port=8080
+web: [[ "$ANYCABLE_DEPLOYMENT" == "true" ]] && bundle exec anycable --server-command="anycable-go" || bundle exec rails server -p $PORT -b 0.0.0.0
+release: bundle exec rake heroku:release
