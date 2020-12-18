@@ -8,8 +8,8 @@ services:
       args:
         RUBY_VERSION: '2.6.6'
         PG_MAJOR: '11'
-        NODE_MAJOR: '11'
-        YARN_VERSION: '1.19.1'
+        NODE_MAJOR: '12'
+        YARN_VERSION: '1.22.5'
         BUNDLER_VERSION: '2.0.2'
     environment: &env
       NODE_ENV: development
@@ -36,21 +36,19 @@ services:
       POSTGRESQL_HOST: postgres
       POSTGRESQL_PORT: 5432
       WEBPACKER_DEV_SERVER_HOST: webpacker
-      WEB_CONCURRENCY: 1
+      WEB_CONCURRENCY: 2
       HISTFILE: /app/log/.bash_history
       PSQL_HISTFILE: /app/log/.psql_history
       EDITOR: vi
-    depends_on: &backend_depends_on
-      postgres:
-        condition: service_started
-      redis:
-        condition: service_started
+    depends_on:
+      - postgres
+      - redis
 
   runner:
     <<: *backend
     command: /bin/bash
     ports:
-      - '3000:3000'
+      - '3001:3001'
       - '3002:3002'
 
   rails:
@@ -69,8 +67,7 @@ services:
       ANYCABLE_RPC_HOST: anycable:50051
       ANYCABLE_DEBUG: 1
     depends_on:
-      redis:
-        condition: service_started
+      - redis
 
   anycable:
     <<: *backend
@@ -83,9 +80,9 @@ services:
     ports:
       - '50051'
     depends_on:
-      <<: *backend_depends_on
-      ws:
-        condition: service_started
+      - postgres
+      - redis
+      - ws
 
   postgres:
     image: postgres:11.1

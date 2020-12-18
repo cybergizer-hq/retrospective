@@ -38,29 +38,34 @@ You can work with project [by docker](#docker) or [classic method](#classic).
 4. Install docker-compose: [docker compose install](https://docs.docker.com/compose/install/ "docker compose install")
 
 
-5. Install gems and setup database:
+5. Install gems with node modules and setup database:
 ```
-docker-compose run runner bundle install && rake db:setup
+docker-compose run runner bundle install && yarn && rake db:setup
 ```
 
-6. Run the containers:
+6. Run the containers (first start will be long):
 ```
-docker-compose up -d anycable rails
+docker-compose up -d
 ```
 
 run Rails console if needed:
 ```
-docker-compose run runner
+docker-compose exec runner bash
 ```
 
 #### Classic
 
-3. Install `ruby-2.6.6`
+3. Install:
+
+- `ruby-2.6.6` via ruby manager (like a [rvm](https://rvm.io/))
+- [postgres 11.1](https://www.postgresql.org/)
+- [redis 3.2](https://redis.io/)
+- [anycable-go](https://github.com/anycable/anycable-go)
 
 
-4. Install gems:
+4. Install gems with node modules:
 ```
-bundle
+bundle && yarn
 ```
 (may need to install a gem `bundle`)
 
@@ -77,5 +82,3 @@ Rails - `rails server`
 Websockets - `anycable-go --port=8080`
 
 Rpc - `anycable`
-
-For run websockets server need install [anycable-go](https://github.com/anycable/anycable-go).
