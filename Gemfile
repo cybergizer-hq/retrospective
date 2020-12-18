@@ -62,6 +62,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.4'
   gem 'rails-erd'
   gem 'letter_opener'
+  gem 'foreman'
 end
 
 group :test do

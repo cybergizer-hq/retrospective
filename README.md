@@ -24,6 +24,8 @@ Things you may want to cover:
 ## Development instructions
 You can work with project [by docker](#docker) or [classic method](#classic).
 
+_(no tests configured in docker mode)_
+
 1. Clone the project: https://github.com/cybergizer-hq/retrospective
 
 
@@ -58,8 +60,9 @@ docker-compose exec runner bash
 3. Install:
 
 - `ruby-2.6.6` via ruby manager (like a [rvm](https://rvm.io/))
-- [postgres 11.1](https://www.postgresql.org/)
-- [redis 3.2](https://redis.io/)
+- [node >= 12](https://nodejs.org/)
+- [postgres >= 11.1](https://www.postgresql.org/)
+- [redis >= 3.2](https://redis.io/)
 - [anycable-go](https://github.com/anycable/anycable-go)
 
 
@@ -67,7 +70,7 @@ docker-compose exec runner bash
 ```
 bundle && yarn
 ```
-(may need to install a gem `bundle`)
+(may need to install a gem [bundler](https://bundler.io/) and manager [yarn](https://yarnpkg.com/))
 
 
 5. Setup database with seeds:
@@ -75,10 +78,7 @@ bundle && yarn
 rails db:setup
 ```
 
-6.  Run several servers:
-
-Rails - `rails server`
-
-Websockets - `anycable-go --port=8080`
-
-Rpc - `anycable`
+6.  Run several servers by foreman:
+```
+foreman start -f Procfile.dev
+```
