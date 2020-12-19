@@ -49,7 +49,7 @@ gem 'omniauth-facebook'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rubocop', '~> 1.6.1', require: false
-  gem 'rspec-rails', '~> 4.0.0.beta2'
+  gem 'rspec-rails', '~> 4.0.1'
   gem 'rspec_junit_formatter'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'pry'
@@ -83,7 +83,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'webpacker', '~> 4.x'
+gem 'webpacker', '~> 5'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
@@ -95,7 +95,7 @@ gem 'dry-monads'
 gem 'aasm'
 gem 'sidekiq'
 
-gem 'graphql', '~> 1.9'
+gem 'graphql', '~> 1.11'
 gem 'action_policy-graphql', '~> 0.3'
 gem 'graphiql-rails', group: :development
 group :test, :development do

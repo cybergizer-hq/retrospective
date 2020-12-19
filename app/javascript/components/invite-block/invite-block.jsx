@@ -101,6 +101,8 @@ const InviteBlock = () => {
           onInputChange={(evt) => {
             if (evt.length >= 3) {
               getSuggestions({variables: {autocomplete: evt}});
+            } else {
+              setOptions([]);
             }
           }}
         />
