@@ -95,7 +95,7 @@ gem 'aasm'
 gem 'sidekiq'
 
 gem 'graphql', '~> 1.11'
-gem 'action_policy-graphql', '~> 0.3'
+gem 'action_policy-graphql', '~> 0.5'
 gem 'graphiql-rails', group: :development
 group :test, :development do
   gem 'action-cable-testing'

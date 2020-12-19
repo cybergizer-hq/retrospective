@@ -25,9 +25,10 @@ GEM
       actioncable (>= 5.0)
     action_policy (0.5.4)
       ruby-next-core (>= 0.10.3)
-    action_policy-graphql (0.4.0)
-      action_policy (>= 0.3.0)
+    action_policy-graphql (0.5.2)
+      action_policy (>= 0.5.0)
       graphql (>= 1.9.3)
+      ruby-next-core (>= 0.10.0)
     actioncable (6.0.3.4)
       actionpack (= 6.0.3.4)
       nio4r (~> 2.0)
@@ -445,7 +446,7 @@ DEPENDENCIES
   aasm
   action-cable-testing
   action_policy (~> 0.5.4)
-  action_policy-graphql (~> 0.3)
+  action_policy-graphql (~> 0.5)
   active_model_serializers (~> 0.10.12)
   bootsnap (>= 1.1.0)
   bullet
