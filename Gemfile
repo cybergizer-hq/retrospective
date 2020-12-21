@@ -12,7 +12,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 5.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -82,7 +82,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'webpacker', '~> 4.x'
+gem 'webpacker', '~> 5'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
@@ -94,8 +94,8 @@ gem 'dry-monads'
 gem 'aasm'
 gem 'sidekiq'
 
-gem 'graphql', '~> 1.9'
-gem 'action_policy-graphql', '~> 0.3'
+gem 'graphql', '~> 1.11'
+gem 'action_policy-graphql', '~> 0.5'
 gem 'graphiql-rails', group: :development
 group :test, :development do
   gem 'action-cable-testing'
