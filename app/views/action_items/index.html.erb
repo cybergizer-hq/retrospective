@@ -1,10 +1,11 @@
-<div class="column is-9">
-  <table class='table'>
+<div class='column is-10'>
+  <table class='table is-fullwidth is-hoverable'>
     <thead>
     <tr>
       <th>Item</th>
+      <th>Continued</th>
       <th></th>
-      <th></th>
+      <th>Board</th>
       <th>Created at</th>
     </tr>
     </thead>
@@ -13,19 +14,20 @@
     <% @action_items.each do |item| %>
       <tr>
         <td><%= item.body %></td>
+        <td><%= item.times_moved if item.times_moved > 0 %></td>
         <td>
           <% if allowed_to?(:close?, item, context: { board: item.board }) %>
-            <%= link_to "close", close_action_item_path(item.id), method: :put, class: 'button is-small is-danger' %>
+            <%= link_to 'close', close_action_item_path(item.id), method: :put, class: 'button is-small is-danger' %>
           <% end %>
           <% if allowed_to?(:complete?, item, context: { board: item.board }) %>
-            <%= link_to "done", complete_action_item_path(item.id), method: :put, class: 'button is-small is-success' %>
+            <%= link_to 'done', complete_action_item_path(item.id), method: :put, class: 'button is-small is-success' %>
           <% end %>
           <% if allowed_to?(:reopen?, item, context: { board: item.board }) %>
-            <%= link_to "reopen", reopen_action_item_path(item.id), method: :put, class: 'button is-small is-light' %>
+            <%= link_to 'reopen', reopen_action_item_path(item.id), method: :put, class: 'button is-small is-light' %>
           <% end %>
         </td>
-        <td><%= link_to "Board: #{item.board.title}", item.board %></td>
-        <th><%= item.created_at %></th>
+        <td><%= link_to item.board.title, item.board %></td>
+        <td><%= item.created_at.strftime('%d %b %Y, %H:%M')%></td>
       </tr>
     <% end %>
     </tbody>
