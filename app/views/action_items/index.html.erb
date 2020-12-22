@@ -1,5 +1,7 @@
-<div class='column is-10'>
-  <table class='table is-fullwidth is-hoverable'>
+<div class='column is-10' style='margin-top: -25px;'>
+  <span class='subtitle is-2'>Action Items assigned to me</span>
+
+  <table class='table is-fullwidth is-hoverable' style='margin-top: 40px;'>
     <thead>
     <tr>
       <th>Item</th>
@@ -32,5 +34,47 @@
     <% end %>
     </tbody>
   </table>
+
+  <a class='button' href='#' id='resolvedItemsA' style='margin: 20px 0'>
+    Show resolved items
+  </a>
+
+  <table class='table is-fullwidth is-hoverable is-hidden' id='resolvedItemsTable'>
+    <thead>
+    <tr>
+      <th>Item</th>
+      <th>Continued</th>
+      <th>Board</th>
+      <th>Updated at</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @action_items_resolved.each do |item| %>
+      <tr>
+        <td><%= item.body %></td>
+        <td><%= item.times_moved if item.times_moved > 0 %></td>
+        <td><%= link_to item.board.title, item.board %></td>
+        <td><%= item.updated_at.strftime('%d %b %Y, %H:%M')%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
+
+<script>
+  const elA = document.getElementById('resolvedItemsA');
+  const elTable = document.getElementById('resolvedItemsTable');
+
+  elA.addEventListener('click', (e) => {
+    e.preventDefault();
+    elTable.classList.toggle('is-hidden')
+
+    if (elA.textContent.includes('Show')) {
+      elA.innerHTML = 'Hide resolved items';
+    } else {
+      elA.innerHTML = 'Show resolved items';
+    }
+  })
+</script>
 
