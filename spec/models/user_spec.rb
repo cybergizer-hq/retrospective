@@ -35,6 +35,14 @@ RSpec.describe User, type: :model do
     it 'has many action items' do
       expect(user).to respond_to(:action_items)
     end
+
+    it 'has many permissions users' do
+      expect(user).to respond_to(:permissions_users)
+    end
+
+    it 'has many permissions' do
+      expect(user).to respond_to(:permissions)
+    end
   end
 
   describe '.from_omniauth' do

@@ -5,5 +5,5 @@ class PermissionsUser < ApplicationRecord
   belongs_to :permission
   belongs_to :board
 
-  validates_uniqueness_of :permission_id, scope: [:user_id, :board_id]
+  validates_uniqueness_of :permission_id, scope: %i[user_id board_id]
 end
