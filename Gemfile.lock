@@ -205,8 +205,8 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     io-like (0.3.0)
     ipaddress (0.8.3)
-    jbuilder (2.9.1)
-      activesupport (>= 4.2.0)
+    jbuilder (2.10.1)
+      activesupport (>= 5.0.0)
     json (2.3.1)
     json_matchers (0.11.1)
       json_schema
@@ -465,7 +465,7 @@ DEPENDENCIES
   fog-aws
   graphiql-rails
   graphql (~> 1.11)
-  jbuilder (~> 2.5)
+  jbuilder (~> 2.10)
   json_matchers
   letter_opener
   listen (>= 3.0.5, < 3.4)
