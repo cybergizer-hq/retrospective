@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_044926) do
+ActiveRecord::Schema.define(version: 2020_12_22_162741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,24 @@ ActiveRecord::Schema.define(version: 2020_11_24_044926) do
     t.index ["board_id"], name: "index_memberships_on_board_id"
     t.index ["user_id", "board_id"], name: "index_memberships_on_user_id_and_board_id", unique: true
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "identifier", null: false
+    t.string "description", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "permissions_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "permission_id"
+    t.bigint "board_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_permissions_users_on_board_id"
+    t.index ["permission_id"], name: "index_permissions_users_on_permission_id"
+    t.index ["user_id"], name: "index_permissions_users_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|

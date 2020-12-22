@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :comments, foreign_key: :author_id
   has_many :memberships
   has_many :boards, through: :memberships
+  has_many :permissions_users, dependent: :destroy
+  has_many :permissions, through: :permissions_users
   has_many :action_items, foreign_key: 'assignee_id', class_name: 'ActionItem'
 
   has_and_belongs_to_many :teams
