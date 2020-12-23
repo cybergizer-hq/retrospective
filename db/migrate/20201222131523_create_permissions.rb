@@ -3,7 +3,7 @@
 class CreatePermissions < ActiveRecord::Migration[6.0]
   def change
     create_table :permissions do |t|
-      t.string :identifier, null: false
+      t.string :identifier, null: false, index: { unique: true }
       t.string :description, null: false
 
       t.timestamps

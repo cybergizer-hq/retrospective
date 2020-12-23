@@ -8,13 +8,6 @@ RSpec.describe PermissionsUser, type: :model do
   let_it_be(:board) { build_stubbed(:board) }
   let_it_be(:permission) { build_stubbed(:permission) }
 
-  let(:with_uniq_board) { build_stubbed(:permissions_user, user: user, permission: permission) }
-  let(:with_uniq_user) { build_stubbed(:permissions_user, permission: permission, board: board) }
-  let(:with_uniq_permission) { build_stubbed(:permissions_user, user: user, board: board) }
-  let(:not_uniq_permissions_user) do
-    build_stubbed(:permissions_user, user: user, board: board, permission: permission)
-  end
-
   context 'associations' do
     it 'belongs to user' do
       expect(permissions_user).to respond_to(:user)
@@ -31,6 +24,13 @@ RSpec.describe PermissionsUser, type: :model do
 
   context 'validations' do
     before { create(:permissions_user, permission: permission, user: user, board: board) }
+
+    let(:with_uniq_board) { build_stubbed(:permissions_user, user: user, permission: permission) }
+    let(:with_uniq_user) { build_stubbed(:permissions_user, permission: permission, board: board) }
+    let(:with_uniq_permission) { build_stubbed(:permissions_user, user: user, board: board) }
+    let(:not_uniq_permissions_user) do
+      build_stubbed(:permissions_user, user: user, board: board, permission: permission)
+    end
 
     it 'is valid when board is uniq' do
       expect(with_uniq_board).to be_valid
