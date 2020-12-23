@@ -14,7 +14,7 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def show?
-    record.private ? user_is_member? : true
+    record.private ? user.allowed?('view_private_board', record.id) : true
   end
 
   def new?
@@ -22,7 +22,7 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def edit?
-    user_is_creator? || user_is_admin?
+    user.allowed?('edit_board', record.id)
   end
 
   def create?
@@ -30,43 +30,27 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_creator? || user_is_admin?
+    user.allowed?('update_board', record.id)
   end
 
   def destroy?
-    user_is_creator?
+    user.allowed?('destroy_board', record.id)
   end
 
   def continue?
-    (user_is_creator? || user_is_host?) && can_continue?
+    user.allowed?('continue_board', record.id) && can_continue?
   end
 
   def create_cards?
-    user_is_member?
+    user.allowed?('create_cards', record.id)
   end
 
   def suggestions?
-    user_is_creator? || user_is_admin?
+    user.allowed?('get_suggestions', record.id)
   end
 
   def invite?
-    user_is_creator? || user_is_admin?
-  end
-
-  def user_is_creator?
-    record.memberships.exists?(user_id: user.id, role: 'creator')
-  end
-
-  def user_is_admin?
-    record.memberships.exists?(user_id: user.id, role: 'admin')
-  end
-
-  def user_is_host?
-    record.memberships.exists?(user_id: user.id, role: 'host')
-  end
-
-  def user_is_member?
-    record.memberships.where(user_id: user.id).exists?
+    user.allowed?('invite_members', record.id)
   end
 
   def can_continue?

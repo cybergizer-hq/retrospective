@@ -63,6 +63,10 @@ class BoardsController < ApplicationController
     @board = Board.new(board_params)
     @board.memberships.build(user_id: current_user.id, role: 'creator')
 
+    Permission.creator_permissions.ids.each do |permission_id|
+      @board.permissions_users.build(permission_id: permission_id, user: current_user)
+    end
+
     if @board.save
       redirect_to @board, notice: 'Board was successfully created.'
     else

@@ -25,6 +25,7 @@ module Boards
       )
 
       new_board.memberships = duplicate_memberships
+      new_board.permissions_users = duplicate_permissions_users
       new_board.save!
 
       Success(new_board)
@@ -49,6 +50,10 @@ module Boards
                 .each do |member|
                   member.ready = false
                 end
+    end
+
+    def duplicate_permissions_users
+      prev_board.permissions_users.map(&:dup)
     end
 
     def default_board_name

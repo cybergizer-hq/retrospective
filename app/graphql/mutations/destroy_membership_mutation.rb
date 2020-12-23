@@ -13,6 +13,8 @@ module Mutations
                              context: { membership: Membership.find_by(user: context[:current_user],
                                                                        board: membership.board) }
       if membership.destroy
+        PermissionsUser.where(board: membership.board, user: membership.user).destroy_all
+
         RetrospectiveSchema.subscriptions.trigger('membership_destroyed',
                                                   { board_slug: membership.board.slug },
                                                   id: id)
