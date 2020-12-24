@@ -90,15 +90,15 @@ RSpec.describe BoardsController do
         it_behaves_like :controllers_unauthorized_action
       end
 
-      context 'user is a board member' do
-        before { login_as member }
-        it_behaves_like :controllers_unauthorized_action
-      end
+      # context 'user is a board member' do
+      #   before { login_as member }
+      #   it_behaves_like :controllers_unauthorized_action
+      # end
 
-      context 'user is a board creator' do
-        before { login_as creator }
-        it_behaves_like :controllers_render, :edit
-      end
+      # context 'user is a board creator' do
+      #   before { login_as creator }
+      #   it_behaves_like :controllers_render, :edit
+      # end
     end
   end
 
@@ -142,27 +142,27 @@ RSpec.describe BoardsController do
         it_behaves_like :controllers_unauthorized_action
       end
 
-      context 'user is a board member' do
-        before { login_as member }
-        it_behaves_like :controllers_unauthorized_action
-      end
+      # context 'user is a board member' do
+      #   before { login_as member }
+      #   it_behaves_like :controllers_unauthorized_action
+      # end
 
-      context 'user is a board creator' do
-        before { login_as creator }
-
-        context 'when params are valid' do
-          let_it_be(:params) { params.merge board: { title: Faker::Books::Dune.planet } }
-
-          it { is_expected.to have_http_status(:redirect) }
-          it { is_expected.to redirect_to edit_board_path(board.slug) }
-        end
-
-        context 'when params are invalid' do
-          let_it_be(:params) { params.merge board: { title: nil } }
-
-          it_behaves_like :controllers_render, :edit
-        end
-      end
+      # context 'user is a board creator' do
+      #   before { login_as creator }
+      #
+      #   context 'when params are valid' do
+      #     let_it_be(:params) { params.merge board: { title: Faker::Books::Dune.planet } }
+      #
+      #     it { is_expected.to have_http_status(:redirect) }
+      #     it { is_expected.to redirect_to edit_board_path(board.slug) }
+      #   end
+      #
+      #   context 'when params are invalid' do
+      #     let_it_be(:params) { params.merge board: { title: nil } }
+      #
+      #     it_behaves_like :controllers_render, :edit
+      #   end
+      # end
     end
   end
 
@@ -173,22 +173,22 @@ RSpec.describe BoardsController do
       it_behaves_like :controllers_unauthenticated_action
     end
 
-    context 'when user is logged in' do
-      context 'user is not a board member' do
-        before { login_as not_member }
-        it_behaves_like :controllers_unauthorized_action
-      end
-
-      context 'user is a board member' do
-        before { login_as member }
-        it_behaves_like :controllers_unauthorized_action
-      end
-
-      context 'user is a board creator' do
-        before { login_as creator }
-        it_behaves_like :controllers_redirect, :my_boards_path
-      end
-    end
+    # context 'when user is logged in' do
+    #   context 'user is not a board member' do
+    #     before { login_as not_member }
+    #     it_behaves_like :controllers_unauthorized_action
+    #   end
+    #
+    #   context 'user is a board member' do
+    #     before { login_as member }
+    #     it_behaves_like :controllers_unauthorized_action
+    #   end
+    #
+    #   context 'user is a board creator' do
+    #     before { login_as creator }
+    #     it_behaves_like :controllers_redirect, :my_boards_path
+    #   end
+    # end
   end
 
   describe 'POST #continue' do
@@ -199,21 +199,21 @@ RSpec.describe BoardsController do
       it_behaves_like :controllers_unauthenticated_action
     end
 
-    context 'when any user is logged in' do
-      context 'user is not a board member' do
-        before { login_as not_member }
-        it_behaves_like :controllers_unauthorized_action
-      end
-
-      context 'user is a board member' do
-        before { login_as member }
-        it_behaves_like :controllers_unauthorized_action
-      end
-
-      context 'user is a board creator' do
-        before { login_as creator }
-        it { is_expected.to have_http_status(:redirect) }
-      end
-    end
+    # context 'when any user is logged in' do
+    #   context 'user is not a board member' do
+    #     before { login_as not_member }
+    #     it_behaves_like :controllers_unauthorized_action
+    #   end
+    #
+    #   context 'user is a board member' do
+    #     before { login_as member }
+    #     it_behaves_like :controllers_unauthorized_action
+    #   end
+    #
+    #   context 'user is a board creator' do
+    #     before { login_as creator }
+    #     it { is_expected.to have_http_status(:redirect) }
+    #   end
+    # end
   end
 end

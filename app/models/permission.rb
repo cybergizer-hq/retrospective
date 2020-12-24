@@ -2,7 +2,7 @@
 
 class Permission < ApplicationRecord
   CREATOR_IDENTIFIERS = %w[view_private_board edit_board update_board
-                         destroy_board continue_board create_cards invite_members].freeze
+                           destroy_board continue_board create_cards invite_members].freeze
   MEMBER_IDENTIFIERS = %w[view_private_board create_cards].freeze
 
   has_many :permissions_users, dependent: :destroy
