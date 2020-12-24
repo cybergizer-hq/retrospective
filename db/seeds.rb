@@ -33,7 +33,10 @@ Board.create([
 Membership.create([
                     { user_id: 1, board_id: 1, role: 'creator', ready: false },
                     { user_id: 2, board_id: 1, role: 'member', ready: false },
-                    { user_id: 2, board_id: 2, role: 'creator', ready: false }
+                    { user_id: 2, board_id: 2, role: 'creator', ready: false },
+                    { user_id: 2, board_id: 3, role: 'creator', ready: false },
+                    { user_id: 2, board_id: 4, role: 'creator', ready: false },
+                    { user_id: 2, board_id: 5, role: 'creator', ready: false }
                   ])
 
 Card.create([
@@ -48,7 +51,7 @@ Card.create([
             ])
 
 ActionItem.create([
-                    { body: 'issue should be fixed', board_id: 1 },
-                    { body: 'meetings should be held', board_id: 1 },
-                    { body: 'actions should be taken', board_id: 1 }
+                    { body: 'issue should be fixed', board_id: 1, author_id: 1 },
+                    { body: 'meetings should be held', board_id: 1, author_id: 1 },
+                    { body: 'actions should be taken', board_id: 1, author_id: 1 }
                   ])

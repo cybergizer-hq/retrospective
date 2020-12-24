@@ -5,8 +5,10 @@ require 'rails_helper'
 RSpec.describe ActionItemsController do
   let_it_be(:board) { create(:board) }
   let_it_be(:action_item) { create(:action_item, board: board) }
-  let_it_be(:closed_action_item) { create(:action_item, status: 'closed', board: board) }
   let_it_be(:creator) { create(:user) }
+  let_it_be(:closed_action_item) do
+    create(:action_item, status: 'closed', board: board, author: creator)
+  end
   let_it_be(:member) { create(:user) }
   let_it_be(:not_member) { create(:user) }
   let_it_be(:creatorship) do

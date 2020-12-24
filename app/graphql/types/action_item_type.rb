@@ -8,6 +8,7 @@ module Types
     field :assignee, Types::UserType, null: true
     field :assignee_avatar_url, String, null: true, camelize: false
     field :status, String, null: true
+    field :author, Types::UserType, null: false
 
     def assignee_avatar_url
       object.assignee.avatar.thumb.url if object.assignee

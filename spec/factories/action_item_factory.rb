@@ -5,5 +5,6 @@ FactoryBot.define do
     sequence(:body) { |n| "Test Action Item#{n}" }
     association :board
     association :assignee, factory: :user
+    association :author, factory: :user, email: Faker::Internet.email
   end
 end

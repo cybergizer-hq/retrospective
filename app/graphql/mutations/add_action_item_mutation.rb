@@ -23,7 +23,7 @@ module Mutations
     # rubocop:enable Metrics/MethodLength
 
     def item_params(params, board)
-      params.merge(board: board)
+      params.merge(board: board, author: context[:current_user])
     end
   end
 end
