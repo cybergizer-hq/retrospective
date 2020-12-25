@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_23_171129) do
+ActiveRecord::Schema.define(version: 2020_12_25_131736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_12_23_171129) do
     t.datetime "updated_at", null: false
     t.integer "times_moved", default: 0, null: false
     t.bigint "assignee_id"
-    t.bigint "author_id"
+    t.bigint "author_id", null: false
     t.index ["assignee_id"], name: "index_action_items_on_assignee_id"
     t.index ["author_id"], name: "index_action_items_on_author_id"
     t.index ["board_id"], name: "index_action_items_on_board_id"
