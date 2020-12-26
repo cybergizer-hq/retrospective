@@ -22,6 +22,10 @@ RSpec.describe Boards::Continue do
   let!(:membership) do
     create(:membership, board: prev_board, user: current_user, role: 'member')
   end
+  let(:permission) { create(:permission) }
+  let!(:permissions_user) do
+    create(:permissions_user, permission: permission, user: current_user, board: prev_board)
+  end
 
   subject { described_class.new(prev_board, current_user).call }
 
@@ -74,6 +78,15 @@ RSpec.describe Boards::Continue do
     end
     it 'sets previous title to the new board' do
       expect(subject.value!.title).to eq(prev_board.title + ' #2')
+    end
+    it 'duplicates permissions_users from the previous board' do
+      expect { subject }.to change(PermissionsUser, :count).by(1)
+    end
+    it 'assigns duplicated permissions for the board to the same user' do
+      expect(subject.value!.permissions_users.first.user_id).to eq(current_user.id)
+    end
+    it 'assigns the same permission for user to the new board' do
+      expect(subject.value!.permissions_users.first.permission_id).to eq(permission.id)
     end
   end
 end

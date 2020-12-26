@@ -9,59 +9,63 @@ RSpec.describe Mutations::InviteMembersMutation, type: :request do
     let!(:creatorship) do
       create(:membership, board: board, user: author, role: 'creator')
     end
+    let(:invite_permission) { create(:permission, identifier: 'invite_members') }
 
-    let(:invitee_1) { build_stubbed(:user) }
-    let(:invitee_2) { build_stubbed(:user) }
+    let(:invitee1) { build_stubbed(:user) }
+    let(:invitee2) { build_stubbed(:user) }
 
-    let(:membership_1) { build_stubbed(:membership, board: board, user: invitee_1) }
-    let(:membership_2) { build_stubbed(:membership, board: board, user: invitee_2) }
+    let(:membership1) { build_stubbed(:membership, board: board, user: invitee1) }
+    let(:membership2) { build_stubbed(:membership, board: board, user: invitee2) }
 
     let(:request) do
       post '/graphql', params: { query: query(board_slug: board.slug,
-                                              email: "#{invitee_1.email},#{invitee_2.email}") }
+                                              email: "#{invitee1.email},#{invitee2.email}") }
+    end
+
+    before do
+      create(:permissions_user, permission: invite_permission, user: author, board: board)
     end
 
     before do
       sign_in author
       allow_any_instance_of(Boards::FindUsersToInvite)
         .to receive(:call)
-        .and_return([invitee_1, invitee_2])
+        .and_return([invitee1, invitee2])
       allow_any_instance_of(Boards::InviteUsers)
         .to receive(:call)
-        .and_return(Dry::Monads.Success([membership_1, membership_2]))
+        .and_return(Dry::Monads.Success([membership1, membership2]))
     end
-    # not authorized error
-    #
-    #   it 'returns a list of memberships' do
-    #     request
-    #     json = JSON.parse(response.body)
-    #     data = json.dig('data', 'inviteMembers', 'memberships')
-    #
-    #     expect(data).to match_array(
-    #       [
-    #         {
-    #           'id' => membership_1.id,
-    #           'ready' => membership_1.ready,
-    #           'board' => {
-    #             'id' => membership_1.board_id.to_s
-    #           },
-    #           'user' => {
-    #             'id' => membership_1.user_id.to_s
-    #           }
-    #         },
-    #         {
-    #           'id' => membership_2.id,
-    #           'ready' => membership_2.ready,
-    #           'board' => {
-    #             'id' => membership_2.board_id.to_s
-    #           },
-    #           'user' => {
-    #             'id' => membership_2.user_id.to_s
-    #           }
-    #         }
-    #       ]
-    #     )
-    #   end
+
+    it 'returns a list of memberships' do
+      request
+      json = JSON.parse(response.body)
+      data = json.dig('data', 'inviteMembers', 'memberships')
+
+      expect(data).to match_array(
+        [
+          {
+            'id' => membership1.id,
+            'ready' => membership1.ready,
+            'board' => {
+              'id' => membership1.board_id.to_s
+            },
+            'user' => {
+              'id' => membership1.user_id.to_s
+            }
+          },
+          {
+            'id' => membership2.id,
+            'ready' => membership2.ready,
+            'board' => {
+              'id' => membership2.board_id.to_s
+            },
+            'user' => {
+              'id' => membership2.user_id.to_s
+            }
+          }
+        ]
+      )
+    end
   end
 
   def query(board_slug:, email:)

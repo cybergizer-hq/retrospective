@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Permission, type: :model do
-  let_it_be(:permission) { build_stubbed(:permission) }
+  let_it_be(:permission) { create(:permission) }
+  let_it_be(:creator_permission) { create(:permission, identifier: 'update_board') }
+  let_it_be(:member_permission) { create(:permission, identifier: 'create_cards') }
 
   context 'validations' do
     it 'is valid with valid attributes' do
@@ -32,6 +34,26 @@ RSpec.describe Permission, type: :model do
 
     it 'has_many_permissions_users' do
       expect(permission).to respond_to(:permissions_users)
+    end
+  end
+
+  context '.creator_permissions' do
+    it 'returns permissions with creator identifiers' do
+      expect(Permission.creator_permissions).to include(creator_permission)
+    end
+
+    it 'excludes permissions without creator identifiers' do
+      expect(Permission.creator_permissions).not_to include(permission)
+    end
+  end
+
+  context '.member_permissions' do
+    it 'returns permissions with member identifiers' do
+      expect(Permission.member_permissions).to include(member_permission)
+    end
+
+    it 'excludes permissions without member identifiers' do
+      expect(Permission.member_permissions).not_to include(permission)
     end
   end
 end
