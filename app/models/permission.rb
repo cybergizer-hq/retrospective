@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Permission < ApplicationRecord
-  CREATOR_IDENTIFIERS = %w[view_private_board edit_board update_board
+  CREATOR_IDENTIFIERS = %w[view_private_board edit_board update_board get_suggestions
                            destroy_board continue_board create_cards invite_members].freeze
   MEMBER_IDENTIFIERS = %w[view_private_board create_cards].freeze
 

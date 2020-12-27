@@ -36,6 +36,35 @@ Membership.create([
                     { user_id: 2, board_id: 2, role: 'creator', ready: false }
                   ])
 
+Permission.create([
+                    { identifier: 'view_private_board',
+                      description: 'User can view private board' },
+                    { identifier: 'create_cards',
+                      description: 'User can create cards on board' },
+                    { identifier: 'edit_board', description: 'User can edit board' },
+                    { identifier: 'update_board', description: 'User can update board' },
+                    { identifier: 'destroy_board', description: 'User can destroy board' },
+                    { identifier: 'continue_board',
+                      description: 'User can continue previous board' },
+                    { identifier: 'invite_members',
+                      description: 'User can invite members to board' },
+                    { identifier: 'get_suggestions', description: 'User can get tips with info' }
+                  ])
+
+Permission.all.find_each do |permission|
+  PermissionsUser.create([
+                           { user_id: 1, permission_id: permission.id, board_id: 1 },
+                           { user_id: 2, permission_id: permission.id, board_id: 2 }
+                         ])
+end
+
+PermissionsUser.create([
+                         { user_id: 2, permission: Permission.find_by(identifier: 'create_cards'), board_id: 1 },
+                         { user_id: 2,
+                           permission: Permission.find_by(identifier: 'view_private_board'),
+                           board_id: 1 }
+                       ])
+
 Card.create([
               { kind: 'mad', body: 'user1 is very mad', author_id: 1, board_id: 1 },
               { kind: 'sad', body: 'user1 is very sad', author_id: 1, board_id: 1 },
