@@ -31,7 +31,7 @@ RSpec.describe Mutations::ToggleReadyStatusMutation, type: :request do
         'id' => creatorship.id,
         'ready' => true,
         'user' => { 'id' => creatorship.user_id.to_s },
-        'board' => { 'id' => creatorship.board_id.to_s }
+        'boardId' => creatorship.board_id
       )
     end
   end
@@ -50,9 +50,7 @@ RSpec.describe Mutations::ToggleReadyStatusMutation, type: :request do
             user {
               id
             }
-            board {
-              id
-            }
+            boardId
           }
         }
       }

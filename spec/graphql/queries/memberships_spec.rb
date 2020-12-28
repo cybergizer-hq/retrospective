@@ -26,13 +26,13 @@ RSpec.describe Queries::Memberships, type: :request do
         [
           {
             'id' => creatorship.id,
-            'board' => { 'id' => board.id.to_s },
+            'boardId' => board.id,
             'user' => { 'id' => author.id.to_s },
             'ready' => creatorship.ready
           },
           {
             'id' => non_creatorship.id,
-            'board' => { 'id' => board.id.to_s },
+            'boardId' => board.id,
             'user' => { 'id' => non_author.id.to_s },
             'ready' => creatorship.ready
           }
@@ -46,9 +46,7 @@ RSpec.describe Queries::Memberships, type: :request do
       query {
         memberships(boardSlug: "#{board_slug}") {
           id
-          board{
-            id
-          }
+          boardId
           user{
             id
           }

@@ -20,7 +20,7 @@ RSpec.describe Queries::Membership, type: :request do
 
       expect(data).to include(
         'id' => be_present,
-        'board' => { 'id' => board.id.to_s },
+        'boardId' => board.id,
         'user' => { 'id' => author.id.to_s },
         'ready' => creatorship.ready
       )
@@ -32,9 +32,7 @@ RSpec.describe Queries::Membership, type: :request do
       query {
         membership(boardSlug: "#{board_slug}") {
           id
-          board{
-            id
-          }
+          boardId
           user{
             id
           }
