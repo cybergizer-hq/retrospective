@@ -14,9 +14,7 @@ const ActionItemBody = (props) => {
   const [inputValue, setInputValue] = useState(body);
   const [editMode, setEditMode] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [actionItemAssignee, setActionItemAssignee] = useState(
-    assignee ? assignee.id : ``
-  );
+  const [actionItemAssignee, setActionItemAssignee] = useState(assignee?.id);
   const [destroyActionItem] = useMutation(destroyActionItemMutation);
   const [updateActionItem] = useMutation(updateActionItemMutation);
 
@@ -150,7 +148,6 @@ const ActionItemBody = (props) => {
                   >
                     Edit
                   </a>
-                  <hr style={{margin: '5px 0'}} />
                 </div>
               )}
               <a

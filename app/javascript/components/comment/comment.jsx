@@ -109,7 +109,6 @@ const Comment = ({comment, editable}) => {
                   >
                     Edit
                   </a>
-                  <hr style={{margin: '5px 0'}} />
                 </div>
               )}
               <a

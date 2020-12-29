@@ -111,7 +111,9 @@ const NewCardBody = ({kind, smile, onCardAdded, onGetNewCardID}) => {
             </div>
           </form>
         ) : (
-          <h2 className="column-header__title">{kind}</h2>
+          <h2 className="column-header__title" onDoubleClick={toggleOpen}>
+            {kind}
+          </h2>
         )}
       </div>
       <div className="column-header__button" onClick={toggleOpen}>

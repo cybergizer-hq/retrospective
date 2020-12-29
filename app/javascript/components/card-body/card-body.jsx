@@ -80,7 +80,6 @@ const CardBody = ({author, id, editable, body, deletable}) => {
                   >
                     Edit
                   </a>
-                  <hr style={{margin: '5px 0'}} />
                 </div>
               )}
               <a
