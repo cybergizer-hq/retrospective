@@ -163,9 +163,6 @@ const MembershipList = () => {
 
     return (
       <div className="users">
-        <div className="users__text users__text-ready">
-          {readyMembers.length} ready
-        </div>
         <div className="avatars avatars--ready">
           {readyMembers.slice(0, 5).map((user) => {
             return (
@@ -177,6 +174,9 @@ const MembershipList = () => {
               />
             );
           })}
+        </div>
+        <div className="users__text users__text--ready">
+          {readyMembers.length} ready
         </div>
         <div className="users__text users__text--not-ready">
           and waiting for {notReadyMembers.length} more
@@ -196,22 +196,6 @@ const MembershipList = () => {
       </div>
     );
   };
-  //
-  // return (
-  //   <div className="user">
-  //     {/* {usersListComponent} */}
-  //     {memberships.map((membership) => {
-  //       return (
-  //         <User
-  //           key={membership.id}
-  //           shouldDisplayReady
-  //           membership={membership}
-  //           shouldHandleDelete={false}
-  //         />
-  //       );
-  //     })}
-  //   </div>
-  // );
 
   return renderMembersList(memberships);
 };

@@ -16,17 +16,6 @@ a:visited {
   color: #1B1D15;
 }
 
-
-// a:hover {
-//   color: hotpink;
-// }
-
-// a:active {
-//   color: blue;
-// }
-
-// для card-table ?
-
 .header {
   width: 100%;
   font-family: "Commissioner";
@@ -51,7 +40,7 @@ a:visited {
 }
 
 .header-left__item {
-  margin-right: 24px;
+  margin-right: 16px;
 }
 
 .header-left__link {
@@ -65,7 +54,7 @@ a:visited {
 .header-left__board-title {
   color: #1B1D15;
   font-size: 16px;
-  margin-left: 12px;
+  font-weight: 600;
 }
 
 .header-left__settings {
@@ -80,34 +69,6 @@ a:visited {
   margin: 0 auto;
 }
 
-// .btn-save {
-// 	direction: rtl;
-// 	padding-top: 5px;
-// }
-
-// .columns-footer {
-// 	padding-top: 5px;
-// }
-
-// .column-btn-save {
-// 	direction: rtl;
-// }
-
-// .column-select {
-// 	width: 100%;
-// }
-
-// .column .select {
-// 	padding: 0px 20px;
-// 	background-color: white;
-// 	border-color: #dbdbdb;
-// 	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
-// }
-
-// .column .select:active {
-// 	border-color: #dbdbdb;
-// }
-
 .board-container {
   display: flex;
   font-family: "Commissioner";
@@ -120,9 +81,49 @@ a:visited {
   flex-grow: 1;
   flex-shrink: 1;
   margin: 0 16px;
-  background-color: #FAFAFA;
 }
 
-// .column-wrapper {
-//   display: flex;
-// }
+.open-button {
+  width: 24px;
+  height: 40px;
+  padding: 0;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #C6C6C4;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 8px;
+}
+
+.open-button img {
+  width: 4px;
+  height: 8px;
+}
+
+.dot {
+  width: 8px;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dot__item {
+  height: 4px;
+  width: 100%;
+  margin-bottom: 4px;
+  border-radius: 2px;
+
+  &--red {
+    background-color: #ED9690;
+  }
+
+  &--yellow {
+    background-color: #F6E3C8;
+  }
+
+  &--green {
+    background-color: #22DB98;
+  }
+}

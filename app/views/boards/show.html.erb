@@ -10,10 +10,7 @@
 <div class='header'>
   <div class="header__wrapper">
     <div class="header-left">
-      <div>
-        <%= link_to '← back to boards', my_boards_path, class: 'header-left__link header-left__item'%>
-      </div>
-      <div class='header-left__item'> < </div>
+        <%= link_to '<', my_boards_path, class: 'header-left__link header-left__item'%>
       <h1 class='header-left__board-title header-left__item'>
         <%= @board.title %>
       </h1>

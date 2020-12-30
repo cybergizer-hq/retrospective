@@ -23,6 +23,9 @@ const CardTable = ({
     initPrevItems.length > 0
   );
 
+  const togglePreviousItemsOpened = () =>
+    setDisplayPreviousItems(!displayPreviousItems);
+
   const previousActionsEmptyHandler = () => {
     setDisplayPreviousItems(false);
     setColumnClass('column is-one-fourth');
@@ -33,7 +36,6 @@ const CardTable = ({
     for (const [index, [columnName, cards]] of Object.entries(
       cardTypePairs
     ).entries()) {
-      // Console.log(index);
       content.push(
         <div key={`${columnName}_column`} className={columnClass}>
           <CardColumn
@@ -49,24 +51,76 @@ const CardTable = ({
     return content;
   };
 
+  const renderPreviousColumn = () => {
+    if (displayPreviousItems) {
+      return (
+        <div className={columnClass}>
+          <PrevActionItemColumn
+            handleEmpty={previousActionsEmptyHandler}
+            initItems={initPrevItems || []}
+            users={users}
+            onClickToggle={togglePreviousItemsOpened}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div className="side-menu">
+        <button
+          type="button"
+          className="open-button"
+          onClick={togglePreviousItemsOpened}
+        >
+          <svg
+            width="5"
+            height="10"
+            viewBox="0 0 5 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.5 9L4.5 5L0.5 1"
+              stroke="#C6C6C4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <svg
+            width="5"
+            height="10"
+            viewBox="0 0 5 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.5 9L4.5 5L0.5 1"
+              stroke="#C6C6C4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+        <div className="dot">
+          <span className="dot__item dot__item--red" />
+          <span className="dot__item dot__item--yellow" />
+          <span className="dot__item dot__item--yellow" />
+          <span className="dot__item dot__item--green" />
+          <span className="dot__item dot__item--green" />
+          <span className="dot__item dot__item--green" />
+        </div>
+      </div>
+    );
+  };
+
   user.isCreator = creators.includes(user.id);
   return (
     <Provider>
       <BoardSlugContext.Provider value={window.location.pathname.split('/')[2]}>
         <UserContext.Provider value={user}>
           <div className="board-container">
-            {displayPreviousItems && (
-              <div className={columnClass}>
-                <PrevActionItemColumn
-                  handleEmpty={previousActionsEmptyHandler}
-                  initItems={initPrevItems || []}
-                  users={users}
-                />
-              </div>
-            )}
-
+            {renderPreviousColumn()}
             {generateColumns(cardsByType)}
-
             <div className={columnClass}>
               <ActionItemColumn initItems={actionItems || []} users={users} />
             </div>

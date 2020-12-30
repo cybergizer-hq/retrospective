@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Textarea from 'react-textarea-autosize';
-import './style.less';
 import {
   destroyActionItemMutation,
   updateActionItemMutation
@@ -8,6 +7,7 @@ import {
 import {useMutation} from '@apollo/react-hooks';
 import {Linkify, linkifyOptions} from '../../utils/linkify';
 import {CardUser} from '../card-user';
+import style from './style.module.less';
 
 const ActionItemBody = (props) => {
   const {assignee, editable, deletable, body, users, timesMoved} = props;
@@ -119,7 +119,7 @@ const ActionItemBody = (props) => {
 
   return (
     <div>
-      <div className="card-top action-item-top">
+      <div className={`card-top ${style.top}`}>
         {
           assignee && <CardUser {...assignee} />
           // Заменить на author после того как он появится

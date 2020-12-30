@@ -6,9 +6,10 @@ import {
 } from './operations.gql';
 import {useSubscription} from '@apollo/react-hooks';
 import BoardSlugContext from '../../utils/board-slug-context';
+import style from './style.module.less';
 
 const PreviousActionItemColumn = (props) => {
-  const {users, handleEmpty, initItems} = props;
+  const {users, handleEmpty, initItems, onClickToggle} = props;
 
   const [actionItems, setActionItems] = useState(initItems);
   const [skip, setSkip] = useState(true); // Workaround for https://github.com/apollographql/react-apollo/issues/3802
@@ -65,13 +66,18 @@ const PreviousActionItemColumn = (props) => {
     setSkip(false);
   }, []);
 
-  // Restart here
   return (
     <>
-      <h2 className="column-header column-header__title">PREVIOUS BOARD</h2>
-      {actionItems.map((item) => {
-        return <ActionItem key={item.id} isPrevious users={users} {...item} />;
-      })}
+      <div className={style.header}>
+        <h2 className={style.title}>PREVIOUS BOARD</h2>
+        <span className={style.hide} onClick={onClickToggle}>
+          hide
+        </span>
+      </div>
+      <hr className={style.line} />
+      {actionItems.map((item) => (
+        <ActionItem key={item.id} isPrevious users={users} {...item} />
+      ))}
     </>
   );
 };

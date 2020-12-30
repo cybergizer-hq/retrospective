@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {destroyMembershipMutation} from './operations.gql';
 import {getUserInitials} from '../../utils/helpers';
-import './style.less';
+import './style.module.less';
 
 const User = ({
   membership: {
@@ -47,7 +47,7 @@ const User = ({
       <div
         className={`${
           shouldDisplayReady && ready ? 'isReady' : ''
-        } avatar avatar--text`}
+        } avatar avatar--text avatar-${id % 10}`}
       >
         {getUserInitials(userName, userSurname)}
       </div>
