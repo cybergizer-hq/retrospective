@@ -22,10 +22,6 @@ RSpec.describe Boards::Continue do
   let!(:membership) do
     create(:membership, board: prev_board, user: current_user, role: 'member')
   end
-  let(:permission) { create(:permission) }
-  let!(:permissions_user) do
-    create(:permissions_user, permission: permission, user: current_user, board: prev_board)
-  end
 
   subject { described_class.new(prev_board, current_user).call }
 
@@ -45,6 +41,11 @@ RSpec.describe Boards::Continue do
   end
 
   context 'when prev_board was not previously continued' do
+    let(:permission) { create(:permission) }
+    let!(:permissions_user) do
+      create(:permissions_user, permission: permission, user: current_user, board: prev_board)
+    end
+
     before do
       allow_any_instance_of(described_class)
         .to receive(:prev_board_continued?)

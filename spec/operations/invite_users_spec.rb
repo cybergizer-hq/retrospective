@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Boards::InviteUsers do
-  subject { described_class.new(board, User.all).call }
+  subject { described_class.new(board, User.where(id: user.id)).call }
   let!(:user) { create(:user) }
   let!(:board) { create(:board) }
 

@@ -5,16 +5,6 @@ require 'rails_helper'
 RSpec.describe BoardPolicy do
   let_it_be(:user) { create(:user) }
   let_it_be(:board) { create(:board) }
-  let_it_be(:private_board) { create(:board, private: true) }
-  let_it_be(:edit_permission) { create(:permission, identifier: 'edit_board') }
-  let_it_be(:view_private_permission) { create(:permission, identifier: 'view_private_board') }
-  let_it_be(:update_permission) { create(:permission, identifier: 'update_board') }
-  let_it_be(:destroy_permission) { create(:permission, identifier: 'destroy_board') }
-  let_it_be(:continue_permission) { create(:permission, identifier: 'continue_board') }
-  let_it_be(:invite_member_permission) { create(:permission, identifier: 'invite_members') }
-  let_it_be(:create_cards_permission) { create(:permission, identifier: 'create_cards') }
-  let_it_be(:get_suggestions_permission) { create(:permission, identifier: 'get_suggestions') }
-
   let(:policy) { described_class.new(board, user: user) }
 
   describe '#my? boards' do
@@ -49,8 +39,11 @@ RSpec.describe BoardPolicy do
     end
 
     context 'when board is private' do
+      let_it_be(:private_board) { create(:board, private: true) }
+      let_it_be(:view_private_permission) { create(:permission, identifier: 'view_private_board') }
+      let(:policy) { described_class.new(private_board, user: user) }
+
       context 'when user has view_private_board permission' do
-        let(:board) { private_board }
         let!(:permissions_user) do
           create(:permissions_user, permission: view_private_permission,
                                     user: user,
@@ -61,8 +54,6 @@ RSpec.describe BoardPolicy do
       end
 
       context 'when user does not have view_private_board permission' do
-        let(:board) { private_board }
-
         it { is_expected.to eq false }
       end
     end
@@ -77,6 +68,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#edit?' do
+    let_it_be(:edit_permission) { create(:permission, identifier: 'edit_board') }
     subject { policy.apply(:edit?) }
 
     context 'when user has edit_board permission' do
@@ -101,6 +93,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#update?' do
+    let_it_be(:update_permission) { create(:permission, identifier: 'update_board') }
     subject { policy.apply(:update?) }
 
     context 'when user has update_board permission' do
@@ -117,6 +110,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#destroy?' do
+    let_it_be(:destroy_permission) { create(:permission, identifier: 'destroy_board') }
     subject { policy.apply(:destroy?) }
 
     context 'when user has destroy_board permission' do
@@ -133,6 +127,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#continue?' do
+    let_it_be(:continue_permission) { create(:permission, identifier: 'continue_board') }
     subject { policy.apply(:continue?) }
 
     context 'when user has continue_board permission' do
@@ -157,6 +152,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#create_cards?' do
+    let_it_be(:create_cards_permission) { create(:permission, identifier: 'create_cards') }
     subject { policy.apply(:create_cards?) }
 
     context 'when user has create_cards permission' do
@@ -173,6 +169,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#suggestions?' do
+    let_it_be(:get_suggestions_permission) { create(:permission, identifier: 'get_suggestions') }
     subject { policy.apply(:suggestions?) }
 
     context 'when user has get_suggestions permission' do
@@ -189,6 +186,7 @@ RSpec.describe BoardPolicy do
   end
 
   describe '#invite?' do
+    let_it_be(:invite_member_permission) { create(:permission, identifier: 'invite_members') }
     subject { policy.apply(:invite?) }
 
     context 'when user has invite_members permission' do

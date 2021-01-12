@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let_it_be(:user) { build_stubbed(:user) }
   let_it_be(:board) { build_stubbed(:board) }
-  let_it_be(:permission) { create(:permission, identifier: 'some_identifier') }
 
   context 'validations' do
     it 'is valid with valid attributes' do
@@ -126,6 +125,8 @@ RSpec.describe User, type: :model do
   end
 
   context '#allowed?' do
+    let_it_be(:permission) { create(:permission, identifier: 'some_identifier') }
+
     it 'returns true if permission for user exists' do
       create(:permissions_user, user: user, board: board, permission: permission)
       expect(user.allowed?('some_identifier', board.id)).to eq true

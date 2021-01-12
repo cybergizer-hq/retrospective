@@ -7,20 +7,6 @@ RSpec.describe BoardsController do
   let_it_be(:member) { create(:user) }
   let_it_be(:not_member) { create(:user) }
   let_it_be(:board) { create(:board) }
-  let_it_be(:private_board) { create(:board, private: true) }
-  let_it_be(:edit_permission) { create(:permission, identifier: 'edit_board') }
-  let_it_be(:update_permission) { create(:permission, identifier: 'update_board') }
-  let_it_be(:view_permission) { create(:permission, identifier: 'view_private_board') }
-  let_it_be(:destroy_permission) { create(:permission, identifier: 'destroy_board') }
-  let_it_be(:continue_permission) { create(:permission, identifier: 'continue_board') }
-
-  before do
-    create(:permissions_user, permission: edit_permission, user: creator, board: board)
-    create(:permissions_user, permission: update_permission, user: creator, board: board)
-    create(:permissions_user, permission: view_permission, user: member, board: private_board)
-    create(:permissions_user, permission: destroy_permission, user: creator, board: board)
-    create(:permissions_user, permission: continue_permission, user: creator, board: board)
-  end
 
   before { bypass_rescue }
 
@@ -87,7 +73,13 @@ RSpec.describe BoardsController do
 
     context 'when board is private' do
       subject(:response) { get :show, params: params }
+      let_it_be(:private_board) { create(:board, private: true) }
       let_it_be(:params) { { slug: private_board.slug } }
+      let_it_be(:view_permission) { create(:permission, identifier: 'view_private_board') }
+
+      before do
+        create(:permissions_user, permission: view_permission, user: member, board: private_board)
+      end
 
       context 'user is not a member' do
         before { login_as not_member }
@@ -103,6 +95,9 @@ RSpec.describe BoardsController do
 
   describe 'GET #edit' do
     subject(:response) { get :edit, params: { slug: board.slug } }
+    let_it_be(:edit_permission) { create(:permission, identifier: 'edit_board') }
+
+    before { create(:permissions_user, permission: edit_permission, user: creator, board: board) }
 
     context 'when user is not logged in' do
       it_behaves_like :controllers_unauthenticated_action
@@ -154,6 +149,11 @@ RSpec.describe BoardsController do
   describe 'PATCH #update' do
     subject(:response) { patch :update, params: params }
     let_it_be(:params) { { slug: board.slug } }
+    let_it_be(:update_permission) { create(:permission, identifier: 'update_board') }
+
+    before do
+      create(:permissions_user, permission: update_permission, user: creator, board: board)
+    end
 
     context 'when user is not logged in' do
       it_behaves_like :controllers_unauthenticated_action
@@ -191,6 +191,11 @@ RSpec.describe BoardsController do
 
   describe 'DELETE #destroy' do
     subject(:response) { delete :destroy, params: { slug: board.slug } }
+    let_it_be(:destroy_permission) { create(:permission, identifier: 'destroy_board') }
+
+    before do
+      create(:permissions_user, permission: destroy_permission, user: creator, board: board)
+    end
 
     context 'when user is not logged in' do
       it_behaves_like :controllers_unauthenticated_action
@@ -216,7 +221,12 @@ RSpec.describe BoardsController do
 
   describe 'POST #continue' do
     subject(:response) { post :continue, params: params }
+    let_it_be(:continue_permission) { create(:permission, identifier: 'continue_board') }
     let_it_be(:params) { { slug: board.slug } }
+
+    before do
+      create(:permissions_user, permission: continue_permission, user: creator, board: board)
+    end
 
     context 'when user is not logged in' do
       it_behaves_like :controllers_unauthenticated_action
