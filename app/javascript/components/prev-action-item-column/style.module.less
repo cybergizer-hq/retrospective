@@ -3,7 +3,9 @@
   justify-content: space-between;
   align-items: center;
   height: 24px;
-  margin: 8px 0;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  position: relative;
 }
 
 .title {
@@ -15,18 +17,23 @@
 .hide {
   font-size: 14px;
   color: #8D8E8A;
+  cursor: pointer;
 }
 
-.line {
+.plus {
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.lineGradient {
 	margin: 0;
 	padding: 0;
 	height: 2px;
   border: none;
   border-radius: 2px;
-	// background: linear-gradient(to right, transparent 50%, #fff 50%),
-  // 			linear-gradient(to right, blue, red);
-  // background: linear-gradient(to right, transparent 50%, #FAFAFA 50%),
-  // linear-gradient(to right, blue, red);
   background: linear-gradient(to right,
     transparent 15.33%,
     #FAFAFA 15.33% 16.93%,
@@ -43,4 +50,21 @@
 
   background-size: 100% 2px;
   margin-bottom: 16px;
+}
+
+.lineYellow {
+	margin: 0;
+	padding: 0;
+	height: 2px;
+  border: none;
+  border-radius: 2px;
+  background: linear-gradient(to right,
+    transparent 32.26%,
+    #FAFAFA 32.26% 33.86%,
+    transparent 33.86% 66.12%,
+    #FAFAFA 66.12% 67.72%,
+    transparent 67.72%,
+  ), #DB9122;
+
+	background-size: 100% 2px;
 }

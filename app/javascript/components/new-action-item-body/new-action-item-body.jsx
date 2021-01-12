@@ -3,6 +3,7 @@ import {useMutation} from '@apollo/react-hooks';
 import Textarea from 'react-textarea-autosize';
 import {addActionItemMutation} from './operations.gql';
 import BoardSlugContext from '../../utils/board-slug-context';
+import style from '../prev-action-item-column/style.module.less';
 
 const NewActionItemBody = ({users}) => {
   const textInput = useRef();
@@ -60,9 +61,9 @@ const NewActionItemBody = ({users}) => {
 
   return (
     <>
-      <div className="column-header">
-        <h2 className="column-header__title">ACTION ITEMS</h2>
-        <div className="column-header__button" onClick={toggleOpen}>
+      <div className={style.header}>
+        <h2 className={style.title}>ACTION ITEMS</h2>
+        <div className={style.plus} onClick={toggleOpen}>
           +
         </div>
       </div>
@@ -73,7 +74,7 @@ const NewActionItemBody = ({users}) => {
               ref={textInput}
               className="input"
               value={newActionItemBody}
-              id="action_item_body`"
+              id="action_item_body"
               onChange={(evt) => setNewActionItemBody(evt.target.value)}
               onKeyDown={handleKeyPress}
             />
@@ -112,6 +113,7 @@ const NewActionItemBody = ({users}) => {
           </form>
         </div>
       )}
+      <hr className={style.lineYellow} />
     </>
   );
 };

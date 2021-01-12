@@ -3,7 +3,7 @@ import UserContext from '../../utils/user-context';
 import {CardBody} from '../card-body';
 import {CardFooter} from '../card-footer';
 import {CommentsDropdown} from '../comments-dropdown';
-import './style.less';
+import style from './style.module.less';
 
 const Card = ({
   id,
@@ -36,8 +36,7 @@ const Card = ({
   );
 
   return (
-    <div className="card">
-      {/* <CardUser {...author} /> */}
+    <div className={`${style.card} ${style.cardColor}`}>
       <CardBody
         author={author}
         id={id}

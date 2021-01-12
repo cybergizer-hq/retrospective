@@ -5,7 +5,8 @@ import {useMutation} from '@apollo/react-hooks';
 import {addCardMutation} from './operations.gql';
 import BoardSlugContext from '../../utils/board-slug-context';
 import UserContext from '../../utils/user-context';
-import './style.less';
+import style from './style.module.less';
+import styleButton from '../../less/button.module.less';
 
 const NewCardBody = ({kind, smile, onCardAdded, onGetNewCardID}) => {
   const textInput = useRef();
@@ -77,14 +78,14 @@ const NewCardBody = ({kind, smile, onCardAdded, onGetNewCardID}) => {
   };
 
   return (
-    <div className="column-header">
-      <div className="column-header__smile">{smile}</div>
-      <div className="column-header__wrapper">
+    <div className={style.header}>
+      <div className={style.smile}>{smile}</div>
+      <div className={style.wrapper}>
         {isEdit ? (
           <form onSubmit={submitHandler}>
             <textarea
               ref={textInput}
-              className="column-header__input"
+              className={style.input}
               autoComplete="off"
               id={`card_${kind}_body`}
               value={newCard}
@@ -93,30 +94,30 @@ const NewCardBody = ({kind, smile, onCardAdded, onGetNewCardID}) => {
               onChange={(evt) => setNewCard(evt.target.value)}
               onKeyDown={handleKeyPress}
             />
-            <div className="column-header__buttons">
+            <div className={styleButton.buttons}>
               <button
-                className="column-header__buttons__item"
-                type="submit"
-                onSubmit={submitHandler}
-              >
-                Add
-              </button>
-              <button
-                className="column-header__buttons__item"
+                className={styleButton.buttonCancel}
                 type="reset"
                 onClick={cancelHandler}
               >
-                Cancel
+                cancel
+              </button>
+              <button
+                className={styleButton.buttonPost}
+                type="submit"
+                onSubmit={submitHandler}
+              >
+                post
               </button>
             </div>
           </form>
         ) : (
-          <h2 className="column-header__title" onDoubleClick={toggleOpen}>
+          <h2 className={style.title} onDoubleClick={toggleOpen}>
             {kind}
           </h2>
         )}
       </div>
-      <div className="column-header__button" onClick={toggleOpen}>
+      <div className={style.buttonPlus} onClick={toggleOpen}>
         +
       </div>
     </div>

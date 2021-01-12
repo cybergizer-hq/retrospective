@@ -74,7 +74,7 @@ const PreviousActionItemColumn = (props) => {
           hide
         </span>
       </div>
-      <hr className={style.line} />
+      <hr className={style.lineGradient} />
       {actionItems.map((item) => (
         <ActionItem key={item.id} isPrevious users={users} {...item} />
       ))}

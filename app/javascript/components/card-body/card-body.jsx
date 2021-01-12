@@ -4,6 +4,7 @@ import {useMutation} from '@apollo/react-hooks';
 import {updateCardMutation, destroyCardMutation} from './operations.gql';
 import {CardUser} from '../card-user';
 import style from './style.module.less';
+import styleButton from '../../less/button.module.less';
 import {Linkify, linkifyOptions} from '../../utils/linkify';
 
 const CardBody = ({author, id, editable, body, deletable}) => {
@@ -52,6 +53,12 @@ const CardBody = ({author, id, editable, body, deletable}) => {
         console.log(data.updateCard.errors.fullMessages.join(' '));
       }
     });
+  };
+
+  const handleCancel = (evt) => {
+    evt.preventDefault();
+    setEditMode(false);
+    setInputValue(body);
   };
 
   return (
@@ -125,13 +132,22 @@ const CardBody = ({author, id, editable, body, deletable}) => {
             onChange={handleChange}
             onKeyDown={handleKeyPress}
           />
-          <button
-            className={style.buttonSave}
-            type="button"
-            onClick={handleSaveClick}
-          >
-            Save
-          </button>
+          <div className={styleButton.buttons}>
+            <button
+              className={styleButton.buttonCancel}
+              type="button"
+              onClick={handleCancel}
+            >
+              cancel
+            </button>
+            <button
+              className={styleButton.buttonPost}
+              type="button"
+              onClick={handleSaveClick}
+            >
+              post
+            </button>
+          </div>
         </>
       )}
     </div>

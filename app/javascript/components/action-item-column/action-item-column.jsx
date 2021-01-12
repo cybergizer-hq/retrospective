@@ -9,7 +9,6 @@ import {
   actionItemDestroyedSubscription,
   actionItemUpdatedSubscription
 } from './operations.gql';
-import './style.less';
 
 const ActionItemColumn = ({users, initItems}) => {
   const boardSlug = useContext(BoardSlugContext);
@@ -90,7 +89,6 @@ const ActionItemColumn = ({users, initItems}) => {
   return (
     <>
       <NewActionItemBody users={users} />
-      <hr className="hr-dashed-gradient" />
       {items.map((item) => {
         return <ActionItem key={item.id} {...item} users={users} />;
       })}
