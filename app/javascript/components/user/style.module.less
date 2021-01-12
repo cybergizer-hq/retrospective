@@ -68,15 +68,19 @@
     // color: #fff;
 }
 
-.avatar--text {
+.avatarText {
   border-radius: 4px;
 }
 
-.avatar__tooltip {
+.avatarTooltip {
   display: none;
 }
 
-.avatar:hover ~ .board-avatar__tooltip {
+.avatarWrapper {
+  position: relative;
+}
+
+.avatar:hover ~ .avatarTooltip  {
   display: block;
   color: black;
   background-color: white;
