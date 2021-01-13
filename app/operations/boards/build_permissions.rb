@@ -24,7 +24,7 @@ module Boards
       end
 
       board.permissions_users.build(permissions_data)
-      Success
+      Success()
     end
   end
 end

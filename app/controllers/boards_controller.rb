@@ -65,10 +65,10 @@ class BoardsController < ApplicationController
 
     result = Boards::BuildPermissions.new(@board, current_user).call(identifiers_scope: 'creator')
 
-    if result.pure.success? && @board.save
+    if result.success? && @board.save
       redirect_to @board, notice: 'Board was successfully created.'
     else
-      flash[:alert] = result.pure.failure
+      flash[:alert] = result.failure
       render :new
     end
   end

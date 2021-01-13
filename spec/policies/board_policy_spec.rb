@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe BoardPolicy do
-  let_it_be(:user) { create(:user) }
+  let(:user) { create(:user) }
   let_it_be(:board) { create(:board) }
   let(:policy) { described_class.new(board, user: user) }
 

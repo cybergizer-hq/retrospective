@@ -125,15 +125,17 @@ RSpec.describe User, type: :model do
   end
 
   context '#allowed?' do
-    let_it_be(:permission) { create(:permission, identifier: 'some_identifier') }
+    subject { user.allowed?('some_identifier', board.id) }
 
-    it 'returns true if permission for user exists' do
-      create(:permissions_user, user: user, board: board, permission: permission)
-      expect(user.allowed?('some_identifier', board.id)).to eq true
+    context 'permission exists' do
+      let_it_be(:permission) { create(:permission, identifier: 'some_identifier') }
+      before { create(:permissions_user, user: user, board: board, permission: permission) }
+
+      it { is_expected.to be true }
     end
 
-    it 'returns false if permission for user does not exist' do
-      expect(user.allowed?('some_identifier', board.id)).to eq false
+    context 'permission does not exist' do
+      it { is_expected.to be false }
     end
   end
 end

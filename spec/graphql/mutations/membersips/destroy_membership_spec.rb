@@ -13,12 +13,20 @@ RSpec.describe Mutations::DestroyMembershipMutation, type: :request do
     let!(:non_creatorship) do
       create(:membership, board: board, user: non_author, role: 'member')
     end
+    let_it_be(:permission) { create(:permission, identifier: 'some_identifier') }
+    let!(:permissions_user) do
+      create(:permissions_user, permission: permission, user: non_author, board: board)
+    end
     let(:request) { post '/graphql', params: { query: query(id: non_creatorship.id) } }
 
     before { sign_in author }
 
     it 'removes membership' do
       expect { request }.to change { Membership.count }.by(-1)
+    end
+
+    it 'removes permission' do
+      expect { request }.to change { non_author.permissions.count }.by(-1)
     end
 
     it 'returns a membership' do
