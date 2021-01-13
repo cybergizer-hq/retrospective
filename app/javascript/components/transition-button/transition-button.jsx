@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {useMutation} from '@apollo/react-hooks';
-import BoardSlugContext from '../../utils/board_slug_context';
+import BoardSlugContext from '../../utils/board-slug-context';
 import {
   closeActionItemMutation,
   completeActionItemMutation,

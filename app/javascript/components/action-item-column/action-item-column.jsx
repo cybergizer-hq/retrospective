@@ -2,14 +2,14 @@ import React, {useState, useContext, useEffect} from 'react';
 import {useSubscription} from '@apollo/react-hooks';
 import {NewActionItemBody} from '../new-action-item-body';
 import {ActionItem} from '../action-item';
-import BoardSlugContext from '../../utils/board_slug_context';
+import BoardSlugContext from '../../utils/board-slug-context';
 import {
   actionItemAddedSubscription,
   actionItemMovedSubscription,
   actionItemDestroyedSubscription,
   actionItemUpdatedSubscription
 } from './operations.gql';
-import '../table.css';
+import '../style.less';
 
 const ActionItemColumn = ({users, initItems}) => {
   const boardSlug = useContext(BoardSlugContext);

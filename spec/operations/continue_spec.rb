@@ -78,7 +78,7 @@ RSpec.describe Boards::Continue do
       expect(subject.value!.private).to eq prev_board.private
     end
     it 'sets previous title to the new board' do
-      expect(subject.value!.title).to eq(prev_board.title + ' #2')
+      expect(subject.value!.title).to eq("#{prev_board.title} #2")
     end
     it 'duplicates permissions_users from the previous board' do
       expect { subject }.to change(PermissionsUser, :count).by(1)

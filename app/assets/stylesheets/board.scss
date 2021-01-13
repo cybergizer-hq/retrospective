@@ -20,6 +20,8 @@
   margin: 5px;
 }
 
+
+
 .board-title{
   font-size: 30px;
   font-weight: 400;
@@ -38,9 +40,9 @@
   color: #0366d6;
 }
 
-.light-gray {
-  background-color: #fafbfc;
-}
+// .light-gray {
+//   background-color: #fafbfc;
+// }
 
 .board-subtitle {
   font-size: 14px!important;
@@ -48,27 +50,27 @@
   padding-bottom: 10px;
 }
 
-.board-columns {
-  margin-top: -0.75rem;
-}
+// .board-columns {
+//   margin-top: -0.75rem;
+// }
 
-.board-columns:not(.is-desktop) {
-  display: flex;
-}
+// .board-columns:not(.is-desktop) {
+//   display: flex;
+// }
 
-.board-column {
-  border-width: 1px!important;
-  border-radius: 6px!important;
-  border-color: #fafbfc;
-  border: 1px solid #e1e4e8!important;
-  margin-right: 0.5%;
-  margin-left: 0.5%;
-}
+// .board-column {
+//   border-width: 1px!important;
+//   border-radius: 6px!important;
+//   border-color: #fafbfc;
+//   border: 1px solid #e1e4e8!important;
+//   margin-right: 0.5%;
+//   margin-left: 0.5%;
+// }
 
-.box {
-  padding: 0.5rem;
-  margin-bottom: 1.5rem;
-}
+// .box {
+//   padding: 0.5rem;
+//   margin-bottom: 1.5rem;
+// }
 
 .board-users {
   float: left;
@@ -76,38 +78,11 @@
   margin-top: 13px;
 }
 
-.straight-border {
-  border-radius: 0px;
-}
+// .straight-border {
+//   border-radius: 0px;
+// }
 
-.avatar-wrapper {
-  position: relative;
-}
 
-.board-avatar {
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  margin-top: 4px;
-}
-
-.board-avatar__tooltip {
-  display: none;
-}
-
-.board-avatar:hover ~ .board-avatar__tooltip {
-  display: block;
-  color: black;
-  background-color: white;
-  position: absolute;
-  left: -21px;
-  padding: 5px;
-  border-radius: 5px;
-  width: auto;
-  white-space: nowrap;
-  margin-top: 15px;
-  z-index: 5;
-}
 
 .outer-circle {
   background: #385a94;

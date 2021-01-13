@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect, useRef} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import Textarea from 'react-textarea-autosize';
 import {addActionItemMutation} from './operations.gql';
-import BoardSlugContext from '../../utils/board_slug_context';
+import BoardSlugContext from '../../utils/board-slug-context';
 
 const NewActionItemBody = ({users}) => {
   const textInput = useRef();
@@ -60,9 +60,9 @@ const NewActionItemBody = ({users}) => {
 
   return (
     <>
-      <div className="board-column-title">
-        <h2 className="float_left">ACTION ITEMS</h2>
-        <div className="float_right card-new" onClick={toggleOpen}>
+      <div className="column-header">
+        <h2 className="column-header__title">ACTION ITEMS</h2>
+        <div className="column-header__button" onClick={toggleOpen}>
           +
         </div>
       </div>

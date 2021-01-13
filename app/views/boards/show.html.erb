@@ -7,23 +7,29 @@
 
 <% end %>
 
-<div class='box has-text-centered light-gray straight-border'>
-  <div class='level' style='height: 75px;'>
-    <div>
-      <div style='float: left;'>
-        <h1 class='board-title'>
-          <%= @board.title %>
-        </h1>
+<div class='header'>
+  <div class="header__wrapper">
+    <div class="header-left">
+      <div>
+        <%= link_to '← back to boards', my_boards_path, class: 'header-left__link header-left__item'%>
       </div>
-
+      <div class='header-left__item'> < </div>
+      <h1 class='header-left__board-title header-left__item'>
+        <%= @board.title %>
+      </h1>
+      <div class='header-left__settings header-left__item'>
+        <%if allowed_to?(:edit?, @board)%>
+          <%= link_to image_tag("setting.svg", :border=>0), edit_board_path(@board) %>
+        <%end%>
+      </div>
     </div>
+
+
+    <div class="header-middle">
     <%= react_component('membership-list-container')%>
-    <div class='level-right'>
-      <%if allowed_to?(:edit?, @board)%>
-        <div id='settings-button'>
-          <%= link_to "SETTINGS", edit_board_path(@board), class: 'board-button link-as-button' %>
-        </div>
-      <%end%>
+    </div>
+
+    <div class='header-right'>
       <% if !current_user %>
         <%= link_to 'Sign in with Alfred', user_alfred_omniauth_authorize_path, class: 'button' %>
         <%= link_to 'Sign in with Google', user_google_omniauth_authorize_path, class: 'button' %>
@@ -37,12 +43,6 @@
   </div>
 </div>
 
-<% if @previous_action_items %>
-  <% column_class_name = 'column is-one-fifth' %>
-<% else %>
-  <% column_class_name = 'column is-one-quarter' %>
-<% end %>
-
 <%= react_component('card-table', {
   actionItems: @action_items,
   board: @board,
@@ -53,8 +53,3 @@
   users: @users
 })
 %>
-<%= link_to 'My boards', my_boards_path, class: 'button is-ghost', style: 'margin-left: 8px; margin-top: 20px;' %>
-<%= link_to 'Boards where I am', participating_boards_path, class: 'button is-ghost', style: 'margin-left: 8px; margin-top: 20px;' %>
-<% if @board.previous_board_id %>
-  <%= link_to 'Historical boards', history_board_path(@board), class: 'button is-ghost', style: 'margin-left: 8px; margin-top: 20px;' %>
-<% end %>

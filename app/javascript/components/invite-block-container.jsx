@@ -1,7 +1,7 @@
 import React from 'react';
 import {InviteBlock} from './invite-block';
 import {Provider} from './provider';
-import BoardSlugContext from '../utils/board_slug_context';
+import BoardSlugContext from '../utils/board-slug-context';
 
 const InviteBlockContainer = () => {
   return (

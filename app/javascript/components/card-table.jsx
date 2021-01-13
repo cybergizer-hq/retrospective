@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {PrevActionItemColumn} from './prev-action-item-column';
 import {CardColumn} from './card-column';
 import {ActionItemColumn} from './action-item-column';
-import BoardSlugContext from '../utils/board_slug_context';
+import BoardSlugContext from '../utils/board-slug-context';
 import UserContext from '../utils/user-context';
 import {Provider} from './provider';
+import './style.less';
 
 const CardTable = ({
   actionItems,
@@ -14,9 +15,9 @@ const CardTable = ({
   user,
   users
 }) => {
-  const [columnClass, setColumnClass] = useState(
-    'column board-column light-gray'
-  );
+  const EMOJIES = ['😡', '😔', '🤗'];
+
+  const [columnClass, setColumnClass] = useState('board-column');
 
   const [displayPreviousItems, setDisplayPreviousItems] = useState(
     initPrevItems.length > 0
@@ -29,10 +30,18 @@ const CardTable = ({
 
   const generateColumns = (cardTypePairs) => {
     const content = [];
-    for (const [columnName, cards] of Object.entries(cardTypePairs)) {
+    for (const [index, [columnName, cards]] of Object.entries(
+      cardTypePairs
+    ).entries()) {
+      // Console.log(index);
       content.push(
         <div key={`${columnName}_column`} className={columnClass}>
-          <CardColumn key={columnName} kind={columnName} initCards={cards} />
+          <CardColumn
+            key={columnName}
+            kind={columnName}
+            smile={EMOJIES[index]}
+            initCards={cards}
+          />
         </div>
       );
     }
@@ -45,7 +54,7 @@ const CardTable = ({
     <Provider>
       <BoardSlugContext.Provider value={window.location.pathname.split('/')[2]}>
         <UserContext.Provider value={user}>
-          <div className="board-columns">
+          <div className="board-container">
             {displayPreviousItems && (
               <div className={columnClass}>
                 <PrevActionItemColumn

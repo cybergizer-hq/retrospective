@@ -5,7 +5,8 @@ import {
   getMembershipQuery,
   membershipUpdatedSubscription
 } from './operations.gql';
-import BoardSlugContext from '../../utils/board_slug_context';
+import style from './style.module.less';
+import BoardSlugContext from '../../utils/board-slug-context';
 
 const ReadyButton = () => {
   const boardSlug = useContext(BoardSlugContext);
@@ -46,7 +47,7 @@ const ReadyButton = () => {
 
   return (
     <button
-      className={`board-button ${isReady ? 'is-success' : ''}`}
+      className={style.readyButton}
       type="button"
       onClick={() => {
         toggleReadyStatus({
@@ -60,7 +61,7 @@ const ReadyButton = () => {
         });
       }}
     >
-      READY
+      {isReady ? 'Not ready' : 'Click when ready'}
     </button>
   );
 };

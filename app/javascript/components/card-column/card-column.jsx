@@ -1,18 +1,17 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {useSubscription} from '@apollo/react-hooks';
 import {Card} from '../card';
-import {CardPopup} from '../card-popup';
+// Import {CardPopup} from '../card-popup';
 import {
   cardAddedSubscription,
   cardDestroyedSubscription,
   cardUpdatedSubscription
 } from './operations.gql';
 import UserContext from '../../utils/user-context';
-import BoardSlugContext from '../../utils/board_slug_context';
-import '../table.css';
+import BoardSlugContext from '../../utils/board-slug-context';
 import {NewCardBody} from '../new-card-body';
 
-const CardColumn = ({kind, initCards}) => {
+const CardColumn = ({kind, initCards, smile}) => {
   const currentUser = useContext(UserContext);
   const boardSlug = useContext(BoardSlugContext);
   const [cards, setCards] = useState(initCards);
@@ -82,12 +81,14 @@ const CardColumn = ({kind, initCards}) => {
     setSkip(false);
   }, []);
 
-  const card = cards.find((it) => it.id === popupShownId);
+  //
+  // const card = cards.find((it) => it.id === popupShownId);
 
   return (
     <>
       <NewCardBody
         kind={kind}
+        smile={smile}
         onCardAdded={(cardAdded) => {
           setCards((oldCards) => [cardAdded, ...oldCards]);
         }}
@@ -107,19 +108,21 @@ const CardColumn = ({kind, initCards}) => {
             key={card.id}
             {...card}
             type={kind}
+            isCommentsShown={popupShownId === card.id}
+            onClickClosed={handlePopupClose}
             onCommentButtonClick={handleCommentButtonClick(card.id)}
           />
         );
       })}
 
-      {popupShownId && (
+      {/* {popupShownId && (
         <CardPopup
           type={kind}
           card={card}
           onCommentButtonClick={() => {}}
           onClickClosed={handlePopupClose}
         />
-      )}
+      )} */}
     </>
   );
 };

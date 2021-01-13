@@ -24,15 +24,22 @@
           "json": "always",
           "svg": "always",
           "css": "always",
-          "gql": "always"
+          "gql": "always",
+          "less": "always"
         }
       ],
-      "unicorn/import-index": ["error", {"ignoreImports": true}],
+      "unicorn/import-index": [
+        "error",
+        {
+          "ignoreImports": true
+        }
+      ],
       "import/no-unassigned-import": [
         "error",
         {
           "allow": [
-            "**/*.css"
+            "**/*.css",
+            "**/*.less"
           ]
         }
       ],
@@ -76,6 +83,8 @@
     "graphql": "^15.4.0",
     "graphql-ruby-client": "^1.8.1",
     "graphql-tag": "^2.10.3",
+    "less": "^4.0.0",
+    "less-loader": "^7.2.0",
     "linkifyjs": "^2.1.9",
     "nanoid": "^3.1.20",
     "prop-types": "^15.7.2",

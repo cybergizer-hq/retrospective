@@ -7,7 +7,7 @@ import {
   inviteMembersMutation
 } from './operations.gql';
 import User from '../user/user';
-import BoardSlugContext from '../../utils/board_slug_context';
+import BoardSlugContext from '../../utils/board-slug-context';
 
 const InviteBlock = () => {
   const boardSlug = useContext(BoardSlugContext);

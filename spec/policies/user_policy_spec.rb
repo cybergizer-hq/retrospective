@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-# rubocop:disable Lint/DuplicatedKey
 RSpec.describe UserPolicy do
   let_it_be(:user) { create(:user) }
   let_it_be(:another_user) { create(:user) }
 
-  let(:policy) { described_class.new(user, user: user, user: another_user) }
+  let(:policy) { described_class.new(user, user: another_user) }
 
   describe '#edit?' do
     subject { policy.apply(:edit?) }
@@ -59,4 +58,3 @@ RSpec.describe UserPolicy do
     end
   end
 end
-# rubocop:enable Lint/DuplicatedKey

@@ -1,10 +1,10 @@
 const {environment} = require('@rails/webpacker');
 
-environment.loaders.append('graphql', {
-  test: /\.(?<id>graphql|gql)$/,
-  exclude: /node_modules/,
-  loader: 'graphql-tag/loader'
-});
+const {graphql, less, moduleLess} = require('./loaders');
+
+environment.loaders.append('graphql', graphql);
+environment.loaders.append('less', less);
+environment.loaders.append('less.module', moduleLess);
 
 module.exports = environment;
 

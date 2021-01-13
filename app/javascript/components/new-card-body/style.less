@@ -1,0 +1,68 @@
+.column-header {
+  // height: 96px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  color: #1B1D15;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.column-header__input {
+  // overflow: hidden;
+  // resize: none;
+  overflow-y: scroll;
+  border: none;
+  height: 40px !important;
+  margin-bottom: 8px;
+  padding: 0 20px;
+  // width: calc(100% - 40px);
+  margin-top: 5px;
+  font-family: "Commissioner";
+}
+
+.column-header__wrapper {
+  width: 100%;
+}
+
+.column-header__input::placeholder {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.column-header__title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 28px;
+  margin-top: 8px;
+}
+
+.column-header__smile {
+  // margin: 0 8px;
+  position: absolute;
+  left: 2px;
+  top: 8px;
+}
+
+.column-header__button {
+  // margin: 0 10px 0 auto;
+  position: absolute;
+  right: 2px;
+  top: 8px;
+}
+
+.column-header__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column-header__buttons__item {
+  width: (50% - 8px);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

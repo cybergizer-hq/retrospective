@@ -1,0 +1,127 @@
+@import "../less/variables.less";
+
+// для erb, вынести отдельно
+
+html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #1B1D15;
+}
+
+a:visited {
+  color: #1B1D15;
+}
+
+
+// a:hover {
+//   color: hotpink;
+// }
+
+// a:active {
+//   color: blue;
+// }
+
+// для card-table ?
+
+.header {
+  width: 100%;
+  font-family: "Commissioner";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header__wrapper {
+  margin: 32px 37px 74px 32px;
+  height: 48px;
+  width: calc(100% - 69px);
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #C6C6C4;
+}
+
+.header-left__item {
+  margin-right: 24px;
+}
+
+.header-left__link {
+  color: #C6C6C4;
+
+  &:visited {
+    color: #C6C6C4;
+  }
+}
+
+.header-left__board-title {
+  color: #1B1D15;
+  font-size: 16px;
+  margin-left: 12px;
+}
+
+.header-left__settings {
+  margin-top: 3px;
+}
+
+.board-button {
+  color: #22DB98;
+}
+
+.header-middle {
+  margin: 0 auto;
+}
+
+// .btn-save {
+// 	direction: rtl;
+// 	padding-top: 5px;
+// }
+
+// .columns-footer {
+// 	padding-top: 5px;
+// }
+
+// .column-btn-save {
+// 	direction: rtl;
+// }
+
+// .column-select {
+// 	width: 100%;
+// }
+
+// .column .select {
+// 	padding: 0px 20px;
+// 	background-color: white;
+// 	border-color: #dbdbdb;
+// 	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+// }
+
+// .column .select:active {
+// 	border-color: #dbdbdb;
+// }
+
+.board-container {
+  display: flex;
+  font-family: "Commissioner";
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin: 0 16px;
+}
+
+// .column-wrapper {
+//   display: flex;
+// }

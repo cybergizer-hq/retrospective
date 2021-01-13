@@ -25,7 +25,8 @@ RSpec.describe Mutations::AddActionItemMutation, type: :request do
 
       expect(data).to include(
         'id' => be_present,
-        'body' => 'Some text'
+        'body' => 'Some text',
+        'author' => { 'id' => author.id.to_s }
       )
     end
   end
@@ -45,6 +46,9 @@ RSpec.describe Mutations::AddActionItemMutation, type: :request do
             id
             body
             times_moved
+            author {
+              id
+            }
           }
         }
       }

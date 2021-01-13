@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import {moveActionItemMutation} from './operations.gql';
 import {useMutation} from '@apollo/react-hooks';
 import {TransitionButton} from '../transition-button';
-import BoardSlugContext from '../../utils/board_slug_context';
-import './style.css';
-const ActionItemFooter = ({id, isReopanable, isCompletable, timesMoved}) => {
+import BoardSlugContext from '../../utils/board-slug-context';
+import './style.less';
+const ActionItemFooter = ({id, isReopanable, isCompletable}) => {
   const boardSlug = useContext(BoardSlugContext);
   const [moveActionItem] = useMutation(moveActionItemMutation);
   const handleMoveClick = () => {
@@ -20,39 +20,29 @@ const ActionItemFooter = ({id, isReopanable, isCompletable, timesMoved}) => {
     });
   };
 
-  const pickColor = (number) => {
-    switch (true) {
-      case [1, 2].includes(number):
-        return 'green';
-      case [3].includes(number):
-        return 'yellow';
-      default:
-        return 'red';
-    }
-  };
-
-  const generateChevrons = () => {
-    const chevrons = Array.from({length: timesMoved}, (_, index) => (
-      <i
-        key={index}
-        className={`fas fa-chevron-right ${pickColor(timesMoved)}_font`}
-      />
-    ));
-    return chevrons;
-  };
-
   return (
-    <div>
-      <hr style={{margin: '0.5rem'}} />
-      <div className="chevrons">{generateChevrons()}</div>
-
+    <div className="action-item__footer">
       {isCompletable && (
         <>
-          <TransitionButton id={id} action="close" />
-          <TransitionButton id={id} action="complete" />
+          <TransitionButton
+            id={id}
+            action="close"
+            className="action-item__button"
+          />
+          <TransitionButton
+            id={id}
+            action="complete"
+            className="action-item__button"
+          />
         </>
       )}
-      {isReopanable && <TransitionButton id={id} action="reopen" />}
+      {isReopanable && (
+        <TransitionButton
+          id={id}
+          action="reopen"
+          className="action-item__button"
+        />
+      )}
       {isCompletable && (
         <button
           type="button"

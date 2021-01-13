@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import Textarea from 'react-textarea-autosize';
-import './style.css';
+import './style.less';
 import {
   destroyActionItemMutation,
   updateActionItemMutation
 } from './operations.gql';
 import {useMutation} from '@apollo/react-hooks';
 import {Linkify, linkifyOptions} from '../../utils/linkify';
+import {CardUser} from '../card-user';
 
 const ActionItemBody = (props) => {
-  const {assigneeId, editable, deletable, body, users} = props;
+  const {assignee, editable, deletable, body, users, timesMoved} = props;
   const [inputValue, setInputValue] = useState(body);
   const [editMode, setEditMode] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [actionItemAssignee, setActionItemAssignee] = useState(assigneeId);
+  const [actionItemAssignee, setActionItemAssignee] = useState(
+    assignee ? assignee.id : ``
+  );
   const [destroyActionItem] = useMutation(destroyActionItemMutation);
   const [updateActionItem] = useMutation(updateActionItemMutation);
 
@@ -95,49 +98,80 @@ const ActionItemBody = (props) => {
     handleItemEdit(props.id, inputValue);
   };
 
+  const pickColor = (number) => {
+    switch (true) {
+      case [1, 2].includes(number):
+        return 'green';
+      case [3].includes(number):
+        return 'yellow';
+      default:
+        return 'red';
+    }
+  };
+
+  const generateChevrons = () => {
+    const chevrons = Array.from({length: timesMoved}, (_, index) => (
+      <i
+        key={index}
+        className={`fas fa-chevron-right ${pickColor(timesMoved)}_font`}
+      />
+    ));
+    return chevrons;
+  };
+
   return (
     <div>
-      {editable && deletable && (
-        <div className="dropdown">
-          <div
-            className="dropdown-btn"
-            tabIndex="1"
-            onClick={toggleDropdown}
-            onBlur={hideDropdown}
-          >
-            …
-          </div>
-          <div hidden={!showDropdown} className="dropdown-content">
-            {!editMode && (
-              <div>
-                <a
-                  onClick={handleEditClick}
-                  onMouseDown={(evt) => {
-                    evt.preventDefault();
-                  }}
-                >
-                  Edit
-                </a>
-                <hr style={{margin: '5px 0'}} />
-              </div>
-            )}
-            <a
-              onClick={() => {
-                window.confirm(
-                  'Are you sure you want to delete this ActionItem?'
-                ) && handleDeleteClick();
-              }}
-              onMouseDown={(evt) => {
-                evt.preventDefault();
-              }}
+      <div className="card-top action-item-top">
+        {
+          assignee && <CardUser {...assignee} />
+          // Заменить на author после того как он появится
+        }
+
+        <div className="card-chevrons">{generateChevrons()}</div>
+
+        {editable && deletable && (
+          <div className="dropdown">
+            <div
+              className="dropdown-btn"
+              tabIndex="1"
+              onClick={toggleDropdown}
+              onBlur={hideDropdown}
             >
-              Delete
-            </a>
+              …
+            </div>
+            <div hidden={!showDropdown} className="dropdown-content">
+              {!editMode && (
+                <div>
+                  <a
+                    onClick={handleEditClick}
+                    onMouseDown={(evt) => {
+                      evt.preventDefault();
+                    }}
+                  >
+                    Edit
+                  </a>
+                  <hr style={{margin: '5px 0'}} />
+                </div>
+              )}
+              <a
+                onClick={() => {
+                  window.confirm(
+                    'Are you sure you want to delete this ActionItem?'
+                  ) && handleDeleteClick();
+                }}
+                onMouseDown={(evt) => {
+                  evt.preventDefault();
+                }}
+              >
+                Delete
+              </a>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
       <div
-        className="text"
+        className="card-text"
         hidden={editMode}
         onDoubleClick={editable ? editModeToggle : undefined}
       >

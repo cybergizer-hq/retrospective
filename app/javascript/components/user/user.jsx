@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {destroyMembershipMutation} from './operations.gql';
 import {getUserInitials} from '../../utils/helpers';
+import './style.less';
 
 const User = ({
   membership: {
@@ -35,7 +36,7 @@ const User = ({
       return (
         <img
           src={avatar.thumb.url}
-          className="board-avatar"
+          className={`${shouldDisplayReady && ready ? 'isReady' : ''} avatar`}
           alt={email}
           title={email}
         />
@@ -43,29 +44,22 @@ const User = ({
     }
 
     return (
-      <div className="board-avatar board-avatar--text">
+      <div
+        className={`${
+          shouldDisplayReady && ready ? 'isReady' : ''
+        } avatar avatar--text`}
+      >
         {getUserInitials(userName, userSurname)}
       </div>
     );
   };
 
   return (
-    <div
-      key={email}
-      style={style}
-      className={
-        shouldDisplayReady && ready
-          ? 'outer-circle is-success'
-          : 'outer-circle is-info'
-      }
-    >
-      <div className="avatar-wrapper">
-        {renderBoardAvatar(avatar.thumb.url, firstName, lastName)}
-        <div className="board-avatar__tooltip">
-          {firstName} {lastName}
-        </div>
+    <div key={email} style={style} className="avatar-wrapper">
+      {renderBoardAvatar(avatar.thumb.url, firstName, lastName)}
+      <div className="avatar__tooltip">
+        {firstName} {lastName}
       </div>
-
       {shouldHandleDelete && (
         <a className="delete is-small" onClick={deleteUser} />
       )}

@@ -10,7 +10,13 @@ class ActionItemsController < ApplicationController
   skip_verify_authorized only: :index
 
   def index
-    @action_items = user_action_items.eager_load(:board).order(created_at: :asc)
+    @action_items = user_action_items.where(status: 'pending')
+                                     .eager_load(:board)
+                                     .order(times_moved: :desc, created_at: :asc)
+
+    @action_items_resolved = user_action_items.where.not(status: 'pending')
+                                              .eager_load(:board)
+                                              .order(updated_at: :desc)
   end
 
   def close
