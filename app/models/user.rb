@@ -35,9 +35,9 @@ class User < ApplicationRecord
   end
 
   def allowed?(identifier, board_id)
-    @permission ||= Permission.find_by(identifier: identifier)
+    permission = Permission.find_by(identifier: identifier)
 
-    permissions_users.where(board_id: board_id, permission: @permission).any?
+    permissions_users.where(board_id: board_id, permission: permission).any?
   end
 
   private
