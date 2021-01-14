@@ -36,8 +36,6 @@
         <%= link_to 'Sign in with Facebook', user_facebook_omniauth_authorize_path, class: 'button' %>
       <% elsif allowed_to?(:create_cards?, @board) %>
         <div id='ready-button'></div>
-      <% else %>
-        <%= link_to 'Join', board_memberships_path(board_slug: @board.slug), method: :post, class: 'button is-large' %>
       <% end %>
     </div>
   </div>
