@@ -20,11 +20,9 @@ User.create([
               { email: 'tu9@mail.com', password: '123456', nickname: 'tu9', provider: 'provider', uid: 'uid9', last_name: 'Mokhova', first_name: 'Lyubov' }
             ])
 
-Team.create([
-              { name: 'Wolves', user_ids: [1, 2, 3, 4, 5] },
-              { name: 'Tigers', user_ids: [1, 5] },
-              { name: 'Eagles', user_ids: [2, 3, 4] }
-            ])
+Team.create(name: 'Wolves', user_ids: [1, 2, 3, 4, 5]) unless Team.where(name: 'Wolves').exists?
+Team.create(name: 'Tigers', user_ids: [1, 5]) unless Team.where(name: 'Tigers').exists?
+Team.create(name: 'Eagles', user_ids: [2, 3, 4]) unless Team.where(name: 'Eagles').exists?
 
 Board.create([
                { title: 'TestUser1_RetroBoard' },
