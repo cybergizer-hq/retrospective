@@ -28,6 +28,10 @@ Lint/AmbiguousBlockAssociation:
 Style/Documentation:
   Enabled: false
 
+Style/IfUnlessModifier:
+  Exclude:
+    - ./db/seeds.rb
+
 Bundler/OrderedGems:
   Enabled: false
 
