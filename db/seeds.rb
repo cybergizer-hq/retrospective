@@ -46,34 +46,34 @@ Membership.create([
                     { user_id: 2, board_id: 5, role: 'creator', ready: false }
                   ])
 
-Permission.create([
-                    { identifier: 'view_private_board',
-                      description: 'User can view private board' },
-                    { identifier: 'create_cards',
-                      description: 'User can create cards on board' },
-                    { identifier: 'edit_board', description: 'User can edit board' },
-                    { identifier: 'update_board', description: 'User can update board' },
-                    { identifier: 'destroy_board', description: 'User can destroy board' },
-                    { identifier: 'continue_board',
-                      description: 'User can continue previous board' },
-                    { identifier: 'invite_members',
-                      description: 'User can invite members to board' },
-                    { identifier: 'get_suggestions', description: 'User can get tips with info' }
-                  ])
+permissions_data = {
+  view_private_board: 'User can view private board',
+  create_cards: 'User can create cards on board',
+  edit_board: 'User can edit board',
+  update_board: 'User can update board',
+  destroy_board: 'User can destroy board',
+  continue_board: 'User can continue previous board',
+  invite_members: 'User can invite members to board',
+  get_suggestions: 'User can get tips with info'
+}
 
-Permission.all.find_each do |permission|
+(Permission::CREATOR_IDENTIFIERS + Permission::MEMBER_IDENTIFIERS).uniq.each do |identifier|
+  Permission.create!(identifier: identifier, description: permissions_data[identifier.to_sym])
+
+rescue StandardError => e
+  puts "Permission '#{identifier}' was not created: #{e.message}" unless Permission.exists?(identifier: identifier)
+end
+
+Permission.creator_permissions.each do |permission|
   PermissionsUser.create([
                            { user_id: 1, permission_id: permission.id, board_id: 1 },
                            { user_id: 2, permission_id: permission.id, board_id: 2 }
                          ])
 end
 
-PermissionsUser.create([
-                         { user_id: 2, permission: Permission.find_by(identifier: 'create_cards'), board_id: 1 },
-                         { user_id: 2,
-                           permission: Permission.find_by(identifier: 'view_private_board'),
-                           board_id: 1 }
-                       ])
+Permission.member_permissions.each do |permission|
+  PermissionsUser.create(user_id: 2, permission_id: permission.id, board_id: 1)
+end
 
 Card.create(kind: 'mad', body: 'user1 is very mad', author_id: 1, board_id: 1) unless Card.where(kind: 'mad', author_id: 1, board_id: 1).exists?
 Card.create(kind: 'sad', body: 'user1 is very sad', author_id: 1, board_id: 1) unless Card.where(kind: 'sad', author_id: 1, board_id: 1).exists?
