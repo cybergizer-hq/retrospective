@@ -57,12 +57,18 @@ permissions_data = {
   get_suggestions: 'User can get tips with info'
 }
 
-(Permission::CREATOR_IDENTIFIERS + Permission::MEMBER_IDENTIFIERS).uniq.each do |identifier|
-  Permission.create!(identifier: identifier, description: permissions_data[identifier.to_sym])
+errors = []
 
-rescue StandardError => e
-  puts "Permission '#{identifier}' was not created: #{e.message}" unless Permission.exists?(identifier: identifier)
+(Permission::CREATOR_IDENTIFIERS | Permission::MEMBER_IDENTIFIERS).each do |identifier|
+  next if Permission.exists?(identifier: identifier)
+
+  begin
+    Permission.create!(identifier: identifier, description: permissions_data[identifier.to_sym])
+  rescue StandardError => e
+    errors << { identifier => e.message }
+  end
 end
+puts errors
 
 Permission.creator_permissions.each do |permission|
   PermissionsUser.create([
@@ -75,14 +81,14 @@ Permission.member_permissions.each do |permission|
   PermissionsUser.create(user_id: 2, permission_id: permission.id, board_id: 1)
 end
 
-Card.create(kind: 'mad', body: 'user1 is very mad', author_id: 1, board_id: 1) unless Card.where(kind: 'mad', author_id: 1, board_id: 1).exists?
-Card.create(kind: 'sad', body: 'user1 is very sad', author_id: 1, board_id: 1) unless Card.where(kind: 'sad', author_id: 1, board_id: 1).exists?
-Card.create(kind: 'glad', body: 'user1 is very glad #1', author_id: 1, board_id: 1) unless Card.where(kind: 'glad', body: 'user1 is very glad #1', author_id: 1, board_id: 1).exists?
-Card.create(kind: 'glad', body: 'user1 is very glad #2', author_id: 1, board_id: 1) unless Card.where(kind: 'glad', body: 'user1 is very glad #2', author_id: 1, board_id: 1).exists?
-Card.create(kind: 'sad', body: 'user2 is very sad', author_id: 2, board_id: 1) unless Card.where(kind: 'sad', author_id: 2, board_id: 1).exists?
-Card.create(kind: 'mad', body: 'user3 is very mad', author_id: 3, board_id: 1) unless Card.where(kind: 'mad', author_id: 3, board_id: 1).exists?
-Card.create(kind: 'mad', body: 'user4 is very mad', author_id: 4, board_id: 1) unless Card.where(kind: 'mad', author_id: 4, board_id: 1).exists?
-Card.create(kind: 'mad', body: 'user5 is very mad', author_id: 5, board_id: 1) unless Card.where(kind: 'mad', author_id: 5, board_id: 1).exists?
+Card.create(kind: 'mad', body: 'user1 is very mad', author_id: 1, board_id: 1) unless Card.where(body: 'user1 is very mad').exists?
+Card.create(kind: 'sad', body: 'user1 is very sad', author_id: 1, board_id: 1) unless Card.where(body: 'user1 is very sad').exists?
+Card.create(kind: 'glad', body: 'user1 is very glad #1', author_id: 1, board_id: 1) unless Card.where(body: 'user1 is very glad #1').exists?
+Card.create(kind: 'glad', body: 'user1 is very glad #2', author_id: 1, board_id: 1) unless Card.where(body: 'user1 is very glad #2').exists?
+Card.create(kind: 'sad', body: 'user2 is very sad', author_id: 2, board_id: 1) unless Card.where(body: 'user2 is very sad').exists?
+Card.create(kind: 'mad', body: 'user3 is very mad', author_id: 3, board_id: 1) unless Card.where(body: 'user3 is very mad').exists?
+Card.create(kind: 'mad', body: 'user4 is very mad', author_id: 4, board_id: 1) unless Card.where(body: 'user4 is very mad').exists?
+Card.create(kind: 'mad', body: 'user5 is very mad', author_id: 5, board_id: 1) unless Card.where(body: 'user5 is very mad').exists?
 
 ActionItem.create(body: 'issue should be fixed', board_id: 1, author_id: 1) unless ActionItem.where(body: 'issue should be fixed', board_id: 1, author_id: 1).exists?
 ActionItem.create(body: 'meetings should be held', board_id: 1, author_id: 1) unless ActionItem.where(body: 'meetings should be held', board_id: 1, author_id: 1).exists?
