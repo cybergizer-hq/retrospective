@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {ActionItemBody} from '../action-item-body';
 import {ActionItemFooter} from '../action-item-footer';
 import './style.less';
@@ -12,7 +12,8 @@ const ActionItem = ({
   times_moved,
   assignee,
   users,
-  isPrevious
+  isPrevious,
+  author_id
 }) => {
   //
   //  const pickColor = (cardStatus) => {
@@ -47,6 +48,8 @@ const ActionItem = ({
 
   const currentUser = useContext(UserContext);
   const isStatusPending = status === 'pending';
+  const [isAuthor] = useState(currentUser.id === author_id);
+
   return (
     <div className={`${pickColor(times_moved, isPrevious)} card`}>
       {/* {assignee && <CardUser {...assignee} />} */}
@@ -55,8 +58,8 @@ const ActionItem = ({
         id={id}
         assignee={assignee}
         // ! assigneeId={assignee?.id}
-        editable={currentUser.isCreator}
-        deletable={currentUser.isCreator}
+        editable={isAuthor || currentUser.isCreator}
+        deletable={isAuthor || currentUser.isCreator}
         body={body}
         users={users}
         timesMoved={times_moved}
@@ -64,8 +67,8 @@ const ActionItem = ({
       {isPrevious && (
         <ActionItemFooter
           id={id}
-          isReopanable={currentUser.isCreator && !isStatusPending}
-          isCompletable={currentUser.isCreator && isStatusPending}
+          isReopanable={(isAuthor || currentUser.isCreator) && !isStatusPending}
+          isCompletable={(isAuthor || currentUser.isCreator) && isStatusPending}
         />
       )}
     </div>

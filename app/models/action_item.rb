@@ -28,6 +28,10 @@ class ActionItem < ApplicationRecord
     end
   end
 
+  def author?(user)
+    author == user
+  end
+
   def move!(board)
     self.board_id = board.id
     increment(:times_moved)
