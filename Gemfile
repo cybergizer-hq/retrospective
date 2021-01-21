@@ -43,8 +43,8 @@ gem 'sentry-raven'
 # Authentication
 gem 'devise'
 gem 'omniauth-alfred', git: 'https://github.com/cybergizer-hq/omniauth-alfred', branch: 'master'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2', '>= 0.8.1'
+gem 'omniauth-facebook', '>= 8.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
