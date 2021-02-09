@@ -446,13 +446,14 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-20
 
 DEPENDENCIES
   aasm
   action-cable-testing
   action_policy (~> 0.5.4)
   action_policy-graphql (~> 0.5)
-  active_model_serializers (~> 0.10.12)
+  active_model_serializers (~> 0.10.0)
   bootsnap (>= 1.1.0)
   bullet
   capybara (>= 2.15)
@@ -507,4 +508,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.1.4
+   2.2.0

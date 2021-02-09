@@ -78,6 +78,7 @@ RSpec.configure do |config|
   config.include LoginHelper, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include JSONHelper
+  config.include SerializerHelper
 
   config.filter_run_when_matching :focus
 

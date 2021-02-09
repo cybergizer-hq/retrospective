@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class BoardPolicy < ApplicationPolicy
+  def index?
+    true
+  end
+
   def my?
     true
   end

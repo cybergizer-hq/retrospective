@@ -48,6 +48,36 @@ Rails.application.routes.draw do
 
   resources :boardsql, param: :slug, only: :show
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :action_items, only: %i[create update destroy] do
+        member do
+          put 'close'
+          put 'complete'
+          put 'move'
+          put 'reopen'
+        end
+      end
+
+      resources :boards, only: %i[index show]
+
+      resources :cards, only: %i[create update destroy] do
+        put 'like', on: :member
+      end
+
+      resources :comments, only: %i[create update destroy] do
+        put 'like', on: :member
+      end
+
+      resources :memberships, only: %i[index create destroy] do
+        get 'current', on: :collection
+        put 'toggle_ready_status', on: :member
+      end
+
+      post 'suggestions', to: 'users#suggestions'
+    end
+  end
+
   mount ActionCable.server, at: '/cable'
 end
 # rubocop:enable Metrics/BlockLength

@@ -7,6 +7,14 @@ RSpec.describe BoardPolicy do
   let_it_be(:board) { create(:board) }
   let(:policy) { described_class.new(board, user: user) }
 
+  describe '#index' do
+    subject { policy.apply(:index?) }
+
+    context 'when user exists' do
+      it { is_expected.to eq true }
+    end
+  end
+
   describe '#my? boards' do
     subject { policy.apply(:my?) }
 
