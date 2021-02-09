@@ -7,8 +7,16 @@ RSpec.describe UserSerializer do
 
   subject { described_class.new(user).to_json }
 
+  it 'makes json with id' do
+    expect(subject['id']).to be_present
+  end
+
   it 'makes json with email' do
     expect(subject).to include '"email":"user@example.com"'
+  end
+
+  it 'makes json with avatar' do
+    expect(subject['avatar']).to be_present
   end
 
   it 'makes json with nickname' do
@@ -21,5 +29,9 @@ RSpec.describe UserSerializer do
 
   it 'makes json with last name' do
     expect(subject).to include '"last_name":"Surname"'
+  end
+
+  it 'makes json with name' do
+    expect(subject).to include '"name":"Name Surname"'
   end
 end
