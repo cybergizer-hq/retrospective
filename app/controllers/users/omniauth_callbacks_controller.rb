@@ -2,6 +2,7 @@
 
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    # rubocop:disable Metrics/AbcSize
     def alfred
       @user = User.from_omniauth(auth.provider, auth.uid, auth.info)
 
@@ -49,6 +50,7 @@ module Users
         redirect_to new_user_session_path, alert: @user.errors.full_messages.join("\n")
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def developer
       @user = User.first
