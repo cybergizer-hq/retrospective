@@ -11,18 +11,16 @@ module API
         @current_membership = Membership.find_by!(user_id: current_user.id, board_id: @board.id)
       end
 
+      skip_verify_authorized only: %i[index current]
+
       # app/graphql/queries/memberships.rb
       def index
-        authorize! context: { membership: @current_membership }
-
         @memberships = @board.memberships.includes(:user)
         render json: serialize_resource(@memberships)
       end
 
       # app/graphql/queries/membership.rb
       def current
-        authorize! context: { membership: @current_membership }
-
         @membership = @board.memberships.find_by(user: current_user)
         render json: serialize_resource(@membership)
       end

@@ -46,12 +46,15 @@ describe 'Membership API', type: :request do
     end
 
     describe 'DELETE /api/v1/memberships/:id' do
-      let_it_be(:permission) { create(:permission, identifier: 'some_identifier') }
-      let_it_be(:permissions_user) do
-        create(:permissions_user, permission: permission, user: non_author, board: board)
-      end
+      let_it_be(:member_permission) { create(:permission, identifier: 'some_identifier') }
+      let_it_be(:destroy_permission) { create(:permission, identifier: 'destroy_membership') }
 
       let(:request) { delete "/api/v1/memberships/#{membership.id}" }
+
+      before do
+        create(:permissions_user, permission: member_permission, user: non_author, board: board)
+        create(:permissions_user, permission: destroy_permission, user: author, board: board)
+      end
 
       it 'return 200' do
         request
@@ -131,7 +134,13 @@ describe 'Membership API', type: :request do
   end
 
   describe 'PUT /api/v1/memberships/:id/toggle_ready_status' do
+    let_it_be(:permission) { create(:permission, identifier: 'toggle_ready_status') }
+
     let(:request) { put "/api/v1/memberships/#{creatorship.id}/toggle_ready_status" }
+
+    before do
+      create(:permissions_user, permission: permission, board: board, user: author)
+    end
 
     it 'return 200' do
       request
