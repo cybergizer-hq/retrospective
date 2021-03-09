@@ -8,13 +8,8 @@ class User < ApplicationRecord
   has_many :comments, foreign_key: :author_id
   has_many :memberships
   has_many :boards, through: :memberships
-  has_many :board_permissions_users, dependent: :destroy
-  has_many :board_permissions, through: :board_permissions_users, source: :permission
-  has_many :card_permissions_users, dependent: :destroy
-  has_many :card_permissions, through: :card_permissions_users, source: :permission
-  has_many :comment_permissions_users, dependent: :destroy
-  has_many :comment_permissions, through: :comment_permissions_users, source: :permission
   has_many :action_items, foreign_key: 'assignee_id', class_name: 'ActionItem'
+  has_many :permissions_rules, dependent: :destroy
 
   has_and_belongs_to_many :teams
 
@@ -40,10 +35,11 @@ class User < ApplicationRecord
 
   def allowed?(identifier, resource)
     permission = Permission.find_by(identifier: identifier)
-    resource_name = resource.class.to_s.downcase
+    resource_name = resource.class.to_s
 
-    public_send("#{resource_name}_permissions_users").where("#{resource_name}": resource,
-                                                            permission: permission).any?
+    permissions_rules.where(permissionable_type: resource_name,
+                            permissionable_id: resource.id,
+                            permission: permission).any?
   end
 
   private

@@ -12,12 +12,7 @@ class Permission < ApplicationRecord
   CARD_IDENTIFIERS = %w[update_card destroy_card].freeze
   COMMENT_IDENTIFIERS = %w[update_comment destroy_comment].freeze
 
-  has_many :board_permissions_users, dependent: :destroy
-  has_many :board_users, through: :board_permissions_users, source: :user
-  has_many :card_permissions_users, dependent: :destroy
-  has_many :card_users, through: :card_permissions_users, source: :user
-  has_many :comment_permissions_users, dependent: :destroy
-  has_many :comment_users, through: :comment_permissions_users, source: :user
+  has_many :permissions_rules, dependent: :destroy
 
   validates_presence_of :description, :identifier
   validates_uniqueness_of :identifier

@@ -5,7 +5,8 @@ class Board < ApplicationRecord
   has_many :cards, dependent: :restrict_with_error
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
-  has_many :board_permissions_users, dependent: :destroy
+  has_many :permissions_rules, as: :permissionable, dependent: :destroy
+
   validates_presence_of :title
 
   after_create :send_action_items
