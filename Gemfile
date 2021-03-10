@@ -50,7 +50,7 @@ gem 'omniauth-github'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rubocop', '~> 1.6.1', require: false
-  gem 'rspec-rails', '~> 4.0.1'
+  gem 'rspec-rails', '~> 5.0.0'
   gem 'rspec_junit_formatter'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'pry'
