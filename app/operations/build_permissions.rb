@@ -19,10 +19,7 @@ class BuildPermissions
     permissions_data = Permission.public_send(
       "#{identifiers_scope}_permissions"
     ).map do |permission|
-      {
-        permission_id: permission.id,
-        user_id: user.id
-      }
+      { permission_id: permission.id, user_id: user.id }
     end
 
     resource.permissions_rules.build(permissions_data)

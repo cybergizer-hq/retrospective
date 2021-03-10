@@ -91,7 +91,7 @@ Permission.creator_permissions.each do |permission|
                            { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board2.id },
                            { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board3.id },
                            { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board4.id },
-                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board5.id },
+                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board5.id }
                          ])
 end
 
