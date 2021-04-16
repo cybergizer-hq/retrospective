@@ -70,7 +70,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.10",
     "@rails/actioncable": "^6.0.3",
-    "@rails/webpacker": "^4.2.2",
+    "@rails/webpacker": "^5.2.0",
     "actioncable": "^5.2.4",
     "apollo-boost": "^0.4.7",
     "apollo-cache-inmemory": "^1.6.6",
