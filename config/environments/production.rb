@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
+  # Specify AnyCable WebSocket server URL to use by JS client
+  config.after_initialize do
+    if AnyCable::Rails.enabled?
+      config.action_cable.url = ActionCable.server.config.url = ENV.fetch('CABLE_URL')
+    end
+  end
+
+  # Configure session cookie to be stored for all subdomains
+  config.session_store :cookie_store, key: '_any_cable_session', domain: :all
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -46,7 +57,6 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.web_socket_server_url = 'wss://retrospective-rubizza.herokuapp.com/cable'
   config.action_cable.allowed_request_origins = [%r{https://retrospective-rubizza.*}]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -96,4 +106,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    'Cache-Control' => 'public, s-maxage=31536000, max-age=15552000',
+    'Expires' => 1.year.from_now.to_formatted_s(:rfc822)
+  }
 end
+# rubocop:enable Metrics/BlockLength

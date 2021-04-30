@@ -8,6 +8,12 @@ GIT
       omniauth-oauth2 (~> 1.0)
 
 GIT
+  remote: https://github.com/google/protobuf
+  revision: 64dd751868d633421563e53e68da831a0a02c923
+  specs:
+    google-protobuf (3.14.0)
+
+GIT
   remote: https://github.com/stympy/faker.git
   revision: ec06d217644cf3d66bd0e658c9b168af8f0c38c7
   branch: master
@@ -95,6 +101,14 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    anycable (1.0.1)
+      anyway_config (>= 1.4.2)
+      grpc (~> 1.17)
+    anycable-rails (1.0.0)
+      anycable (>= 1.0.0)
+      rails (>= 5)
+    anyway_config (2.0.6)
+      ruby-next-core (>= 0.8.0)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     ast (2.4.1)
@@ -193,12 +207,29 @@ GEM
     fog-xml (0.1.3)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
+    foreman (0.87.2)
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    googleapis-common-protos-types (1.0.5)
+      google-protobuf (~> 3.11)
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
+    graphql-anycable (0.5.0)
+      anycable (>= 0.6.0, < 2)
+      anyway_config (>= 1.3, < 3)
+      graphql (~> 1.8)
+      redis (>= 4.2.0)
+    grpc (1.34.0)
+      google-protobuf (~> 3.13)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.34.0-universal-darwin)
+      google-protobuf (~> 3.13)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.34.0-x86_64-linux)
+      google-protobuf (~> 3.13)
+      googleapis-common-protos-types (~> 1.0)
     graphql (1.11.6)
     hashdiff (1.0.1)
     hashie (4.1.0)
@@ -446,6 +477,8 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -453,6 +486,7 @@ DEPENDENCIES
   action_policy (~> 0.5.4)
   action_policy-graphql (~> 0.5)
   active_model_serializers (~> 0.10.12)
+  anycable-rails (= 1.0)
   bootsnap (>= 1.1.0)
   bullet
   capybara (>= 2.15)
@@ -466,7 +500,10 @@ DEPENDENCIES
   factory_bot_rails
   faker!
   fog-aws
+  foreman
+  google-protobuf!
   graphiql-rails
+  graphql-anycable
   graphql (~> 1.11)
   jbuilder (~> 2.5)
   json_matchers
@@ -507,4 +544,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.1.4
+   2.2.1

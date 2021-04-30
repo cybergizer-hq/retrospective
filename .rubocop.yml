@@ -1,4 +1,7 @@
 # ./.rubocop.yml
+require:
+  - "anycable/rails/compatibility/rubocop"
+
 AllCops:
   TargetRubyVersion: 2.6
   Exclude:
