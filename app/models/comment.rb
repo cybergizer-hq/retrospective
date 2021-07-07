@@ -4,7 +4,8 @@ class Comment < ApplicationRecord
   belongs_to :card
   belongs_to :author, class_name: 'User'
 
-  has_many :comment_permissions_users, dependent: :destroy
+  has_many :permissions_rules, as: :permissionable, dependent: :destroy
+
   validates_presence_of :content
 
   def author?(user)

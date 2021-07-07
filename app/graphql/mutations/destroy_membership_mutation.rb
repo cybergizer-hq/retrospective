@@ -15,7 +15,7 @@ module Mutations
                                                                        board: membership.board) }
 
       membership.transaction do
-        membership.board.board_permissions_users.where(user: membership.user).destroy_all
+        membership.board.permissions_rules.where(user: membership.user).destroy_all
         membership.destroy
       end
 

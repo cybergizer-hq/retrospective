@@ -25,7 +25,7 @@ module Boards
       )
 
       new_board.memberships = duplicate_memberships
-      new_board.board_permissions_users = duplicate_permissions_users
+      new_board.permissions_rules = duplicate_permissions_rules
       new_board.save!
 
       Success(new_board)
@@ -52,8 +52,8 @@ module Boards
                 end
     end
 
-    def duplicate_permissions_users
-      prev_board.board_permissions_users.map(&:dup)
+    def duplicate_permissions_rules
+      prev_board.permissions_rules.map(&:dup)
     end
 
     def default_board_name

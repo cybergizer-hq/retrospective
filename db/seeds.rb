@@ -86,26 +86,26 @@ end
 puts errors
 
 Permission.creator_permissions.each do |permission|
-  BoardPermissionsUser.create([
-                                { user_id: user1.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user2.id, permission_id: permission.id, board_id: board2.id },
-                                { user_id: user2.id, permission_id: permission.id, board_id: board3.id },
-                                { user_id: user2.id, permission_id: permission.id, board_id: board4.id },
-                                { user_id: user2.id, permission_id: permission.id, board_id: board5.id }
-                              ])
+  PermissionsRule.create([
+                           { user_id: user1.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board2.id },
+                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board3.id },
+                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board4.id },
+                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board5.id }
+                         ])
 end
 
 Permission.member_permissions.each do |permission|
-  BoardPermissionsUser.create([
-                                { user_id: user2.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user3.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user4.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user5.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user6.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user7.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user8.id, permission_id: permission.id, board_id: board1.id },
-                                { user_id: user9.id, permission_id: permission.id, board_id: board1.id }
-                              ])
+  PermissionsRule.create([
+                           { user_id: user2.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user3.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user4.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user5.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user6.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user7.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user8.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id },
+                           { user_id: user9.id, permission_id: permission.id, permissionable_type: 'Board', permissionable_id: board1.id }
+                         ])
 end
 
 Card.create(kind: 'mad', body: 'user1 is very mad', author_id: user1.id, board_id: board1.id) unless Card.where(body: 'user1 is very mad').exists?

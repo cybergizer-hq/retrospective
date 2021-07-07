@@ -63,7 +63,7 @@ class BoardsController < ApplicationController
     @board = Board.new(board_params)
     @board.memberships.build(user_id: current_user.id, role: 'creator')
 
-    result = Boards::BuildPermissions.new(@board, current_user).call(identifiers_scope: 'creator')
+    result = BuildPermissions.new(@board, current_user).call(identifiers_scope: 'creator')
 
     if result.success? && @board.save
       redirect_to @board, notice: 'Board was successfully created.'
