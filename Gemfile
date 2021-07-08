@@ -6,20 +6,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 6.1', '>= 6.1.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 5.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 6.0'
+gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 5.0'
+gem 'coffee-rails', '~> 5.0', '>= 5.0.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -37,11 +37,11 @@ gem 'redis', '~> 4.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'dotenv-rails'
+gem 'dotenv-rails', '>= 2.7.6'
 gem 'sentry-raven'
 
 # Authentication
-gem 'devise'
+gem 'devise', '>= 4.7.3'
 gem 'omniauth-alfred', git: 'https://github.com/cybergizer-hq/omniauth-alfred', branch: 'master'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
@@ -59,9 +59,9 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 4.1.0'
   gem 'listen', '>= 3.0.5', '< 3.4'
-  gem 'rails-erd'
+  gem 'rails-erd', '>= 1.6.0'
   gem 'letter_opener'
 end
 
@@ -72,24 +72,24 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'simplecov', require: false
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '>= 6.1.0'
   gem 'vcr'
   gem 'webmock'
   gem 'test-prof'
   gem 'json_matchers'
   gem 'database_cleaner'
-  gem 'rails-controller-testing'
+  gem 'rails-controller-testing', '>= 1.0.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'webpacker', '~> 5'
+gem 'webpacker', '~> 5', '>= 5.2.1'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'nanoid'
 gem 'action_policy', '~> 0.5.4'
-gem 'react-rails'
+gem 'react-rails', '>= 2.6.1'
 gem 'active_model_serializers', '~> 0.10.12'
 gem 'dry-monads'
 gem 'aasm'
@@ -97,9 +97,9 @@ gem 'sidekiq'
 
 gem 'graphql', '~> 1.11'
 gem 'action_policy-graphql', '~> 0.5'
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails', '>= 1.7.0', group: :development
 group :test, :development do
-  gem 'action-cable-testing'
+  gem 'action-cable-testing', '>= 0.6.1'
 end
 
 gem 'bullet', group: 'test'
