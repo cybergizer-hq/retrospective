@@ -62,19 +62,19 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.4'
   gem 'rails-erd'
-  gem 'letter_opener'
+  gem 'letter_opener', '>= 1.7.0'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.34.0'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'simplecov', require: false
   gem 'factory_bot_rails'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '>= 3.10.0'
   gem 'test-prof'
   gem 'json_matchers'
   gem 'database_cleaner'
@@ -86,7 +86,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 5'
 gem 'rails-assets-bulma', source: 'https://rails-assets.org'
 gem 'fog-aws', require: false
-gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+gem 'carrierwave', '>= 2.1.0', '< 3.0'
 gem 'nanoid'
 gem 'action_policy', '~> 0.5.4'
 gem 'react-rails'
