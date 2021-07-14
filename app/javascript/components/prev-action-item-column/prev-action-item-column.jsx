@@ -69,7 +69,8 @@ const PreviousActionItemColumn = (props) => {
   return (
     <>
       <div className={style.header}>
-        <h2 className={style.title}>PREVIOUS BOARD</h2>
+        <h2 className={style.title}>Past Actions</h2>
+        <a href="/boards/my">See more</a>
         <span className={style.hide} onClick={onClickToggle}>
           hide
         </span>

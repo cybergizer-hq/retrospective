@@ -45,3 +45,6 @@ coverage
 **/.DS_Store
 
 /config/credentials/production.key
+
+.env.test
+.env.development
