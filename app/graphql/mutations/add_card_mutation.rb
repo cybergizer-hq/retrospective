@@ -16,6 +16,13 @@ module Mutations
 
       if result.success?
         card = result.value!
+
+        like_permission_id = Permission.where(identifier: 'like_card').ids.first
+
+        board.users.each do |board_user|
+          CardPermissionsUser.create(user: board_user, card: card, permission_id: like_permission_id)
+        end
+
         RetrospectiveSchema.subscriptions.trigger('card_added', { board_slug: board.slug }, card)
         { card: card }
       else
