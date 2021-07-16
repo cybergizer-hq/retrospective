@@ -6,6 +6,7 @@ import BoardSlugContext from '../utils/board-slug-context';
 import UserContext from '../utils/user-context';
 import {Provider} from './provider';
 import './style.less';
+import {BoardColumnHidden} from './board-column-hidden';
 
 const CardTable = ({
   actionItems,
@@ -17,18 +18,20 @@ const CardTable = ({
 }) => {
   const EMOJIES = ['😡', '😔', '🤗'];
 
-  const [columnClass, setColumnClass] = useState('board-column');
-
-  const [displayPreviousItems, setDisplayPreviousItems] = useState(
+  const [isPreviousItemsOpen, setIsPreviousItemsOpen] = useState(
     initPrevItems.length > 0
   );
+  const [isActionItemsOpen, setIsActionItemsOpen] = useState(true);
 
   const togglePreviousItemsOpened = () =>
-    setDisplayPreviousItems(!displayPreviousItems);
+    setIsPreviousItemsOpen(!isPreviousItemsOpen);
+
+  const toggleActionItemsOpened = () => {
+    setIsActionItemsOpen(!isActionItemsOpen);
+  };
 
   const previousActionsEmptyHandler = () => {
-    setDisplayPreviousItems(false);
-    setColumnClass('column is-one-fourth');
+    setIsPreviousItemsOpen(false);
   };
 
   const generateColumns = (cardTypePairs) => {
@@ -37,7 +40,7 @@ const CardTable = ({
       cardTypePairs
     ).entries()) {
       content.push(
-        <div key={`${columnName}_column`} className={columnClass}>
+        <div key={`${columnName}_column`} className="board-column column">
           <CardColumn
             key={columnName}
             kind={columnName}
@@ -51,79 +54,36 @@ const CardTable = ({
     return content;
   };
 
-  const renderPreviousColumn = () => {
-    if (displayPreviousItems) {
-      return (
-        <div className={columnClass}>
-          <PrevActionItemColumn
-            handleEmpty={previousActionsEmptyHandler}
-            initItems={initPrevItems || []}
-            users={users}
-            onClickToggle={togglePreviousItemsOpened}
-          />
-        </div>
-      );
-    }
-
-    return (
-      <div className="side-menu">
-        <button
-          type="button"
-          className="open-button"
-          onClick={togglePreviousItemsOpened}
-        >
-          <svg
-            width="5"
-            height="10"
-            viewBox="0 0 5 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.5 9L4.5 5L0.5 1"
-              stroke="#C6C6C4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <svg
-            width="5"
-            height="10"
-            viewBox="0 0 5 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.5 9L4.5 5L0.5 1"
-              stroke="#C6C6C4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-        <div className="dot">
-          <span className="dot__item dot__item--red" />
-          <span className="dot__item dot__item--yellow" />
-          <span className="dot__item dot__item--yellow" />
-          <span className="dot__item dot__item--green" />
-          <span className="dot__item dot__item--green" />
-          <span className="dot__item dot__item--green" />
-        </div>
-      </div>
-    );
-  };
-
   user.isCreator = creators.includes(user.id);
   return (
     <Provider>
       <BoardSlugContext.Provider value={window.location.pathname.split('/')[2]}>
         <UserContext.Provider value={user}>
           <div className="board-container">
-            {renderPreviousColumn()}
+            {isPreviousItemsOpen ? (
+              <div className="board-column column">
+                <PrevActionItemColumn
+                  handleEmpty={previousActionsEmptyHandler}
+                  initItems={initPrevItems || []}
+                  users={users}
+                  onClickToggle={togglePreviousItemsOpened}
+                />
+              </div>
+            ) : (
+              <BoardColumnHidden toggleOpen={togglePreviousItemsOpened} />
+            )}
             {generateColumns(cardsByType)}
-            <div className={columnClass}>
-              <ActionItemColumn initItems={actionItems || []} users={users} />
-            </div>
+            {isActionItemsOpen ? (
+              <div className="board-column column">
+                <ActionItemColumn
+                  initItems={actionItems || []}
+                  users={users}
+                  onClickToggle={toggleActionItemsOpened}
+                />
+              </div>
+            ) : (
+              <BoardColumnHidden toggleOpen={toggleActionItemsOpened} />
+            )}
           </div>
         </UserContext.Provider>
       </BoardSlugContext.Provider>
