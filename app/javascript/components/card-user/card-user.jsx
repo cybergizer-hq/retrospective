@@ -11,7 +11,9 @@ const CardUser = ({first_name, last_name, nickname, avatar}) => {
         firstName={first_name}
         lastName={last_name}
       />
-      <span className="avatar__nickname"> {nickname}</span>
+      <span className="avatar__nickname">
+        {first_name ? `${first_name} ${last_name}` : nickname}
+      </span>
     </div>
   );
 };

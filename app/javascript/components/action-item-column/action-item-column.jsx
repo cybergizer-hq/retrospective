@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {useSubscription} from '@apollo/react-hooks';
-import {NewActionItemBody} from '../new-action-item-body';
+import {ActionItemHeader} from '../action-item-header';
 import {ActionItem} from '../action-item';
 import BoardSlugContext from '../../utils/board-slug-context';
 import {
@@ -9,8 +9,9 @@ import {
   actionItemDestroyedSubscription,
   actionItemUpdatedSubscription
 } from './operations.gql';
+import {NewActionItem} from '../new-action-item';
 
-const ActionItemColumn = ({users, initItems}) => {
+const ActionItemColumn = ({users, initItems, onClickToggle}) => {
   const boardSlug = useContext(BoardSlugContext);
   const [items, setItems] = useState(initItems);
   const [skip, setSkip] = useState(true); // Workaround for https://github.com/apollographql/react-apollo/issues/3802
@@ -88,7 +89,8 @@ const ActionItemColumn = ({users, initItems}) => {
 
   return (
     <>
-      <NewActionItemBody users={users} />
+      <ActionItemHeader onClickToggle={onClickToggle} />
+      <NewActionItem users={users} />
       {items.map((item) => {
         return <ActionItem key={item.id} {...item} users={users} />;
       })}
